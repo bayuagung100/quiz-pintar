@@ -32,9 +32,11 @@
             if (empty($_SESSION['email']) or $_SESSION['log'] == 0) { ?>
                 <div class="col-md-6 hidden-xs">
                     <div class="intro-text-box text-box text-white text-center">
-                        <img src="./img/author.jpg" alt="" class="avatar">
-                        <h4>nama lengakap</h4>
-                        <a href="" style="color: #b01ba5">Edit profil</a> | <a href="" style="color: #b01ba5">Lihat aktifitas</a>
+                        <i class="fa fa-user" style="font-size: 90px;background-color:#737375;border-radius: 100%;height: 100px;width: 100px;"></i>
+                        <p>
+                        <a href="auth?register" style="color: #b01ba5">Daftar</a> sekarang dan kumpulkan pointnya</a>
+                        </p>
+                        
                     </div>
                 </div>
             <?php
