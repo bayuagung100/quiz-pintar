@@ -5,16 +5,24 @@
         <a href="<?php echo $set['url']; ?>" class="site-logo">
             <img src="./img/quiz-pintar.png" alt="">
         </a>
-        <nav class="top-nav-area w-100">
-            <div class="user-panel">
-                <a href="auth?login">Login</a> / <a href="auth?register">Register</a>
-            </div>
 
+        <nav class="top-nav-area w-100">
+            <?php
+            if (empty($_SESSION['email']) or $_SESSION['log'] == 0) { ?>
+                <div class="user-panel">
+                    <a href="auth?login">Login</a> / <a href="auth?register">Register</a>
+                </div>
+            <?php } else { ?>
+                <div class="user-panel">
+                    <a href="dashboard">Dashboard</a>
+                </div>
+            <?php } ?>
             <ul class="main-menu primary-menu">
                 <li><a href="<?php echo $set['url']; ?>"><i class="fa fa-home"></i> Home</a></li>
                 <li><a href=""><i class="fa fa-history"></i> Aktivitas</a></li>
             </ul>
         </nav>
+
     </div>
 </div>
 <section class="intro-section">
@@ -34,16 +42,159 @@
                     <div class="intro-text-box text-box text-white text-center">
                         <i class="fa fa-user" style="font-size: 90px;background-color:#737375;border-radius: 100%;height: 100px;width: 100px;"></i>
                         <p>
-                        <a href="auth?register" style="color: #b01ba5">Daftar</a> sekarang dan kumpulkan pointnya</a>
+                            <a href="auth?register" style="color: #b01ba5">Daftar</a> sekarang dan kumpulkan pointnya</a>
                         </p>
-                        
+
                     </div>
                 </div>
             <?php
             } else { ?>
                 <div class="col-md-6 hidden-xs">
+
                     <div class="intro-text-box text-box text-white text-center">
-                        <img src="./img/author.jpg" alt="" class="avatar">
+                        <?php
+                            if ($_SESSION['avatar'] == "") {
+                                ?>
+                            <button id="avatar" style="font-size: 70px;background-color:#737375;border-radius: 100%;height: 100px;width: 100px;"><i class="fa fa-plus"></i></button>
+                            <!-- <img src="./img/author.jpg" alt="" class="avatar"> -->
+
+
+                        <?php } else { ?>
+
+                            <img id="avatar" src="./img/avatar/<?php echo $_SESSION['avatar']; ?>" alt="avatar" class="avatar">
+                        <?php } ?>
+                        <!-- The Modal -->
+                        <div id="avatar_modal" class="modal">
+
+                            <!-- Modal content -->
+                            <div class="modal-content">
+                                <p class="modal-heading">Pilih Avatar</p>
+                                <span class="close" style="color: #ec0b43;">x</span>
+                                <?php
+                                    if (isset($_POST['change_avatar'])) {
+                                        $avatar = $_POST['avatar'];
+                                        $query = $mysqli->query("UPDATE user SET
+                                            avatar='$avatar'
+                                            WHERE id='$_SESSION[id]'
+                                        ");
+                                        if ($query) {
+                                            $_SESSION['avatar'] = $avatar;
+                                            echo '
+                                            <script>
+                                            window.location = "' . $set['url'] . '";
+                                            </script>
+                                            ';
+                                        }
+                                    }
+                                    ?>
+                                <form action="" method="post">
+                                    <input type="hidden" name="change_avatar">
+                                    <div class="row text-center">
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster.png" required>
+                                                <img src="./img/avatar/monster.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster1.png" required>
+                                                <img src="./img/avatar/monster1.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster2.png" required>
+                                                <img src="./img/avatar/monster2.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster3.png" required>
+                                                <img src="./img/avatar/monster3.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster4.png" required>
+                                                <img src="./img/avatar/monster4.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster5.png" required>
+                                                <img src="./img/avatar/monster5.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster6.png" required>
+                                                <img src="./img/avatar/monster6.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster7.png" required>
+                                                <img src="./img/avatar/monster7.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster8.png" required>
+                                                <img src="./img/avatar/monster8.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster9.png" required>
+                                                <img src="./img/avatar/monster9.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster10.png" required>
+                                                <img src="./img/avatar/monster10.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster11.png" required>
+                                                <img src="./img/avatar/monster11.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster12.png" required>
+                                                <img src="./img/avatar/monster12.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster13.png" required>
+                                                <img src="./img/avatar/monster13.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster14.png" required>
+                                                <img src="./img/avatar/monster14.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>
+                                                <input type="radio" name="avatar" value="monster15.png" required>
+                                                <img src="./img/avatar/monster15.png" style="max-width:90px">
+                                            </label>
+                                        </div>
+
+                                    </div>
+
+                                    <button type="submit" class="site-btn">Pilih</button>
+
+                                </form>
+                            </div>
+
+                        </div>
                         <h4><?php echo $_SESSION['nama']; ?></h4>
                         <a href="" style="color: #b01ba5">Edit profil</a> | <a href="" style="color: #b01ba5">Lihat aktifitas</a>
                     </div>

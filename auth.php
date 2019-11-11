@@ -43,10 +43,35 @@ if (isset($_GET['register'])) {
                     <p>
                         <input type="text" name="alamat" placeholder="Alamat Lengkap(*)" required>
                     </p>
+                    <p>Role(*)</p>
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                        <label>
+                            <input type="radio" name="role" value="guru" required>
+                            <img src="./img/guru.png" style="max-width:120px">
+                            <p>Guru</p>
+                        </label>
+                        </div>
+                        <div class="col-md-4">
+                        <label>
+                            <input type="radio" name="role" value="pelajar" required>
+                            <img src="./img/pelajar.png" style="max-width:120px">
+                            <p>Pelajar</p>
+                        </label>
+                        </div>
+                        <div class="col-md-4">
+                        <label>
+                            <input type="radio" name="role" value="umum" required>
+                            <img src="./img/umum.png" style="max-width:120px">
+                            <p>Orang tua / Umum</p>
+                        </label>
+                        </div>
+                    </div>
 
                     <button type="submit" class="site-btn">Daftar</button>
 
                 </form>
+
                 <hr>
                 <p>Sudah punya akun? <a href="<?php echo $set['url']; ?>auth?login">Login Disini</a></p>
             </div>
@@ -65,7 +90,7 @@ if (isset($_GET['register'])) {
                     <?php
                         if ($_GET['login'] == "new-user") {
                             echo '<div class="alert alert-success" role="alert">Pendaftaran berhasil. Silahkan login!</div>';
-                        }elseif ($_GET['login'] == "gagal") {
+                        } elseif ($_GET['login'] == "gagal") {
                             echo '<div class="alert alert-danger" role="alert"><b>Sorry!</b> Email yang Anda masukkan salah.</div>';
                         }
                         ?>
@@ -94,6 +119,7 @@ if (isset($_GET['register'])) {
     $email = $_POST['email'];
     $alamat = $_POST['alamat'];
     $hp = $_POST['hp'];
+    $role = $_POST['role'];
 
     $cek = $mysqli->query("SELECT * FROM user WHERE email='$email' ");
     $jml = $cek->num_rows;
@@ -110,14 +136,16 @@ if (isset($_GET['register'])) {
                 nama,
                 email,
                 hp,
-                alamat
+                alamat,
+                role
             )
             VALUES
             (
                 '$nama',
                 '$email',
                 '$hp',
-                '$alamat'
+                '$alamat',
+                '$role'
             )
         ");
         if ($query) {
@@ -140,7 +168,8 @@ if (isset($_GET['register'])) {
         $_SESSION['nama']     = $data['nama'];
         $_SESSION['email']    = $data['email'];
         $_SESSION['hp']       = $data['hp'];
-        
+        $_SESSION['avatar']       = $data['avatar'];
+
         $_SESSION['log'] = 1;
 
         echo '

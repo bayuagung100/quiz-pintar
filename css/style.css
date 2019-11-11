@@ -1085,14 +1085,14 @@ ol {
 
 .footer-left-pic {
 	position: absolute;
-	left: -13px;
-	bottom: 19px;
+	left: 10;
+	bottom: 20px;
 }
 
 .footer-right-pic {
 	position: absolute;
-	right: 50px;
-	bottom: 19px;
+	right: 0;
+	bottom: 20px;
 }
 
 .footer-menu {
@@ -1922,4 +1922,67 @@ img.avatar {
 	width: 100px;
 	height: 100px;
 	border-radius: 50%;
+}
+
+/* HIDE RADIO */
+[type=radio] {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+/* IMAGE STYLES */
+[type=radio]+img {
+	cursor: pointer;
+}
+
+/* CHECKED STYLES */
+[type=radio]:checked+img {
+	outline: 2px solid #f00;
+}
+
+/* The Modal (background) */
+.modal {
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	max-width: 700px;
+	top:10px;
+	left:25%
+}
+
+/* Modal Content */
+.modal-content {
+	background-color: #fefefe;
+	padding: 20px;
+	border: 1px solid #888;
+	overflow: scroll;
+	height: 100%;
+}
+
+.modal-content p {
+	text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: rgba(41,42,58,.66);
+    margin-bottom: 10px;
+}
+
+/* The Close Button */
+.close {
+	position: absolute;
+    right: 12px;
+    top: 12px;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+    
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
 }

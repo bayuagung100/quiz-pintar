@@ -6,7 +6,7 @@ include "vendor/config.php";
 
 $content  = (isset($_GET['content'])) ? $_GET['content'] : "home";
 $kosong   = true;
-$page     = array('home');
+$page     = array('home','dashboard');
 foreach($page as $pg){
   if($content == $pg and $kosong){
     

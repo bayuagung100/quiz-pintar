@@ -4,6 +4,7 @@ RewriteEngine on
 RewriteRule ^(.*)/$ /$1 [L,R]
 
 RewriteRule ^$ index.php [L]
+RewriteRule ^dashboard$ index.php?content=dashboard [L]
 RewriteRule ^auth$ auth.php [L]
 RewriteRule ^logout$ logout.php [L]
 
