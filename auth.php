@@ -5,7 +5,7 @@ include "website/header.php"; ?>
 <div class="header-warp">
     <div class="header-bar-warp d-flex">
 
-        <a href="<?php echo $set['url']; ?>" class="site-logo">
+        <a href="<?php echo url(""); ?>" class="site-logo">
             <img src="./img/quiz-pintar.png" alt="">
         </a>
     </div>
@@ -45,27 +45,27 @@ if (isset($_GET['register'])) {
                     </p>
                     <p>Role(*)</p>
                     <div class="row text-center">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                         <label>
                             <input type="radio" name="role" value="guru" required>
                             <img src="./img/guru.png" style="max-width:120px">
                             <p>Guru</p>
                         </label>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                         <label>
                             <input type="radio" name="role" value="pelajar" required>
                             <img src="./img/pelajar.png" style="max-width:120px">
                             <p>Pelajar</p>
                         </label>
                         </div>
-                        <div class="col-md-4">
+                        <!-- <div class="col-md-4">
                         <label>
                             <input type="radio" name="role" value="umum" required>
                             <img src="./img/umum.png" style="max-width:120px">
                             <p>Orang tua / Umum</p>
                         </label>
-                        </div>
+                        </div> -->
                     </div>
 
                     <button type="submit" class="site-btn">Daftar</button>
@@ -73,7 +73,7 @@ if (isset($_GET['register'])) {
                 </form>
 
                 <hr>
-                <p>Sudah punya akun? <a href="<?php echo $set['url']; ?>auth?login">Login Disini</a></p>
+                <p>Sudah punya akun? <a href="<?php echo url("auth?login"); ?>">Login Disini</a></p>
             </div>
 
         </div>
@@ -107,7 +107,7 @@ if (isset($_GET['register'])) {
 
                 </form>
                 <hr>
-                <p>Belum punya akun? <a href="<?php echo $set['url']; ?>auth?register">Daftar Disini</a></p>
+                <p>Belum punya akun? <a href="<?php echo url("auth?register"); ?>">Daftar Disini</a></p>
             </div>
 
         </div>
@@ -127,7 +127,7 @@ if (isset($_GET['register'])) {
     if ($jml > 0) {
         echo '
         <script>
-        window.location = "' . $set['url'] . 'auth?register=gagal";
+        window.location = "' . url("auth?register=gagal") . '";
         </script>
         ';
     } else {
@@ -151,7 +151,7 @@ if (isset($_GET['register'])) {
         if ($query) {
             echo '
             <script>
-            window.location = "' . $set['url'] . 'auth?login=new-user";
+            window.location = "' . url("auth?login=new-user") . '";
             </script>
             ';
         }
@@ -174,20 +174,20 @@ if (isset($_GET['register'])) {
 
         echo '
         <script>
-        window.location = "' . $set['url'] . '";
+        window.location = "' . url("") . '";
         </script>
         ';
     } else {
         echo '
         <script>
-        window.location = "' . $set['url'] . 'auth?login=gagal";
+        window.location = "' . url("auth?login=gagal") . '";
         </script>
         ';
     }
 } else {
     echo '
         <script>
-        window.location = "' . $set['url'] . 'auth?login";
+        window.location = "' . url("auth?login") . '";
         </script>
         ';
 }

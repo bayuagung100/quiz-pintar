@@ -1,6 +1,4 @@
-
- <?php
-
+<?php
 //localpc
 $servername = "localhost";
 $username = "root";
@@ -28,6 +26,23 @@ $jam 		= date("H:i:s");
 
 $query = $mysqli->query("SELECT * FROM setting");
 $set = $query->fetch_array();
+
+function url($var)
+{
+    $url = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+    $url .= "://" . $_SERVER['SERVER_NAME'];
+    $url .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
+    $url .= $var;
+    return $url;
+}
+
+function title()
+{   
+    $title = " - Quiz Pintar";
+
+    return $title;
+}
+
 
 function limit_words($string, $word_limit){
     $words = explode(" ",$string);

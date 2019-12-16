@@ -2,7 +2,7 @@
 <html lang="ID">
 
 <head>
-    <title>EndGam - Gaming Magazine Template</title>
+    <title><?php echo title();?></title>
     <meta charset="UTF-8">
     <meta name="description" content="EndGam Gaming Magazine Template">
     <meta name="keywords" content="endGam,gGaming, magazine, html">
@@ -15,15 +15,15 @@
 
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="<?php echo $set['url'];?>css/bootstrap.min.css" />
-    <link rel="stylesheet" href="<?php echo $set['url'];?>css/font-awesome.min.css" />
-    <link rel="stylesheet" href="<?php echo $set['url'];?>css/slicknav.min.css" />
-    <link rel="stylesheet" href="<?php echo $set['url'];?>css/owl.carousel.min.css" />
-    <link rel="stylesheet" href="<?php echo $set['url'];?>css/magnific-popup.css" />
-    <link rel="stylesheet" href="<?php echo $set['url'];?>css/animate.css" />
+    <link rel="stylesheet" href="<?php echo url("css/bootstrap.min.css");?>"/>
+    <link rel="stylesheet" href="<?php echo url("css/font-awesome.min.css");?>" />
+    <link rel="stylesheet" href="<?php echo url("css/slicknav.min.css");?>" />
+    <link rel="stylesheet" href="<?php echo url("css/owl.carousel.min.css");?>" />
+    <link rel="stylesheet" href="<?php echo url("css/magnific-popup.css");?>" />
+    <link rel="stylesheet" href="<?php echo url("css/animate.css");?>" />
 
     <!-- Main Stylesheets -->
-    <link rel="stylesheet" href="<?php echo $set['url'];?>css/style.css" />
+    <link rel="stylesheet" href="<?php echo url("css/style.css");?>" />
 
 
     <!--[if lt IE 9]>

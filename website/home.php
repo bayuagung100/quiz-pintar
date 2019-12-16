@@ -2,7 +2,7 @@
 <div class="header-warp">
     <div class="header-bar-warp d-flex">
 
-        <a href="<?php echo $set['url']; ?>" class="site-logo">
+        <a href="<?php echo url(""); ?>" class="site-logo">
             <img src="./img/quiz-pintar.png" alt="">
         </a>
 
@@ -10,7 +10,7 @@
             <?php
             if (empty($_SESSION['email']) or $_SESSION['log'] == 0) { ?>
                 <div class="user-panel">
-                    <a href="auth?login">Login</a> / <a href="auth?register">Register</a>
+                    <a href="auth?login">Masuk</a> / <a href="auth?register">Daftar</a>
                 </div>
             <?php } else { ?>
                 <div class="user-panel">
@@ -18,8 +18,8 @@
                 </div>
             <?php } ?>
             <ul class="main-menu primary-menu">
-                <li><a href="<?php echo $set['url']; ?>"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href=""><i class="fa fa-history"></i> Aktivitas</a></li>
+                <li><a href="<?php echo url(""); ?>"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="<?php echo url("aktivitas"); ?>"><i class="fa fa-history"></i> Aktivitas</a></li>
             </ul>
         </nav>
 
@@ -81,7 +81,7 @@
                                             $_SESSION['avatar'] = $avatar;
                                             echo '
                                             <script>
-                                            window.location = "' . $set['url'] . '";
+                                            window.location = "' . url("") . '";
                                             </script>
                                             ';
                                         }
@@ -197,6 +197,8 @@
                         </div>
                         <h4><?php echo $_SESSION['nama']; ?></h4>
                         <a href="" style="color: #b01ba5">Edit profil</a> | <a href="" style="color: #b01ba5">Lihat aktifitas</a>
+                        <br>
+                        <a href="<?php echo url("logout");?>" style="color: #b01ba5"><i class="fa fa-sign-out"></i> Keluar</a>
                     </div>
                 </div>
             <?php
