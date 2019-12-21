@@ -25,6 +25,8 @@ if (isset($_GET['register'])) {
                     <?php
                         if ($_GET['register'] == "gagal") {
                             echo '<div class="alert alert-danger" role="alert"><b>Sorry!</b> Email yang Anda masukkan sudah terdaftar.</div>';
+                        } elseif ($_GET['register'] == "password") {
+                            echo '<div class="alert alert-danger" role="alert"><b>Sorry!</b> Password yang Anda masukkan tidak sama.</div>';
                         }
                         ?>
                 </div>
@@ -68,6 +70,13 @@ if (isset($_GET['register'])) {
                         </div> -->
                     </div>
 
+                    <p>
+                        <input type="password" name="password" placeholder="Password(*)" required>
+                    </p>
+                    <p>
+                        <input type="password" name="ulangi_password" placeholder="Ulangi Password(*)" required>
+                    </p>
+
                     <button type="submit" class="site-btn">Daftar</button>
 
                 </form>
@@ -95,13 +104,16 @@ if (isset($_GET['register'])) {
                         }
                         ?>
                     <p>
-                        Masukkan email Anda untuk login
+                        Masukkan email dan password Anda untuk login
                     </p>
                 </div>
                 <form class="auth-form" action="auth" method="post">
                     <input type="hidden" name="oauth" value="login">
                     <p>
                         <input type="email" name="email" placeholder="Email(*)" required>
+                    </p>
+                    <p>
+                        <input type="password" name="password" placeholder="Password(*)" required>
                     </p>
                     <button type="submit" class="site-btn">Login</button>
 
@@ -120,6 +132,9 @@ if (isset($_GET['register'])) {
     $alamat = $_POST['alamat'];
     $hp = $_POST['hp'];
     $role = $_POST['role'];
+    $password = $_POST['password'];
+    $ulangi_password = $_POST['ulangi_password'];
+    $md5 = md5($_POST['password']);
 
     $cek = $mysqli->query("SELECT * FROM user WHERE email='$email' ");
     $jml = $cek->num_rows;
@@ -130,6 +145,12 @@ if (isset($_GET['register'])) {
         window.location = "' . url("auth?register=gagal") . '";
         </script>
         ';
+    } elseif ($password != $ulangi_password) {
+        echo '
+        <script>
+        window.location = "' . url("auth?register=password") . '";
+        </script>
+        ';
     } else {
         $query = $mysqli->query("INSERT INTO user
             (
@@ -137,7 +158,8 @@ if (isset($_GET['register'])) {
                 email,
                 hp,
                 alamat,
-                role
+                role,
+                password
             )
             VALUES
             (
@@ -145,7 +167,8 @@ if (isset($_GET['register'])) {
                 '$email',
                 '$hp',
                 '$alamat',
-                '$role'
+                '$role',
+                '$md5'
             )
         ");
         if ($query) {
@@ -158,8 +181,9 @@ if (isset($_GET['register'])) {
     }
 } elseif ($_POST['oauth'] == "login") {
     $email = $_POST['email'];
+    $password = md5($_POST['password']);
 
-    $query = $mysqli->query("SELECT * FROM user WHERE email='$email'");
+    $query = $mysqli->query("SELECT * FROM user WHERE email='$email' AND password='$password' ");
     $jmluser = $query->num_rows;
     $data = $query->fetch_array();
 
