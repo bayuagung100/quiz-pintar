@@ -30,6 +30,8 @@
         <link rel="stylesheet" href="<?php echo url("website/dashboard/");?>plugins/jqvmap/jqvmap.min.css">
         <!-- Theme style -->
         <link rel="stylesheet" href="<?php echo url("website/dashboard/");?>dist/css/adminlte.min.css">
+        <!-- my custom css -->
+        <link rel="stylesheet" href="<?php echo url("website/dashboard/");?>dist/css/my-custom.css">
         <!-- overlayScrollbars -->
         <link rel="stylesheet" href="<?php echo url("website/dashboard/");?>plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
         <!-- Daterange picker -->
@@ -39,6 +41,13 @@
         <!-- jQuery -->
         <script src="<?php echo url("website/dashboard/");?>plugins/jquery/jquery.min.js"></script>
         <style>
+        ul li .active{
+            position: absolute;
+            left: 5px;
+            width: 5px;
+            height: 22px;
+            background: #C4C4C4;
+        }
         #myImg {
             border-radius: 5px;
             cursor: pointer;

@@ -167,6 +167,9 @@
         <!-- AdminLTE for demo purposes -->
         <script src="<?php echo url("website/dashboard/");?>dist/js/demo.js"></script>
 
+        <!-- my custom js-->
+        <script src="<?php echo url("website/dashboard/");?>dist/js/my-custom.js"></script>
+
         <script>
         $('#kabupaten').change(function() {
 

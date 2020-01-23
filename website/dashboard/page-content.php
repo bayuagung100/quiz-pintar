@@ -1,9 +1,9 @@
 <?php
 
-$content = isset($_GET['pages']) ? $_GET['pages'] : '';
+$content = isset($_GET['pages']) ? $_GET['pages'] : 'dashboard';
 $kosong = true;
 //Menampilkan file sesuai nilai $content
-$page = array('test','buat-quiz');
+$page = array('dashboard','buat-quiz','quizku');
 foreach($page as $pg){
 	if($content == $pg and $kosong){
 		include 'pages/'.$pg.'.php';
@@ -21,12 +21,8 @@ if($kosong){
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-sm-12 dashboard text-center">
-                <h2>Cari game quiz yang kamu inginkan!</h2>
-                <form class="dashboard-form">
-                    <input type="search" placeholder="Cari Quiz mengenai topik apa saja">
-                    <button class="site-btn">Cari <img src="img/icons/double-arrow.png" alt="#"></button>
-                </form>
+                <div class="alert alert-warning">
+                    <strong>Warning!</strong> Page not found.
                 </div>
             </div>
         </div>

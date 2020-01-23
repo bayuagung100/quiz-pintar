@@ -100,7 +100,7 @@ if (isset($_GET['register'])) {
                         if ($_GET['login'] == "new-user") {
                             echo '<div class="alert alert-success" role="alert">Pendaftaran berhasil. Silahkan login!</div>';
                         } elseif ($_GET['login'] == "gagal") {
-                            echo '<div class="alert alert-danger" role="alert"><b>Sorry!</b> Email yang Anda masukkan salah.</div>';
+                            echo '<div class="alert alert-danger" role="alert"><b>Sorry!</b> Email/Password yang Anda masukkan salah.</div>';
                         }
                         ?>
                     <p>
@@ -185,14 +185,18 @@ if (isset($_GET['register'])) {
 
     $query = $mysqli->query("SELECT * FROM user WHERE email='$email' AND password='$password' ");
     $jmluser = $query->num_rows;
+    var_dump($jmluser);
     $data = $query->fetch_array();
 
     if ($jmluser > 0) {
         $_SESSION['id']       = $data['id'];
         $_SESSION['nama']     = $data['nama'];
+        $_SESSION['avatar']       = $data['avatar'];
         $_SESSION['email']    = $data['email'];
         $_SESSION['hp']       = $data['hp'];
-        $_SESSION['avatar']       = $data['avatar'];
+        $_SESSION['alamat']       = $data['alamat'];
+        $_SESSION['role']       = $data['role'];
+        $_SESSION['password']       = $data['password'];
 
         $_SESSION['log'] = 1;
 

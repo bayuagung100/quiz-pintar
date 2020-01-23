@@ -3,9 +3,16 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="<?php echo url("dashboard/buat-quiz");?>" class="nav-link"><i class="fas fa-plus-circle"></i> Buat Quiz Baru</a>
-        </li>
+        <?php
+            if ($_SESSION['role']=="guru") {
+                echo '
+                <li class="nav-item d-none d-sm-inline-block">
+                    <a href="'.url("dashboard/buat-quiz").'" class="nav-link"><i class="fas fa-plus-circle"></i> Buat Quiz Baru</a>
+                </li>
+                ';
+            }
+        ?>
+        
     </ul>
 
     <ul class="navbar-nav ml-auto">

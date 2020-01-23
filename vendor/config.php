@@ -36,6 +36,19 @@ function url($var)
     return $url;
 }
 
+function path(){
+    
+    $url = $_SERVER['REQUEST_URI'];
+    $exp = explode("/", $url);
+    if (isset($exp[3])) {
+        $path = $exp[3];
+        return $path;
+    } else {
+        $path = false;
+        return $path;
+    }
+}
+
 function title()
 {   
     $title = " - Quiz Pintar";
