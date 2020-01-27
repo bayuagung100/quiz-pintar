@@ -1,37 +1,38 @@
 <section class="content-header">
-    <div class="container-fluid"> 
+    <div class="container-fluid">
     </div>
 </section>
 <section class="content">
     <div class="container-fluid">
-    <div class="card card-default color-palette-box">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i class="fas fa-chart-bar"></i>
-              Aktivitas
-            </h3>
-            <div class="card-tools">
-              <div class="input-group input-group-sm" style="width: 150px;">
-                <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+        <div class="card card-default color-palette-box">
+            <div class="card-header">
+                <h3 class="card-title">
+                    <i class="fas fa-chart-bar"></i>
+                    Aktivitas
+                </h3>
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
 
-                <div class="input-group-append">
-                  <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i></button>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
-          <div class="card-body">
-            <!-- jika tidak ada data -->
-            <div class="text-center">
-              <h3>Buat Quiz Anda Sendiri</h3>
-              <a href="<?php echo url("dashboard/buat-quiz"); ?>" class="buat-quiz-btn" ><i class="fas fa-plus-circle"></i> Buat</a>
-              <br>
-              <br>
-              <img src="<?php echo url("img/empty_myquiz.png");?>"/>
-            </div>
+            <div class="card-body">
+                <!-- jika tidak ada data -->
+                <div class="text-center">
+                    <h3>Buat Quiz Anda Sendiri</h3>
+                    <a href="<?php echo url("dashboard/buat-quiz"); ?>" class="buat-quiz-btn"><i
+                            class="fas fa-plus-circle"></i> Buat</a>
+                    <br>
+                    <br>
+                    <img src="<?php echo url("img/empty_myquiz.png");?>" />
+                </div>
 
-            <!-- jika ada data -->
-            <!-- <div class="card card-default color-palette-box">
+                <!-- jika ada data -->
+                <!-- <div class="card card-default color-palette-box">
               <div class="card-body">
                 <div class="row">
                   jika image kosong
@@ -56,9 +57,9 @@
                 </div>
               </div>
             </div> -->
-            
-          </div>
-          
+
+            </div>
+
         </div>
     </div>
 </section>

@@ -7,11 +7,11 @@ if (empty($_SESSION['email']) AND $_SESSION['log'] == 0) {
     include "nav.php";
     include "sidebar.php";
 ?>
-        <div class="content-wrapper">
-            <?php include "page-content.php";?>
-        </div>
+<div class="content-wrapper">
+    <?php include "page-content.php";?>
+</div>
 
-    </div>
+</div>
 <?php  
     include "footer.php";
 

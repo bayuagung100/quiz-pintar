@@ -137,6 +137,7 @@
     color: rgba(41, 42, 58, 0.67);
     margin-bottom: 2px;
 }
+
 .buat-quiz form input {
     display: block;
     width: 100%;
@@ -148,8 +149,8 @@
     color: #292A3A;
     border-radius: 4px;
     background-color: #fff;
-    border: 1px solid rgba(41,42,58,0.34);
-    box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.08);
+    border: 1px solid rgba(41, 42, 58, 0.34);
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.08);
 }
 
 .buat-quiz form input[type=text]:focus {
@@ -176,8 +177,8 @@
     color: #292A3A;
     border-radius: 4px;
     background-color: #fff;
-    border: 1px solid rgba(41,42,58,0.34);
-    box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.08);
+    border: 1px solid rgba(41, 42, 58, 0.34);
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.08);
 }
 
 .buat-quiz form textarea {
@@ -191,16 +192,18 @@
     color: #292A3A;
     border-radius: 4px;
     background-color: #fff;
-    border: 1px solid rgba(41,42,58,0.34);
-    box-shadow: inset 0 2px 4px 0 rgba(0,0,0,0.08);
+    border: 1px solid rgba(41, 42, 58, 0.34);
+    box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.08);
 }
+
 .buat-quiz form .action-btns-wrapper {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 0 24px 24px;
 }
-.buat-quiz form .action-btns-wrapper .cancel-btn{
+
+.buat-quiz form .action-btns-wrapper .cancel-btn {
     padding: 8px 16px;
     margin-right: 10px;
     border: none;
@@ -214,7 +217,7 @@
     transition: all 0.1s ease-in-out;
 }
 
-.buat-quiz form .action-btns-wrapper .save-btn{
+.buat-quiz form .action-btns-wrapper .save-btn {
     padding: 8px 16px;
     border: none;
     outline: none;
@@ -228,7 +231,7 @@
     transition: all 0.1s ease-in-out;
 }
 
-.img-responsive{
+.img-responsive {
     width: 100%;
     height: auto;
 }
@@ -251,7 +254,16 @@
     margin-bottom: 10px;
 } */
 
-#buat_quiz #pertanyaan1, #buat_quiz #pertanyaan2, #buat_quiz #pertanyaan3, #buat_quiz #pertanyaan4, #buat_quiz #pertanyaan4, #buat_quiz #pertanyaan6, #buat_quiz #pertanyaan7, #buat_quiz #pertanyaan8, #buat_quiz #pertanyaan9, #buat_quiz #pertanyaan10{
+#buat_quiz #pertanyaan1,
+#buat_quiz #pertanyaan2,
+#buat_quiz #pertanyaan3,
+#buat_quiz #pertanyaan4,
+#buat_quiz #pertanyaan4,
+#buat_quiz #pertanyaan6,
+#buat_quiz #pertanyaan7,
+#buat_quiz #pertanyaan8,
+#buat_quiz #pertanyaan9,
+#buat_quiz #pertanyaan10 {
     display: none;
 }
 
@@ -262,12 +274,13 @@
     display: block;
 }
 
-.jawaban-container input[type=text].jawaban-radio-input{
+.jawaban-container input[type=text].jawaban-radio-input {
     display: inline-block;
     width: 95%;
     position: absolute;
     left: 35px;
 }
+
 .jawaban-container input[type=radio].jawaban-radio {
     position: absolute;
     opacity: 0;
@@ -286,13 +299,13 @@
     color: #8D8D8D;
 }
 
-.jawaban-container .jawaban-radio:checked ~ .jawaban-radio-label:before{
+.jawaban-container .jawaban-radio:checked~.jawaban-radio-label:before {
     content: "\f058";
     font-family: 'Font Awesome 5 Free';
     color: #2FDA40;
 }
 
-.preview-soal{
+.preview-soal {
     background: rgba(255, 255, 255, 0.25);
     border-radius: 10px;
     color: white;

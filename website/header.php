@@ -15,7 +15,7 @@
 
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="<?php echo url("css/bootstrap.min.css");?>"/>
+    <link rel="stylesheet" href="<?php echo url("css/bootstrap.min.css");?>" />
     <link rel="stylesheet" href="<?php echo url("css/font-awesome.min.css");?>" />
     <link rel="stylesheet" href="<?php echo url("css/slicknav.min.css");?>" />
     <link rel="stylesheet" href="<?php echo url("css/owl.carousel.min.css");?>" />

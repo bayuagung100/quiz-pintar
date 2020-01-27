@@ -3,7 +3,7 @@ function readImg(input, id) {
         var reader = new FileReader();
 
         reader.onload = function (e) {
-            $('#'+id)
+            $('#' + id)
                 .show()
                 .attr('src', e.target.result)
                 .width(200)
@@ -14,14 +14,14 @@ function readImg(input, id) {
     }
 }
 
-$(document).ready(function(){
+$(document).ready(function () {
     // var form = document.getElementById('buat_quiz');
-    var judul = document.forms["buat_quiz"]["judul"];               
-    var gambar = document.forms["buat_quiz"]["gambar"];    
-    var kategori = document.forms["buat_quiz"]["kategori"];  
-    var tingkat =  document.forms["buat_quiz"]["tingkat"];  
+    var judul = document.forms["buat_quiz"]["judul"];
+    var gambar = document.forms["buat_quiz"]["gambar"];
+    var kategori = document.forms["buat_quiz"]["kategori"];
+    var tingkat = document.forms["buat_quiz"]["tingkat"];
     var deskripsi = document.forms["buat_quiz"]["deskripsi"];
-    $("#next_pertanyaan1").click(function(){
+    $("#next_pertanyaan1").click(function () {
         // if(judul.value == "" && judul.hasAttribute('required')){
         //     alert("Nama quiz wajib diisi ");
         //     judul.focus();
@@ -58,35 +58,35 @@ $(document).ready(function(){
         $('#pertanyaan1').show();
     });
 
-    $("#prev_default").click(function(){
+    $("#prev_default").click(function () {
         $('#banner').show();
         $('#tanda').show();
         $('#default').show();
         $('#pertanyaan1').hide();
     });
 
-    $("#a_soal1").click(function(){
+    $("#a_soal1").click(function () {
         $("#jawaban_a_soal1").prop('required', true);
         $("#jawaban_b_soal1").prop('required', false);
         $("#jawaban_c_soal1").prop('required', false);
         $("#jawaban_d_soal1").prop('required', false);
     });
 
-    $("#b_soal1").click(function(){
+    $("#b_soal1").click(function () {
         $("#jawaban_a_soal1").prop('required', false);
         $("#jawaban_b_soal1").prop('required', true);
         $("#jawaban_c_soal1").prop('required', false);
         $("#jawaban_d_soal1").prop('required', false);
     });
 
-    $("#c_soal1").click(function(){
+    $("#c_soal1").click(function () {
         $("#jawaban_a_soal1").prop('required', false);
         $("#jawaban_b_soal1").prop('required', false);
         $("#jawaban_c_soal1").prop('required', true);
         $("#jawaban_d_soal1").prop('required', false);
     });
 
-    $("#d_soal1").click(function(){
+    $("#d_soal1").click(function () {
         $("#jawaban_a_soal1").prop('required', false);
         $("#jawaban_b_soal1").prop('required', false);
         $("#jawaban_c_soal1").prop('required', false);
@@ -96,14 +96,13 @@ $(document).ready(function(){
 
 });
 
-$(document).ready(function(){
-    var soal1 = $('#soal1').keyup(function(){
+$(document).ready(function () {
+    var soal1 = $('#soal1').keyup(function () {
         isi = this.value;
         $('#preview-container-soal1').text(isi);
     });
-    
+
     // var gambar = $('#preview2').click(function(){
     //     console.log(gambar.load());
     // });
 });
-

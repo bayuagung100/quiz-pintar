@@ -72,4 +72,4 @@ function convert_seo($kata) {
 	return $kata;
 }
 
-?> 
+?>
