@@ -7,6 +7,8 @@ RewriteRule ^$ index.php [L]
 RewriteRule ^auth$ auth.php [L]
 RewriteRule ^logout$ logout.php [L]
 
+RewriteRule ^simpan-buat-quiz$ ajax/simpan-buat-quiz.php [L]
+
 RewriteRule ^dashboard$ index.php?content=dashboard/index [L]
 RewriteRule ^dashboard/(.*)$ index.php?content=dashboard/index&pages=$1 [L]
 
