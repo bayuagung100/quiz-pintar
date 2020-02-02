@@ -177,6 +177,15 @@ $(function() {
 <!-- my custom js-->
 <script src="<?php echo url("website/dashboard/");?>dist/js/my-custom.js"></script>
 
+<!-- sweetalert2-->
+<script src="<?php echo url("website/dashboard/");?>dist/js/sweetalert2.min.js"></script>
+
+<!-- tinymce editor-->
+<script src="<?php echo url("website/dashboard/");?>dist/tinymce/tinymce.min.js"></script>
+
+<!-- <script src="https://wiris.net/demo/plugins/app/WIRISplugins.js?viewer=image"> </script>  -->
+
+
 <script>
 $('#kabupaten').change(function() {
 
