@@ -176,6 +176,7 @@ $(function() {
 
 <!-- my custom js-->
 <script src="<?php echo url("website/dashboard/");?>dist/js/my-custom.js"></script>
+<script src="<?php echo url("website/dashboard/");?>dist/js/custom-tinymce.js"></script>
 
 <!-- sweetalert2-->
 <script src="<?php echo url("website/dashboard/");?>dist/js/sweetalert2.min.js"></script>

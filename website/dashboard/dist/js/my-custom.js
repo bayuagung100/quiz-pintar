@@ -18,7 +18,11 @@ function readImg(input, id, name) {
 
             reader.readAsDataURL(input.files[0]);
         } else {
-            alert("Format gambar tidak didukung.\nFormat yang didukung: .jpeg, .jpg, .png");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: 'Format gambar tidak didukung.<br>Format yang didukung: .jpeg, .jpg, .png',
+            })
             $('#' + id).hide();
             $('#' + name).val('');
         }
@@ -51,7 +55,11 @@ function readImgPreview(input, id) {
 
             reader.readAsDataURL(input.files[0]);
         } else {
-            alert("Format gambar tidak didukung.\nFormat yang didukung: .jpeg, .jpg, .png");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                html: 'Format gambar tidak didukung.<br>Format yang didukung: .jpeg, .jpg, .png',
+            })
             $('#preview_soal' + id).hide();
             $('#gambar_soal' + id).val('');
             $('#preview-container-gambar-soal' + id).hide();
@@ -66,7 +74,6 @@ $(document).ready(function () {
     var gambar = document.forms["buat_quiz"]["gambar"];
     var kategori = document.forms["buat_quiz"]["kategori"];
     var tingkat = document.forms["buat_quiz"]["tingkat"];
-    // var deskripsi = $("#deskripsi");
     var deskripsi =document.forms["buat_quiz"]["deskripsi"];
 
 
@@ -133,63 +140,63 @@ $(document).ready(function () {
 
 
     $("#next_pertanyaan1").click(function () {
-        // if (judul.value == "" && judul.hasAttribute('required')) {
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Oops...',
-        //         text: 'Nama quiz wajib diisi!',
-        //         onAfterClose: () => {
-        //             // focus your element
-        //             judul.focus();
-        //             window.scrollTo(0, judul.offsetTop);
-        //         }
-        //     })
-        //     return false;
-        // }
+        if (judul.value == "" && judul.hasAttribute('required')) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Nama quiz wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    judul.focus();
+                    window.scrollTo(0, judul.offsetTop);
+                }
+            })
+            return false;
+        }
 
-        // if (gambar.value == "" && gambar.hasAttribute('required')) {
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Oops...',
-        //         text: 'Gambar quiz wajib diisi!',
-        //         onAfterClose: () => {
-        //             // focus your element
-        //             gambar.focus();
-        //             window.scrollTo(0, gambar.offsetTop);
-        //         }
-        //     });
-        //     return false;
-        // }
+        if (gambar.value == "" && gambar.hasAttribute('required')) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Gambar quiz wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    gambar.focus();
+                    window.scrollTo(0, gambar.offsetTop);
+                }
+            });
+            return false;
+        }
 
-        // if (kategori.value == "" && kategori.hasAttribute('required')) {
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Oops...',
-        //         text: 'Kategori quiz wajib diisi!',
-        //         onAfterClose: () => {
-        //             // focus your element
-        //             kategori.focus();
-        //             window.scrollTo(0, kategori.offsetTop);
-        //         }
-        //     });
-        //     return false;
-        // }
+        if (kategori.value == "" && kategori.hasAttribute('required')) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Kategori quiz wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    kategori.focus();
+                    window.scrollTo(0, kategori.offsetTop);
+                }
+            });
+            return false;
+        }
 
-        // if (tingkat.value == "" && tingkat.hasAttribute('required')) {
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Oops...',
-        //         text: 'Tingkat kesulitan quiz wajib diisi!',
-        //         onAfterClose: () => {
-        //             // focus your element
-        //             tingkat.focus();
-        //             window.scrollTo(0, tingkat.offsetTop);
-        //         }
-        //     });
-        //     return false;
-        // }
+        if (tingkat.value == "" && tingkat.hasAttribute('required')) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Tingkat kesulitan quiz wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    tingkat.focus();
+                    window.scrollTo(0, tingkat.offsetTop);
+                }
+            });
+            return false;
+        }
 
-        if (deskripsi.value == "") {
+        if (deskripsi.value == "" && deskripsi.hasAttribute('required')) {
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -197,7 +204,7 @@ $(document).ready(function () {
                 onAfterClose: () => {
                     // focus your element
                     deskripsi.focus();
-                    window.scrollTo(0, window.offsetTop);
+                    window.scrollTo(0, tingkat.offsetTop);
                 }
             });
             return false;
@@ -207,7 +214,8 @@ $(document).ready(function () {
         $('#tanda').hide();
         $('#default').hide();
         $('#pertanyaan1').show();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_default").click(function () {
@@ -215,545 +223,894 @@ $(document).ready(function () {
         $('#tanda').show();
         $('#default').show();
         $('#pertanyaan1').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#next_pertanyaan2").click(function () {
 
         if (soal1.val() == "" && soal1.prop('required')) {
-            alert("Soal pertanyaan 1 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal1.focus();
+                    window.scrollTo(0, soal1.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal1]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal1";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal1.value == "" && jawaban_a_soal1.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal1";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal1.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal1.value == "" && jawaban_b_soal1.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal1";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal1.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal1.value == "" && jawaban_c_soal1.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal1";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal1.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal1.value == "" && jawaban_d_soal1.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal1";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal1.focus();
+                }
+            });
             return false;
         }
 
         $('#pertanyaan2').show();
         $('#pertanyaan1').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_pertanyaan1").click(function () {
         $('#pertanyaan1').show();
         $('#pertanyaan2').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#next_pertanyaan3").click(function () {
 
         if (soal2.val() == "" && soal2.prop('required')) {
-            alert("Soal pertanyaan 2 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal2.focus();
+                    window.scrollTo(0, soal2.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal2]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal2";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal2.value == "" && jawaban_a_soal2.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal2";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal2.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal2.value == "" && jawaban_b_soal2.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal2";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal2.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal2.value == "" && jawaban_c_soal2.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal2";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal2.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal2.value == "" && jawaban_d_soal2.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal2";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal2.focus();
+                }
+            });
             return false;
         }
 
         $('#pertanyaan3').show();
         $('#pertanyaan2').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_pertanyaan2").click(function () {
         $('#pertanyaan2').show();
         $('#pertanyaan3').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#next_pertanyaan4").click(function () {
 
         if (soal3.val() == "" && soal3.prop('required')) {
-            alert("Soal pertanyaan 3 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal3.focus();
+                    window.scrollTo(0, soal3.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal3]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal3";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal3.value == "" && jawaban_a_soal3.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal3";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal3.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal3.value == "" && jawaban_b_soal3.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal3";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal3.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal3.value == "" && jawaban_c_soal3.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal3";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal3.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal3.value == "" && jawaban_d_soal3.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal3";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal3.focus();
+                }
+            });
             return false;
         }
 
         $('#pertanyaan4').show();
         $('#pertanyaan3').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_pertanyaan3").click(function () {
         $('#pertanyaan3').show();
         $('#pertanyaan4').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#next_pertanyaan5").click(function () {
 
         if (soal4.val() == "" && soal4.prop('required')) {
-            alert("Soal pertanyaan 4 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal4.focus();
+                    window.scrollTo(0, soal4.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal4]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal4";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal4.value == "" && jawaban_a_soal4.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal4";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal4.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal4.value == "" && jawaban_b_soal4.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal4";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal4.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal4.value == "" && jawaban_c_soal4.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal4";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal4.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal4.value == "" && jawaban_d_soal4.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal4";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal4.focus();
+                }
+            });
             return false;
         }
 
         $('#pertanyaan5').show();
         $('#pertanyaan4').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_pertanyaan4").click(function () {
         $('#pertanyaan4').show();
         $('#pertanyaan5').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#next_pertanyaan6").click(function () {
 
         if (soal5.val() == "" && soal5.prop('required')) {
-            alert("Soal pertanyaan 5 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 5 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal5.focus();
+                    window.scrollTo(0, soal5.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal5]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal5";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal5.value == "" && jawaban_a_soal5.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal5";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal5.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal5.value == "" && jawaban_b_soal5.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal5";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal5.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal5.value == "" && jawaban_c_soal5.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal5";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal5.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal5.value == "" && jawaban_d_soal5.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal5";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal5.focus();
+                }
+            });
             return false;
         }
 
         $('#pertanyaan6').show();
         $('#pertanyaan5').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_pertanyaan5").click(function () {
         $('#pertanyaan5').show();
         $('#pertanyaan6').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#next_pertanyaan7").click(function () {
 
         if (soal6.val() == "" && soal6.prop('required')) {
-            alert("Soal pertanyaan 6 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 6 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal6.focus();
+                    window.scrollTo(0, soal6.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal6]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal6";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal6.value == "" && jawaban_a_soal6.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal6";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal6.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal6.value == "" && jawaban_b_soal6.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal6";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal6.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal6.value == "" && jawaban_c_soal6.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal6";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal6.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal6.value == "" && jawaban_d_soal6.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal6";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal6.focus();
+                }
+            });
             return false;
         }
 
         $('#pertanyaan7').show();
         $('#pertanyaan6').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_pertanyaan6").click(function () {
         $('#pertanyaan6').show();
         $('#pertanyaan7').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#next_pertanyaan8").click(function () {
 
         if (soal7.val() == "" && soal7.prop('required')) {
-            alert("Soal pertanyaan 7 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 7 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal7.focus();
+                    window.scrollTo(0, soal7.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal7]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal7";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal7.value == "" && jawaban_a_soal7.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal7";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal7.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal7.value == "" && jawaban_b_soal7.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal7";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal7.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal7.value == "" && jawaban_c_soal7.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal7";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal7.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal7.value == "" && jawaban_d_soal7.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal7";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal7.focus();
+                }
+            });
             return false;
         }
 
         $('#pertanyaan8').show();
         $('#pertanyaan7').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_pertanyaan7").click(function () {
         $('#pertanyaan7').show();
         $('#pertanyaan8').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#next_pertanyaan9").click(function () {
 
         if (soal8.val() == "" && soal8.prop('required')) {
-            alert("Soal pertanyaan 8 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 8 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal8.focus();
+                    window.scrollTo(0, soal8.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal8]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal8";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal8.value == "" && jawaban_a_soal8.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal8";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal8.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal8.value == "" && jawaban_b_soal8.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal8";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal8.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal8.value == "" && jawaban_c_soal8.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal8";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal8.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal8.value == "" && jawaban_d_soal8.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal8";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal8.focus();
+                }
+            });
             return false;
         }
 
         $('#pertanyaan9').show();
         $('#pertanyaan8').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_pertanyaan8").click(function () {
         $('#pertanyaan8').show();
         $('#pertanyaan9').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#next_pertanyaan10").click(function () {
 
         if (soal9.val() == "" && soal9.prop('required')) {
-            alert("Soal pertanyaan 9 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 9 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal9.focus();
+                    window.scrollTo(0, soal9.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal9]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal9";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal9.value == "" && jawaban_a_soal9.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal8";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal9.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal9.value == "" && jawaban_b_soal9.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal9";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal9.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal9.value == "" && jawaban_c_soal9.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal9";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal9.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal9.value == "" && jawaban_d_soal9.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal9";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal9.focus();
+                }
+            });
             return false;
         }
 
         $('#pertanyaan10').show();
         $('#pertanyaan9').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#prev_pertanyaan9").click(function () {
         $('#pertanyaan9').show();
         $('#pertanyaan10').hide();
-        location.href = "#sec-buat-quiz";
+        // location.href = "#sec-buat-quiz";
+        window.scrollTo(0, this.offsetTop)
     });
 
     $("#simpan-soal").click(function () {
 
         if (soal10.val() == "" && soal10.prop('required')) {
-            alert("Soal pertanyaan 10 wajib diisi");
-            location.href = "#sec-buat-quiz";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Soal pertanyaan 10 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    soal10.focus();
+                    window.scrollTo(0, soal10.offsetTop);
+                }
+            });
             return false;
         }
 
         if ($('input[name=jawaban_soal10]').is(':checked')) {} else {
-            alert("Silahkan ceklis jawaban yang benar");
-            location.href = "#soal10";
-            // tingkat.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Silahkan ceklis jawaban yang benar!',
+            });
             return false;
         }
 
         if (jawaban_a_soal10.value == "" && jawaban_a_soal10.hasAttribute('required')) {
-            alert("Pilihan jawaban 1 wajib diisi");
-            location.href = "#soal10";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 1 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_a_soal10.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_b_soal10.value == "" && jawaban_b_soal10.hasAttribute('required')) {
-            alert("Pilihan jawaban 2 wajib diisi");
-            location.href = "#soal10";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 2 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_b_soal10.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_c_soal10.value == "" && jawaban_c_soal10.hasAttribute('required')) {
-            alert("Pilihan jawaban 3 wajib diisi");
-            location.href = "#soal10";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 3 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_c_soal10.focus();
+                }
+            });
             return false;
         }
 
         if (jawaban_d_soal10.value == "" && jawaban_d_soal10.hasAttribute('required')) {
-            alert("Pilihan jawaban 4 wajib diisi");
-            location.href = "#soal10";
-            // deskripsi.focus();
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Pilihan jawaban 4 wajib diisi!',
+                onAfterClose: () => {
+                    // focus your element
+                    jawaban_d_soal10.focus();
+                }
+            });
             return false;
         }
 
@@ -868,32 +1225,5 @@ $(document).ready(function () {
     // batas fungsi preview pertanyaan //
 
 
-
-});
-
-
-$(document).ready(function () {
-
-    
-    tinymce.init({
-        selector: 'textarea#deskripsi',
-        // body_id: 'asd',
-        height: 200,
-        plugins: [
-            'preview',
-        ],
-        toolbar: 'preview | undo redo| bold italic | tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry',
-        menubar: '',
-        external_plugins: {
-            'tiny_mce_wiris' : '../../../../node_modules/@wiris/mathtype-tinymce5/plugin.min.js'
-        },
-        // inline: true
-        setup: function (editor) {
-            editor.on('change', function () {
-                tinymce.triggerSave();
-            });
-        }
-
-    });
 
 });

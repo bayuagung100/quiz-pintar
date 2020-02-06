@@ -61,7 +61,6 @@
                     </div>
                     <div class="form-group">
                         <label for="deskripsi">5. Deskripsi untuk quiz ini <span style="color:red">*</span></label>
-                        <!-- <div id="deskripsi"></div> -->
                         <textarea id="deskripsi" name="deskripsi" placeholder="Deskripsi Quiz" required></textarea>
                     </div>
                     <hr>
