@@ -1227,3 +1227,67 @@ $(document).ready(function () {
 
 
 });
+
+
+$("#quizku").ready(function() {
+    var quizku = $("#quizku").attr('id');
+    load_data();
+    function load_data(page) {
+        $.ajax({
+            url: "../ajax/pagination.php",
+            method: "post",
+            data: {
+                page: page,
+                halaman: quizku,
+            },
+            success: function (data) {
+                $("#quizku").html(data);
+            }
+        });
+    }
+
+    $("#quizku").on("click", ".pagination_link", function () {
+        var page = $(this).attr("page");
+        load_data(page);
+        $('html,body').animate({
+            scrollTop: $(".content").offset().top},
+            'fast');
+    });
+    $("#quizku").on('click', '#delete_quiz', function(e){
+        var id = $(this).data('id');
+        console.log(id);
+        
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!',
+            showLoaderOnConfirm: true,
+            preConfirm: function() {
+                return new Promise(function(resolve) {
+                    $.ajax({
+                    url: '../ajax/delete.php',
+                    type: 'POST',
+                    data: {
+                        id:id,
+                        halaman: quizku
+                    },
+                    dataType: 'json'
+                    })
+                    .done(function(response){
+                        Swal.fire('Deleted!', response.text, response.icon);
+                        load_data();
+                    })
+                    .fail(function(){
+                        Swal.fire('Oops...', 'Something went wrong!', 'error');
+                    });
+                });
+            },
+            allowOutsideClick: false     
+        }); 
+        e.preventDefault();
+    });
+});
