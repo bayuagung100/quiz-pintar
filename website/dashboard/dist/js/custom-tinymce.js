@@ -26,7 +26,7 @@ $(document).ready(function () {
 
     
     tinymce.init({
-        selector: 'textarea#deskripsi',
+        selector: '.richtext',
         height: 200,
         plugins: [
             'preview placeholder',
@@ -40,6 +40,8 @@ $(document).ready(function () {
         }
 
     });
+
+    
 
     tinymce.init({
         selector: 'textarea#soal1',

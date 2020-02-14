@@ -3,6 +3,7 @@ session_start();
 error_reporting();
 ob_start();
 include "vendor/config.php";
+include "vendor/func.php";
 
 $content  = (isset($_GET['content'])) ? $_GET['content'] : "home";
 $kosong   = true;

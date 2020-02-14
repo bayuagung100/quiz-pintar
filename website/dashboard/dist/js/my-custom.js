@@ -1,4 +1,35 @@
-function readImg(input, id, name) {
+// function readImg(input, id, name) {
+//     if (input.files && input.files[0]) {
+//         var fileTypes = ['jpg', 'jpeg', 'png'];
+
+//         var extension = input.files[0].name.split('.').pop().toLowerCase(), //file extension from input file
+//             isSuccess = fileTypes.indexOf(extension) > -1; //is extension in acceptable types
+//         // var reader = new FileReader();
+
+//         if (isSuccess) { //yes
+//             var reader = new FileReader();
+//             reader.onload = function (e) {
+//                 $('#' + id)
+//                     .show()
+//                     .attr('src', e.target.result)
+//                     .width(300)
+//                     .height(200);
+//             };
+
+//             reader.readAsDataURL(input.files[0]);
+//         } else {
+//             Swal.fire({
+//                 icon: 'error',
+//                 title: 'Oops...',
+//                 html: 'Format gambar tidak didukung.<br>Format yang didukung: .jpeg, .jpg, .png',
+//             })
+//             $('#' + id).hide();
+//             $('#' + name).val('');
+//         }
+//     }
+// }
+
+function readImg(input, id) {
     if (input.files && input.files[0]) {
         var fileTypes = ['jpg', 'jpeg', 'png'];
 
@@ -9,7 +40,7 @@ function readImg(input, id, name) {
         if (isSuccess) { //yes
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#' + id)
+                $('#preview' + id)
                     .show()
                     .attr('src', e.target.result)
                     .width(300)
@@ -23,8 +54,8 @@ function readImg(input, id, name) {
                 title: 'Oops...',
                 html: 'Format gambar tidak didukung.<br>Format yang didukung: .jpeg, .jpg, .png',
             })
-            $('#' + id).hide();
-            $('#' + name).val('');
+            $('#preview' + id).hide();
+            $('#gambar' + id).val('');
         }
     }
 }
