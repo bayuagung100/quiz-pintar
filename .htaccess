@@ -12,6 +12,9 @@ RewriteRule ^simpan-buat-quiz$ ajax/simpan-buat-quiz.php [L]
 RewriteRule ^dashboard$ index.php?content=dashboard/index [L]
 RewriteRule ^dashboard/(.*)$ index.php?content=dashboard/index&pages=$1 [L]
 
+RewriteRule ^join$ index.php?content=join [L]
+RewriteRule ^join/(.*)$ index.php?content=join&code=$1 [L]
+
 
 
 

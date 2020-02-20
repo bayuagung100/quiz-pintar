@@ -103,17 +103,60 @@ switch($show){
                         buat_btnactiondefault(1);
                         echo'</div>';
                         
+                        $soal = isset($data['soal'])?explode(";",$data['soal']):"";
+                    
+                        $gambar_soal = isset($data['gambar_soal'])?explode(";",$data['gambar_soal']):"";
+                        $jawaban_soal = isset($data['jawaban_soal'])?explode(";",$data['jawaban_soal']):"";
+                        $jawaban_a_soal = isset($data['jawaban_a_soal'])?explode(";",$data['jawaban_a_soal']):"";
+                        $jawaban_b_soal = isset($data['jawaban_b_soal'])?explode(";",$data['jawaban_b_soal']):"";
+                        $jawaban_c_soal = isset($data['jawaban_c_soal'])?explode(";",$data['jawaban_c_soal']):"";
+                        $jawaban_d_soal = isset($data['jawaban_d_soal'])?explode(";",$data['jawaban_d_soal']):"";
 
                         for ($i=1; $i <= 10; $i++) {
                             buat_bukadivpertanyaan($i);
                                 echo '<div class="row">';
+                                if($soal!=null){
+                                    $sl =  $soal[$i-1];
+                                }else{
+                                    $sl = $soal;
+                                }
+                                if($gambar_soal!=null){
+                                    $gs =  $gambar_soal[$i-1];
+                                }else{
+                                    $gs = $gambar_soal;
+                                }
+                                if($jawaban_soal!=null){
+                                    $js =  $jawaban_soal[$i-1];
+                                }else{
+                                    $js = $jawaban_soal;
+                                }
+                                if($jawaban_a_soal!=null){
+                                    $pilA =  $jawaban_a_soal[$i-1];
+                                }else{
+                                    $pilA = $jawaban_a_soal;
+                                }
+                                if($jawaban_b_soal!=null){
+                                    $pilB =  $jawaban_b_soal[$i-1];
+                                }else{
+                                    $pilB = $jawaban_b_soal;
+                                }
+                                if($jawaban_c_soal!=null){
+                                    $pilC =  $jawaban_c_soal[$i-1];
+                                }else{
+                                    $pilC = $jawaban_c_soal;
+                                }
+                                if($jawaban_d_soal!=null){
+                                    $pilD =  $jawaban_d_soal[$i-1];
+                                }else{
+                                    $pilD = $jawaban_d_soal;
+                                }
                                     buat_bukadivsoal($i);
-                                        buat_textarea("Pertanyaan", "soal$i", $data['soal1'], "Soal pertanyaan", "required");
-                                        buat_fileimagesoal("Gambar pertanyaan", $data['gambar_soal1'], $i);
-                                        buat_radiojawaban($i);
+                                        buat_textarea("Pertanyaan", "soal$i", $sl, "Soal pertanyaan", "required");
+                                        buat_fileimagesoal("Gambar pertanyaan", $gs, $i);
+                                        buat_radiojawaban($i, $js, $pilA, $pilB, $pilC, $pilD);
                                     buat_tutupdivsoal();
                                     buat_bukadivpreview($i);
-                                        buat_isipreview($i);
+                                        buat_isipreview($i, $gs, $sl, $js, $pilA, $pilB, $pilC, $pilD);
                                     buat_tutupdivpreview();
 
                                 echo "
@@ -147,63 +190,140 @@ switch($show){
     break;
 
     case 'action':
-        if($_POST['aksi'] == "buat"){
-            $id_pembuat = $_POST['id_pembuat'];
-            $judul = ucwords($_POST['judul']);
-            $kategori = $_POST['kategori'];
-            $tingkat = $_POST['tingkat'];
-            $deskripsi = addslashes($_POST['deskripsi']);
+        $id_pembuat = $_POST['id_pembuat'];
+        $judul = ucwords($_POST['judul']);
+        $kategori = $_POST['kategori'];
+        $tingkat = $_POST['tingkat'];
+        $deskripsi = addslashes($_POST['deskripsi']);
 
-            $soal = [$_POST['soal1'], $_POST['soal2'], $_POST['soal3'], $_POST['soal4'], $_POST['soal5'], $_POST['soal6'], $_POST['soal7'], $_POST['soal8'], $_POST['soal9'], $_POST['soal10']];
+        $soal = [$_POST['soal1'], $_POST['soal2'], $_POST['soal3'], $_POST['soal4'], $_POST['soal5'], $_POST['soal6'], $_POST['soal7'], $_POST['soal8'], $_POST['soal9'], $_POST['soal10']];
 
-            $jawaban_soal = [$_POST['jawaban_soal1'], $_POST['jawaban_soal2'], $_POST['jawaban_soal3'], $_POST['jawaban_soal4'], $_POST['jawaban_soal5'], $_POST['jawaban_soal6'], $_POST['jawaban_soal7'], $_POST['jawaban_soal8'], $_POST['jawaban_soal9'], $_POST['jawaban_soal10']];
-            $jawaban_a_soal = [$_POST['jawaban_a_soal1'], $_POST['jawaban_a_soal2'], $_POST['jawaban_a_soal3'], $_POST['jawaban_a_soal4'], $_POST['jawaban_a_soal5'], $_POST['jawaban_a_soal6'], $_POST['jawaban_a_soal7'], $_POST['jawaban_a_soal8'], $_POST['jawaban_a_soal9'], $_POST['jawaban_a_soal10']];
-            $jawaban_b_soal = [$_POST['jawaban_b_soal1'], $_POST['jawaban_b_soal2'], $_POST['jawaban_b_soal3'], $_POST['jawaban_b_soal4'], $_POST['jawaban_b_soal5'], $_POST['jawaban_b_soal6'], $_POST['jawaban_b_soal7'], $_POST['jawaban_b_soal8'], $_POST['jawaban_b_soal9'], $_POST['jawaban_b_soal10']];
-            $jawaban_c_soal = [$_POST['jawaban_c_soal1'], $_POST['jawaban_c_soal2'], $_POST['jawaban_c_soal3'], $_POST['jawaban_c_soal4'], $_POST['jawaban_c_soal5'], $_POST['jawaban_c_soal6'], $_POST['jawaban_c_soal7'], $_POST['jawaban_c_soal8'], $_POST['jawaban_c_soal9'], $_POST['jawaban_c_soal10']];
-            $jawaban_d_soal = [$_POST['jawaban_d_soal1'], $_POST['jawaban_d_soal2'], $_POST['jawaban_d_soal3'], $_POST['jawaban_d_soal4'], $_POST['jawaban_d_soal5'], $_POST['jawaban_d_soal6'], $_POST['jawaban_d_soal7'], $_POST['jawaban_d_soal8'], $_POST['jawaban_d_soal9'], $_POST['jawaban_d_soal10']];
+        $jawaban_soal = [$_POST['jawaban_soal1'], $_POST['jawaban_soal2'], $_POST['jawaban_soal3'], $_POST['jawaban_soal4'], $_POST['jawaban_soal5'], $_POST['jawaban_soal6'], $_POST['jawaban_soal7'], $_POST['jawaban_soal8'], $_POST['jawaban_soal9'], $_POST['jawaban_soal10']];
+        $jawaban_a_soal = [$_POST['jawaban_a_soal1'], $_POST['jawaban_a_soal2'], $_POST['jawaban_a_soal3'], $_POST['jawaban_a_soal4'], $_POST['jawaban_a_soal5'], $_POST['jawaban_a_soal6'], $_POST['jawaban_a_soal7'], $_POST['jawaban_a_soal8'], $_POST['jawaban_a_soal9'], $_POST['jawaban_a_soal10']];
+        $jawaban_b_soal = [$_POST['jawaban_b_soal1'], $_POST['jawaban_b_soal2'], $_POST['jawaban_b_soal3'], $_POST['jawaban_b_soal4'], $_POST['jawaban_b_soal5'], $_POST['jawaban_b_soal6'], $_POST['jawaban_b_soal7'], $_POST['jawaban_b_soal8'], $_POST['jawaban_b_soal9'], $_POST['jawaban_b_soal10']];
+        $jawaban_c_soal = [$_POST['jawaban_c_soal1'], $_POST['jawaban_c_soal2'], $_POST['jawaban_c_soal3'], $_POST['jawaban_c_soal4'], $_POST['jawaban_c_soal5'], $_POST['jawaban_c_soal6'], $_POST['jawaban_c_soal7'], $_POST['jawaban_c_soal8'], $_POST['jawaban_c_soal9'], $_POST['jawaban_c_soal10']];
+        $jawaban_d_soal = [$_POST['jawaban_d_soal1'], $_POST['jawaban_d_soal2'], $_POST['jawaban_d_soal3'], $_POST['jawaban_d_soal4'], $_POST['jawaban_d_soal5'], $_POST['jawaban_d_soal6'], $_POST['jawaban_d_soal7'], $_POST['jawaban_d_soal8'], $_POST['jawaban_d_soal9'], $_POST['jawaban_d_soal10']];
 
-            $gambar_soal = [
-                isset($_FILES['gambar_soal1'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal1']['name'])):null, 
-                isset($_FILES['gambar_soal2'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal2']['name'])):null, 
-                isset($_FILES['gambar_soal3'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal3']['name'])):null, 
-                isset($_FILES['gambar_soal4'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal4']['name'])):null, 
-                isset($_FILES['gambar_soal5'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal5']['name'])):null, 
-                isset($_FILES['gambar_soal6'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal6']['name'])):null, 
-                isset($_FILES['gambar_soal7'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal7']['name'])):null, 
-                isset($_FILES['gambar_soal8'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal8']['name'])):null, 
-                isset($_FILES['gambar_soal9'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal9']['name'])):null, 
-                isset($_FILES['gambar_soal10'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal10']['name'])):null
-            ];
+        if (isset($_FILES['gambar_soal1'])){
+            $gambar_soal1 = isset($_FILES['gambar_soal1'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal1']['name'])):null;
+        } else {
+            $gambar_soal1 = isset($_POST['gambar_soal1'])?$_POST['gambar_soal1']:null;
+        }
+        if (isset($_FILES['gambar_soal2'])){
+            $gambar_soal2 = isset($_FILES['gambar_soal2'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal2']['name'])):null;
+        } else {
+            $gambar_soal2 = isset($_POST['gambar_soal2'])?$_POST['gambar_soal2']:null;
+        }
+        if (isset($_FILES['gambar_soal3'])){
+            $gambar_soal3 = isset($_FILES['gambar_soal3'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal3']['name'])):null;
+        } else {
+            $gambar_soal3 = isset($_POST['gambar_soal3'])?$_POST['gambar_soal3']:null;
+        }
+        if (isset($_FILES['gambar_soal4'])){
+            $gambar_soal4 = isset($_FILES['gambar_soal4'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal4']['name'])):null;
+        } else {
+            $gambar_soal4 = isset($_POST['gambar_soal4'])?$_POST['gambar_soal4']:null;
+        }
+        if (isset($_FILES['gambar_soal5'])){
+            $gambar_soal5 = isset($_FILES['gambar_soal5'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal5']['name'])):null;
+        } else {
+            $gambar_soal5 = isset($_POST['gambar_soal5'])?$_POST['gambar_soal5']:null;
+        }
+        if (isset($_FILES['gambar_soal6'])){
+            $gambar_soal6 = isset($_FILES['gambar_soal6'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal6']['name'])):null;
+        } else {
+            $gambar_soal6 = isset($_POST['gambar_soal6'])?$_POST['gambar_soal6']:null;
+        }
+        if (isset($_FILES['gambar_soal7'])){
+            $gambar_soal7 = isset($_FILES['gambar_soal7'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal7']['name'])):null;
+        } else {
+            $gambar_soal7 = isset($_POST['gambar_soal7'])?$_POST['gambar_soal7']:null;
+        }
+        if (isset($_FILES['gambar_soal8'])){
+            $gambar_soal8 = isset($_FILES['gambar_soal8'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal8']['name'])):null;
+        } else {
+            $gambar_soal8 = isset($_POST['gambar_soal8'])?$_POST['gambar_soal8']:null;
+        }
+        if (isset($_FILES['gambar_soal9'])){
+            $gambar_soal9 = isset($_FILES['gambar_soal9'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal9']['name'])):null;
+        } else {
+            $gambar_soal9 = isset($_POST['gambar_soal9'])?$_POST['gambar_soal9']:null;
+        }
+        if (isset($_FILES['gambar_soal10'])){
+            $gambar_soal10 = isset($_FILES['gambar_soal10'])?strtolower(str_replace(" ","-",$_FILES['gambar_soal10']['name'])):null;
+        } else {
+            $gambar_soal10 = isset($_POST['gambar_soal10'])?$_POST['gambar_soal10']:null;
+        }
 
-            $tmp_gambar_soal = [
-                isset($_FILES['gambar_soal1'])?$_FILES['gambar_soal1']['tmp_name']:null, 
-                isset($_FILES['gambar_soal2'])?$_FILES['gambar_soal2']['tmp_name']:null, 
-                isset($_FILES['gambar_soal3'])?$_FILES['gambar_soal3']['tmp_name']:null, 
-                isset($_FILES['gambar_soal4'])?$_FILES['gambar_soal4']['tmp_name']:null, 
-                isset($_FILES['gambar_soal5'])?$_FILES['gambar_soal5']['tmp_name']:null, 
-                isset($_FILES['gambar_soal6'])?$_FILES['gambar_soal6']['tmp_name']:null, 
-                isset($_FILES['gambar_soal7'])?$_FILES['gambar_soal7']['tmp_name']:null, 
-                isset($_FILES['gambar_soal8'])?$_FILES['gambar_soal8']['tmp_name']:null, 
-                isset($_FILES['gambar_soal9'])?$_FILES['gambar_soal9']['tmp_name']:null, 
-                isset($_FILES['gambar_soal10'])?$_FILES['gambar_soal10']['tmp_name']:null
-            ];
+        $gambar_soal = [
+            $gambar_soal1,
+            $gambar_soal2,
+            $gambar_soal3,
+            $gambar_soal4,
+            $gambar_soal5,
+            $gambar_soal6,
+            $gambar_soal7,
+            $gambar_soal8,
+            $gambar_soal9,
+            $gambar_soal10,
+        ];
 
+        $tmp_gambar_soal = [
+            isset($_FILES['gambar_soal1'])?$_FILES['gambar_soal1']['tmp_name']:null, 
+            isset($_FILES['gambar_soal2'])?$_FILES['gambar_soal2']['tmp_name']:null, 
+            isset($_FILES['gambar_soal3'])?$_FILES['gambar_soal3']['tmp_name']:null, 
+            isset($_FILES['gambar_soal4'])?$_FILES['gambar_soal4']['tmp_name']:null, 
+            isset($_FILES['gambar_soal5'])?$_FILES['gambar_soal5']['tmp_name']:null, 
+            isset($_FILES['gambar_soal6'])?$_FILES['gambar_soal6']['tmp_name']:null, 
+            isset($_FILES['gambar_soal7'])?$_FILES['gambar_soal7']['tmp_name']:null, 
+            isset($_FILES['gambar_soal8'])?$_FILES['gambar_soal8']['tmp_name']:null, 
+            isset($_FILES['gambar_soal9'])?$_FILES['gambar_soal9']['tmp_name']:null, 
+            isset($_FILES['gambar_soal10'])?$_FILES['gambar_soal10']['tmp_name']:null
+        ];
+
+        
+        if(isset($_FILES['gambar'])){
             $gambar = isset($_FILES['gambar'])?strtolower(str_replace(" ","-",$_FILES['gambar']['name'])):null;
-            $filetmpgambar = isset($_FILES['gambar'])?$_FILES['gambar']['tmp_name']:null;
+        }else {
+            $gambar =  isset($_POST['gambar'])?$_POST['gambar']:null;
+        }
+            
+        $filetmpgambar = isset($_FILES['gambar'])?$_FILES['gambar']['tmp_name']:null;
 
-            $imp_soal = implode(";", $soal);
-            $imp_jawaban_soal = implode(";", $jawaban_soal);
-            $imp_jawaban_a_soal = implode(";", $jawaban_a_soal);
-            $imp_jawaban_b_soal = implode(";", $jawaban_b_soal);
-            $imp_jawaban_c_soal = implode(";", $jawaban_c_soal);
-            $imp_jawaban_d_soal = implode(";", $jawaban_d_soal);
+        // } else {
+        //     $gambar = isset($_POST['gambar'])?$_POST['gambar']:null;
 
-            $imp_gambar_soal = implode(";", $gambar_soal);
-            $ex_gambar_soal = explode(';', $imp_gambar_soal);
-            $imp_tmp_gambar_soal = implode(";", $tmp_gambar_soal);
-            $ex_tmp_gambar_soal = explode(';', $imp_tmp_gambar_soal);
+        //     $gambar_soal = [
+        //         isset($_POST['gambar_soal1'])?$_POST['gambar_soal1']:null, 
+        //         isset($_POST['gambar_soal2'])?$_POST['gambar_soal2']:null, 
+        //         isset($_POST['gambar_soal3'])?$_POST['gambar_soal3']:null, 
+        //         isset($_POST['gambar_soal4'])?$_POST['gambar_soal4']:null, 
+        //         isset($_POST['gambar_soal5'])?$_POST['gambar_soal5']:null, 
+        //         isset($_POST['gambar_soal6'])?$_POST['gambar_soal6']:null, 
+        //         isset($_POST['gambar_soal7'])?$_POST['gambar_soal7']:null, 
+        //         isset($_POST['gambar_soal8'])?$_POST['gambar_soal8']:null, 
+        //         isset($_POST['gambar_soal9'])?$_POST['gambar_soal9']:null, 
+        //         isset($_POST['gambar_soal10'])?$_POST['gambar_soal10']:null
+        //     ];
+        // }
 
-            global $mysqli;
+        $imp_soal = implode(";", $soal);
+        $imp_jawaban_soal = implode(";", $jawaban_soal);
+        $imp_jawaban_a_soal = implode(";", $jawaban_a_soal);
+        $imp_jawaban_b_soal = implode(";", $jawaban_b_soal);
+        $imp_jawaban_c_soal = implode(";", $jawaban_c_soal);
+        $imp_jawaban_d_soal = implode(";", $jawaban_d_soal);
+
+        $imp_gambar_soal = implode(";", $gambar_soal);
+        $ex_gambar_soal = explode(';', $imp_gambar_soal);
+        $imp_tmp_gambar_soal = implode(";", $tmp_gambar_soal);
+        $ex_tmp_gambar_soal = explode(';', $imp_tmp_gambar_soal);
+
+        global $mysqli;
+
+        if($_POST['aksi'] == "buat"){
+            // var_dump($gambar);
+            // var_dump($imp_gambar_soal);
             move_uploaded_file($filetmpgambar, 'images/'.strtolower(str_replace(" ","-",$gambar)));
             if ($gambar_soal) {
                 for ($i=0; $i < count($ex_gambar_soal); $i++) {
@@ -244,20 +364,72 @@ switch($show){
 
                 )
             ");
-            
-
             if ($query) {
-                header('location:'.$link);
+                echo"
+                <script type='text/javascript'>
+                $(document).ready(function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Soal berhasil disimpan',
+                        onAfterClose: () => {
+                            window.location.href = '".$link."';
+                        }
+                    });
+                });
+                </script>
+                ";
+                // header('location:'.$link);
             } else {
                 echo "gagal " .$mysqli->error;
             }
-
-            
-
         }elseif($_POST['aksi'] == "edit"){
-            echo "edit";
+            // var_dump($gambar);
+            // var_dump($imp_gambar_soal);
+            move_uploaded_file($filetmpgambar, 'images/'.strtolower(str_replace(" ","-",$gambar)));
+            if ($gambar_soal) {
+                for ($i=0; $i < count($ex_gambar_soal); $i++) {
+                    move_uploaded_file($ex_tmp_gambar_soal[$i], 'images/'.$ex_gambar_soal[$i]);
+                }
+            }
+            $query 	= $mysqli->query ( "UPDATE quiz SET
+                id_pembuat      =   '$id_pembuat',
+                judul           =   '$judul',
+                gambar          =   '$gambar',
+                kategori        =   '$kategori',
+                tingkat         =   '$tingkat',
+                deskripsi       =   '$deskripsi',
+                soal            =   '$imp_soal',
+                gambar_soal     =   '$imp_gambar_soal',
+                jawaban_soal    =   '$imp_jawaban_soal',
+                jawaban_a_soal  =   '$imp_jawaban_a_soal',
+                jawaban_b_soal  =   '$imp_jawaban_b_soal',
+                jawaban_c_soal  =   '$imp_jawaban_c_soal',
+                jawaban_d_soal  =   '$imp_jawaban_d_soal'
+
+                WHERE id='$_POST[id]'
+                ");
+            if ($query) {
+                echo"
+                <script type='text/javascript'>
+                $(document).ready(function () {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: 'Soal berhasil disimpan',
+                        onAfterClose: () => {
+                            window.location.href = '".$link."';
+                        }
+                    });
+                });
+                </script>
+                ";
+                // header('location:'.$link);
+            } else {
+                echo "gagal " .$mysqli->error;
+            }
         }
-        header('location:'.$link);
+        // header('location:'.$link);
     break;
 
 

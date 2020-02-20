@@ -1,13 +1,13 @@
 <footer class="footer-section">
     <div class="container">
         <div class="footer-left-pic">
-            <img src="img/footer-left.png" alt="" style="max-height: 350px;">
+            <img src="<?php echo url("");?>/img/footer-left.png" alt="" style="max-height: 350px;">
         </div>
         <div class="footer-right-pic">
-            <img src="img/footer-right.png" alt="" style="max-height: 350px;">
+            <img src="<?php echo url("");?>/img/footer-right.png" alt="" style="max-height: 350px;">
         </div>
         <a href="#" class="footer-logo">
-            <img src="./img/quiz-pintar.png" alt="">
+            <img src="<?php echo url("");?>/img/quiz-pintar.png" alt="">
         </a>
         <ul class="main-menu footer-menu">
             <li><a href="<?php echo url("");?>"><i class="fa fa-home"></i> Home</a></li>

@@ -22,7 +22,7 @@ function buat_textbox($label, $name, $value, $place, $required="", $type="text")
     echo'
         <div class="form-group">
             <label for="'.$name.'">'.$label.' '.$span.'</label>
-            <input type="'.$type.'" id="'.$name.'" name="'.$name.'" placeholder="'.$place.'" '.$required.'>
+            <input type="'.$type.'" id="'.$name.'" name="'.$name.'" value="'.$value.'" placeholder="'.$place.'" '.$required.'>
         </div>
     ';
 }
@@ -33,16 +33,48 @@ function buat_fileimage($label, $name, $value, $idimg, $required="", $type="file
     } else {
         $span = '(opsional)';
     }
-    echo'
-        <div class="form-group">
-            <label for="'.$name.'">'.$label.' '.$span.'</label>
+    if ($value != null) {
+        echo "
+        <script>
+            $(document).ready(function () {
+                var html = `<img id='preview".$idimg."' style='display:none' src='#' alt='your image' />`;
+                html += `<input style='margin-top:10px' type='".$type."' id='gambar".$idimg."' name='".$name."' value='' onchange='readImg(this, ".$idimg.")' ".$required.">`;
+                
+                $('#delete-image".$idimg."').on('click', function(){
+                    $('#preview".$idimg."').remove();
+                    $('#gambar".$idimg."').remove();
+                    this.remove();
+                    $('#append-gambar".$idimg."').append(html);
+                })
+            });
+        </script>
+        ";
+        echo '
+            <div class="form-group">
+                <label for="'.$name.'">'.$label.' '.$span.'</label>
+                <br>
+                <div id="append-gambar'.$idimg.'"></div>
+                <img id="preview'.$idimg.'" style="width:300px;height:200px" src="'.url('').'images/'.$value.'" alt="your image" />
+                <div class="input-group col-sm-5" style="margin-top:10px;padding-left:0">
+                    <input type="text" class="form-control" id="gambar'.$idimg.'" name="'.$name.'" value="'.$value.'" readonly>
+                    <a id="delete-image'.$idimg.'" class="btn" style="background:#dc3545;color:#fff;cursor:pointer">Delete</a>
+                </div>
+                <span style="float: left;">Format yang didukung: .jpeg, .jpg, .png</span>
+            </div>
             <br>
-            <img id="preview'.$idimg.'" style="display:none" src="#" alt="your image" />
-            <input style="margin-top:10px" type="'.$type.'" id="gambar'.$idimg.'" name="'.$name.'" value="'.$value.'" onchange="readImg(this, '.$idimg.');" '.$required.'>
-            <span style="float: left;">Format yang didukung: .jpeg, .jpg, .png</span>
-        </div>
-        <br>
-    ';
+        ';
+    }else {
+        echo'
+            <div class="form-group">
+                <label for="'.$name.'">'.$label.' '.$span.'</label>
+                <br>
+                <img id="preview'.$idimg.'" style="display:none" src="#" alt="your image" />
+                <input style="margin-top:10px" type="'.$type.'" id="gambar'.$idimg.'" name="'.$name.'" value="'.$value.'" onchange="readImg(this, '.$idimg.');" '.$required.'>
+                <span style="float: left;">Format yang didukung: .jpeg, .jpg, .png</span>
+            </div>
+            <br>
+        ';
+    }
 }
 
 function buat_select($label, $nama, $list, $nilai, $required="")
@@ -121,18 +153,50 @@ function buat_fileimagesoal($label, $value, $idimg, $required="", $type="file")
     } else {
         $span = '(opsional)';
     }
-    echo'
-        <div class="form-group">
-            <label for="preview_soal'.$idimg.'">'.$label.' '.$span.'</label>
+    if ($value != null) {
+        echo "
+        <script>
+            $(document).ready(function () {
+                var html = `<img id='preview_soal".$idimg."' style='display:none' src='#' alt='your image' />`;
+                html += `<input style='margin-top:10px' type='".$type."' id='gambar_soal".$idimg."' name='gambar_soal".$idimg."' value='gambar_soal".$value."' onchange='readImgPreview(this, ".$idimg.")' ".$required.">`;
+                
+                $('#delete-gambar_soal".$idimg."').on('click', function(){
+                    $('#preview_soal".$idimg."').remove();
+                    $('#gambar_soal".$idimg."').remove();
+                    this.remove();
+                    $('#append-gambar_soal".$idimg."').append(html);
+                })
+            });
+        </script>
+        ";
+        echo '
+            <div class="form-group">
+                <label for="preview_soal'.$idimg.'">'.$label.' '.$span.'</label>
+                <br>
+                <div id="append-gambar_soal'.$idimg.'"></div>
+                <img id="preview_soal'.$idimg.'" style="width:300px;height:200px" src="'.url('').'images/'.$value.'" alt="your image" />
+                <div class="input-group col-sm-8" style="margin-top:10px;padding-left:0">
+                    <input type="text" class="form-control" id="gambar_soal'.$idimg.'" name="gambar_soal'.$idimg.'" value="'.$value.'" readonly>
+                    <a id="delete-gambar_soal'.$idimg.'" class="btn" style="background:#dc3545;color:#fff;cursor:pointer">Delete</a>
+                </div>
+                <span style="float: left;">Format yang didukung: .jpeg, .jpg, .png</span>
+            </div>
             <br>
-            <img id="preview_soal'.$idimg.'" style="display:none" src="#" alt="your image" />
-            <input style="margin-top:10px" type="'.$type.'" id="gambar_soal'.$idimg.'" name="gambar_soal'.$idimg.'" value="'.$value.'"  onchange="readImgPreview(this, '.$idimg.')">
-            <span style="float: left;">Format yang didukung: .jpeg, .jpg, .png</span>
-        </div>
-        <br>
-    ';
+        ';
+    }else {
+        echo'
+            <div class="form-group">
+                <label for="preview_soal'.$idimg.'">'.$label.' '.$span.'</label>
+                <br>
+                <img id="preview_soal'.$idimg.'" style="display:none" src="#" alt="your image" />
+                <input style="margin-top:10px" type="'.$type.'" id="gambar_soal'.$idimg.'" name="gambar_soal'.$idimg.'" value="'.$value.'"  onchange="readImgPreview(this, '.$idimg.') ">
+                <span style="float: left;">Format yang didukung: .jpeg, .jpg, .png</span>
+            </div>
+            <br>
+        ';
+    }
 }
-function buat_radiojawaban($i)
+function buat_radiojawaban($i, $jawaban_soal, $pilA, $pilB, $pilC, $pilD)
 {
     echo "
         <div class='form-group'>
@@ -140,33 +204,33 @@ function buat_radiojawaban($i)
                     style='color:red'>*</span></label>
             <div class='form-group'>
                 <div class='jawaban-container'>
-                    <input type='radio' id='a_soal".$i."' name='jawaban_soal".$i."' value='A' class='jawaban-radio' required>
+                    <input type='radio' id='a_soal".$i."' name='jawaban_soal".$i."' value='A' ";if($jawaban_soal=='A')echo"checked"; echo" class='jawaban-radio' required>
                     <label for='a_soal".$i."' class='jawaban-radio-label'></label>
-                    <input class='jawaban-radio-input' type='text' id='jawaban_a_soal".$i."' name='jawaban_a_soal".$i."'
+                    <input class='jawaban-radio-input' type='text' id='jawaban_a_soal".$i."' name='jawaban_a_soal".$i."' value='".$pilA."'
                         placeholder='Pilihan jawaban 1' required>
                 </div>
             </div>
             <div class='form-group'>
                 <div class='jawaban-container'>
-                    <input type='radio' id='b_soal".$i."' name='jawaban_soal".$i."' value='B' class='jawaban-radio' required>
+                    <input type='radio' id='b_soal".$i."' name='jawaban_soal".$i."' value='B' ";if($jawaban_soal=='B')echo"checked"; echo" class='jawaban-radio' required>
                     <label for='b_soal".$i."' class='jawaban-radio-label'></label>
-                    <input class='jawaban-radio-input' type='text' id='jawaban_b_soal".$i."' name='jawaban_b_soal".$i."'
+                    <input class='jawaban-radio-input' type='text' id='jawaban_b_soal".$i."' name='jawaban_b_soal".$i."' value='".$pilB."'
                         placeholder='Pilihan jawaban 2' required>
                 </div>
             </div>
             <div class='form-group'>
                 <div class='jawaban-container'>
-                    <input type='radio' id='c_soal".$i."' name='jawaban_soal".$i."' value='C' class='jawaban-radio' required>
+                    <input type='radio' id='c_soal".$i."' name='jawaban_soal".$i."' value='C' ";if($jawaban_soal=='C')echo"checked"; echo" class='jawaban-radio' required>
                     <label for='c_soal".$i."' class='jawaban-radio-label'></label>
-                    <input class='jawaban-radio-input' type='text' id='jawaban_c_soal".$i."' name='jawaban_c_soal".$i."'
+                    <input class='jawaban-radio-input' type='text' id='jawaban_c_soal".$i."' name='jawaban_c_soal".$i."' value='".$pilC."'
                         placeholder='Pilihan jawaban 3' required>
                 </div>
             </div>
             <div class='form-group'>
                 <div class='jawaban-container'>
-                    <input type='radio' id='d_soal".$i."' name='jawaban_soal".$i."' value='D' class='jawaban-radio' required>
+                    <input type='radio' id='d_soal".$i."' name='jawaban_soal".$i."' value='D' ";if($jawaban_soal=='D')echo"checked"; echo" class='jawaban-radio' required>
                     <label for='d_soal".$i."' class='jawaban-radio-label'></label>
-                    <input class='jawaban-radio-input' type='text' id='jawaban_d_soal".$i."' name='jawaban_d_soal".$i."'
+                    <input class='jawaban-radio-input' type='text' id='jawaban_d_soal".$i."' name='jawaban_d_soal".$i."' value='".$pilD."'
                         placeholder='Pilihan jawaban 4' required>
                 </div>
             </div>
@@ -193,13 +257,31 @@ function buat_bukadivpreview($i)
                     <div class='card-body' style='background: #390F3D;overflow:scroll;height:450px'>
     ";
 }
-function buat_isipreview($i)
+function buat_isipreview($i, $gambar_soal, $soal, $jawaban_soal, $pilA, $pilB, $pilC, $pilD)
 {
     echo "
-                        <div class='preview-soal text-center'>
+                        <div class='preview-soal text-center'>";
+                        if($gambar_soal!=null){
+                            echo "
+                            <img id='preview-container-gambar-soal".$i."' style='width:200px;height:150px' src='".url('')."images/".$gambar_soal."' alt='your image' />
+                            ";
+                        }else{
+                            echo "
                             <img id='preview-container-gambar-soal".$i."' style='display:none' src='#' alt='your image' />
-                            <br>
+                            ";
+                        }
+                        echo"
+                            <br>";
+                        if($soal!=null){
+                            echo "
+                            <h3 id='preview-container-soal".$i."'>".$soal."</h3>
+                            ";
+                        }else{
+                            echo "
                             <h3 id='preview-container-soal".$i."'></h3>
+                            ";
+                        }
+                        echo "
                         </div>
                         <br>
                         <div class='card bg-gradient-danger'>
@@ -207,44 +289,120 @@ function buat_isipreview($i)
                                 <h3 class='card-title text-center'
                                     style='border: 2px solid #FFFFFF;border-radius: 10px;width:30px'>
                                     A
-                                </h3>
-                                <i id='check-a-soal".$i."' class='fa fa-check-circle'
+                                </h3>";
+                                if($jawaban_soal=='A'){
+                                    echo "
+                                    <i id='check-a-soal".$i."' class='fa fa-check-circle'
+                                    style='margin-left:10px;color: #2FDA40;'></i>
+                                    ";
+                                }else{
+                                    echo "
+                                    <i id='check-a-soal".$i."' class='fa fa-check-circle'
                                     style='margin-left:10px;color: #2FDA40; display:none;'></i>
-                            </div>
-                            <div id='preview-container-jawaban-a-soal".$i."' class='card-body'></div>
+                                    ";
+                                }
+                            echo"
+                            </div>";
+                            if($pilA!=null){
+                                echo "
+                                <div id='preview-container-jawaban-a-soal".$i."' class='card-body'>".$pilA."</div>
+                                ";
+                            }else {
+                                echo "
+                                <div id='preview-container-jawaban-a-soal".$i."' class='card-body'></div>
+                                ";
+                            }
+                            echo"
                         </div>
                         <div class='card bg-gradient-warning'>
                             <div class='card-header border-0 ui-sortable-handle'>
                                 <h3 class='card-title text-center'
                                     style='border: 2px solid #000;border-radius: 10px;width:30px'>
                                     B
-                                </h3>
-                                <i id='check-b-soal".$i."' class='fa fa-check-circle'
+                                </h3>";
+                                if($jawaban_soal=='B'){
+                                    echo "
+                                    <i id='check-b-soal".$i."' class='fa fa-check-circle'
+                                    style='margin-left:10px;color: #000;'></i>
+                                    ";
+                                }else{
+                                    echo "
+                                    <i id='check-b-soal".$i."' class='fa fa-check-circle'
                                     style='margin-left:10px;color: #000; display:none'></i>
-                            </div>
-                            <div id='preview-container-jawaban-b-soal".$i."' class='card-body'></div>
+                                    ";
+                                }
+                            echo"
+                            </div>";
+                            if($pilB!=null){
+                                echo "
+                                <div id='preview-container-jawaban-b-soal".$i."' class='card-body'>".$pilB."</div>
+                                ";
+                            }else {
+                                echo "
+                                <div id='preview-container-jawaban-b-soal".$i."' class='card-body'></div>
+                                ";
+                            }
+                            echo"
                         </div>
                         <div class='card bg-gradient-success'>
                             <div class='card-header border-0 ui-sortable-handle'>
                                 <h3 class='card-title text-center'
                                     style='border: 2px solid #FFFFFF;border-radius: 10px;width:30px'>
                                     C
-                                </h3>
-                                <i id='check-c-soal".$i."' class='fa fa-check-circle'
+                                </h3>";
+                                if($jawaban_soal=='C'){
+                                    echo "
+                                    <i id='check-c-soal".$i."' class='fa fa-check-circle'
+                                    style='margin-left:10px;color: #fff;'></i>
+                                    ";
+                                }else{
+                                    echo "
+                                    <i id='check-c-soal".$i."' class='fa fa-check-circle'
                                     style='margin-left:10px;color: #fff; display:none'></i>
-                            </div>
-                            <div id='preview-container-jawaban-c-soal".$i."' class='card-body'></div>
+                                    ";
+                                }
+                            echo"
+                            </div>";
+                            if($pilC!=null){
+                                echo "
+                                <div id='preview-container-jawaban-c-soal".$i."' class='card-body'>".$pilC."</div>
+                                ";
+                            }else {
+                                echo "
+                                <div id='preview-container-jawaban-c-soal".$i."' class='card-body'></div>
+                                ";
+                            }
+                            echo"
                         </div>
                         <div class='card bg-gradient-primary'>
                             <div class='card-header border-0 ui-sortable-handle'>
                                 <h3 class='card-title text-center'
                                     style='border: 2px solid #FFFFFF;border-radius: 10px;width:30px'>
                                     D
-                                </h3>
-                                <i id='check-d-soal".$i."' class='fa fa-check-circle'
+                                </h3>";
+                                if($jawaban_soal=='D'){
+                                    echo "
+                                    <i id='check-d-soal".$i."' class='fa fa-check-circle'
+                                    style='margin-left:10px;color: #2FDA40;'></i>
+                                    ";
+                                }else{
+                                    echo "
+                                    <i id='check-d-soal".$i."' class='fa fa-check-circle'
                                     style='margin-left:10px;color: #2FDA40; display:none'></i>
-                            </div>
-                            <div id='preview-container-jawaban-d-soal".$i."' class='card-body'></div>
+                                    ";
+                                }
+                            echo"
+                            </div>";
+                            if($pilD!=null){
+                                echo "
+                                <div id='preview-container-jawaban-d-soal".$i."' class='card-body'>".$pilD."</div>
+                                ";
+                            }else {
+                                echo "
+                                <div id='preview-container-jawaban-d-soal".$i."' class='card-body'></div>
+                                ";
+                            }
+                            echo"
                         </div>
     ";
 }

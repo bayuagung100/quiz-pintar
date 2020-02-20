@@ -11,7 +11,7 @@
                 // </li>
                 // ';
                 echo '
-                <li class="nav-item d-none d-sm-inline-block">
+                <li class="nav-item d-sm-inline-block">
                     <a href="'.url("dashboard/quizku&show=form").'" class="nav-link"><i class="fas fa-plus-circle"></i> Buat Quiz Baru</a>
                 </li>
                 ';

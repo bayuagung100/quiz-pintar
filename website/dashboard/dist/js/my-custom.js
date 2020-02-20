@@ -102,7 +102,9 @@ function readImgPreview(input, id) {
 $(document).ready(function () {
     // var form = document.getElementById('buat_quiz');
     var judul = document.forms["buat_quiz"]["judul"];
-    var gambar = document.forms["buat_quiz"]["gambar"];
+    setInterval(function() {
+    gambar = document.forms["buat_quiz"]["gambar"];
+    }, 1000);
     var kategori = document.forms["buat_quiz"]["kategori"];
     var tingkat = document.forms["buat_quiz"]["tingkat"];
     var deskripsi =document.forms["buat_quiz"]["deskripsi"];
@@ -240,7 +242,8 @@ $(document).ready(function () {
             });
             return false;
         }
-
+        
+        
         $('#banner').hide();
         $('#tanda').hide();
         $('#default').hide();
@@ -248,6 +251,7 @@ $(document).ready(function () {
         // location.href = "#sec-buat-quiz";
         window.scrollTo(0, this.offsetTop)
     });
+
 
     $("#prev_default").click(function () {
         $('#banner').show();
@@ -1321,4 +1325,52 @@ $("#quizku").ready(function() {
         }); 
         e.preventDefault();
     });
+    $("#quizku").on('click', '#play_quiz', function(e){
+        var code = $(this).data('code');
+        var id = $(this).data('id');
+        console.log(code);
+        console.log(id);
+        
+        Swal.fire({
+            title: 'Mulai game ini?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, play it!',
+            showLoaderOnConfirm: true,
+            preConfirm: function() {
+                return new Promise(function(resolve) {
+                    $.ajax({
+                    url: '../ajax/join.php',
+                    type: 'POST',
+                    data: {
+                        code:code,
+                        id: id
+                    },
+                    dataType: 'json'
+                    })
+                    .done(function(response){
+                        // Swal.fire('Success', response.text, response.icon);
+                        Swal.fire({
+                            icon: response.data[0].icon,
+                            title: response.data[0].title,
+                            text: response.data[0].text,
+                            onAfterClose: () => {
+                                window.location.href = response.data[0].url;
+                            }
+                        });
+                    })
+                    .fail(function(){
+                        Swal.fire('Oops...', 'Something went wrong!', 'error');
+                    });
+                });
+            },
+            allowOutsideClick: false     
+        }); 
+        e.preventDefault();
+    });
+
+    
 });
+

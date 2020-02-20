@@ -15,6 +15,9 @@ if (isset($_POST['halaman'])=="quizku") {
     $start_from = ($page - 1) * $show;
     $query = $mysqli->query("SELECT * FROM quiz WHERE id_pembuat='$_SESSION[id]' ORDER BY id DESC LIMIT $start_from,$show ");
     $adadata = $query->num_rows;
+
+    
+    
     if ($adadata>0) {
        
         while ($data = $query->fetch_array()) {
@@ -25,6 +28,10 @@ if (isset($_POST['halaman'])=="quizku") {
             $kategori = $data['kategori'];
             $tingkat = $data['tingkat'];
             $deskripsi = $data['deskripsi'];
+
+            
+            $code = rand(100000, 999999);
+
             $output .= '
             <div class="card card-default color-palette-box">
                 <div class="card-body">
@@ -51,15 +58,15 @@ if (isset($_POST['halaman'])=="quizku") {
                         </div>
                         <div class="col-sm-3 text-center">
                             <div class="btn-group">
-                                <a class="btn btn-app" href="'.str_replace("ajax/","",url("dashboard/quizku")).'&action=edit&id='.$id.'">
+                                <a class="btn btn-app" href="'.str_replace("ajax/","",url("dashboard/quizku")).'&show=form&id='.$id.'">
                                 <i class="fas fa-edit" style="color:#007bff"></i> Edit
                                 </a>
                                 <a class="btn btn-app" id="delete_quiz" data-id="'.$id.'" href="javascript:void(0)">
-                                <i class="fas fa-trash" style="color:#dc3545"></i> Delete
+                                <i class="fas fa-trash" style="color:#dc3545" ></i> Delete
                                 </a>
                             </div>
                             <div class="btn-group-vertical">
-                                <a class="btn btn-app">
+                                <a class="btn btn-app" id="play_quiz" data-code="'.$code.'" data-id="'.$id.'" href="javascript:void(0)">
                                 <i class="fas fa-play" style="color:#28a745"></i> Play
                                 </a>
                             </div>

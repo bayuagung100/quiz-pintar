@@ -24,7 +24,7 @@
                     echo '
                     <div class="info">
                         <a href="'.url("dashboard/profil").'" class="d-block">'.$_SESSION['nama'].'</a>
-                        <a href="'.url("dashboard/buat-quiz").'" class="buat-quiz-btn" ><i class="fas fa-plus-circle"></i> Buat Quiz Baru</a>
+                        <a href="'.url("dashboard/quizku&show=form").'" class="buat-quiz-btn" ><i class="fas fa-plus-circle"></i> Buat Quiz Baru</a>
                     </div>
                     ';
                 } else {
