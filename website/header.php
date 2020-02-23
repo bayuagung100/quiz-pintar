@@ -24,6 +24,8 @@
 
     <!-- Main Stylesheets -->
     <link rel="stylesheet" href="<?php echo url("css/style.css");?>" />
+    <!-- sweetalert2 -->
+    <link rel="stylesheet" href="<?php echo url("css/sweetalert2.min.css");?>" />
 
 
     <!--[if lt IE 9]>

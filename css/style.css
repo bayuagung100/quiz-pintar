@@ -2005,6 +2005,15 @@ img.avatar {
 .join-section {
 	background: #390F3D;
 	padding: 150px 0 100px 0;
+	/* width: 100%;
+	height: 100%; */
+}
+
+.join-section-murid {
+	background: #390F3D;
+	padding: 150px 0 100px 0;
+	width: 100%;
+	height: 100%;
 }
 
 .join-step {
@@ -2151,7 +2160,7 @@ img.avatar {
 	font-size: 18px;
 	line-height: 21px;
 	/* identical to box height */
-	text-align: center;
+	/* text-align: center; */
 
 	color: #000000;
 
@@ -2161,7 +2170,27 @@ img.avatar {
 
 }
 
+.card-waiting{
+	position: absolute;
+	width: 300px;
+	padding: 10px;
+	left: 435px;
+	/* padding: 0 10px 16px 16px; */
+	background: #FFFFFF;
+	border: 5px solid rgba(0, 0, 0, 0.25);
+	border-radius: 10px;
+}
+
+.card-waiting .name-player h3{
+	color: #000;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+
 @media screen and (max-width: 769px) {
+	
 	.join-step .input-step {
 		/* display: block; */
 		width: 200px;
@@ -2177,5 +2206,45 @@ img.avatar {
 			#fff;
 		border: 1px solid rgba(41, 42, 58, 0.34);
 		box-shadow: inset 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+	}
+
+	.join-player .btn-mulai {
+		position: absolute;
+		cursor: pointer;
+		width: 200px;
+		/* width: 35%; */
+		height: 70.24px;
+		left: 22%;
+		/* left: 400px; */
+		top: -35px;
+		/* top: 610px; */
+	
+		background: #FFFFFF;
+		box-shadow: 5px 4px 5px #E231C5;
+		border-radius: 50px;
+	}
+	
+	.join-player .btn-mulai .mulai-text {
+		font-family: Roboto;
+		font-style: normal;
+		font-weight: bold;
+		font-size: 36px;
+		/* line-height: 42px; */
+		/* display: flex; */
+		align-items: center;
+		text-align: center;
+	
+		color: #000000;
+	}
+
+	.card-waiting{
+		position: absolute;
+		width: 300px;
+		padding: 10px;
+		left: 32px;
+		/* padding: 0 10px 16px 16px; */
+		background: #FFFFFF;
+		border: 5px solid rgba(0, 0, 0, 0.25);
+		border-radius: 10px;
 	}
 }
