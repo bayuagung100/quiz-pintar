@@ -5,14 +5,25 @@ $code = $_POST["code"];
 
 $query = $mysqli->query("SELECT id_player FROM join_temp WHERE code_room='$code' ");
 $data = $query->fetch_array();
-// while ($data = $query->fetch_array()) {
+
+// $response = array();
+// // $response["data"] = array();
+
+//     $idp = $data['id_player'];
+//     $ex = explode(";", $idp);
+//     foreach ($ex as $key => $value) {
+//         $response[$key] = $value;
+//     }
+    
+   
+//     // $response  = $ex;
+
+//     // array_push($response, $res);
+
+// echo json_encode($response);
+
     $idp = $data['id_player'];
     $ex = explode(";", $idp);
-
-    // echo $id;
-    // $ex = explode(";", $data['id_player']);
-    // $total = count($ex);
-    // $total = $ex;
     $total = count(array_filter($ex));
     if ($idp!=null) {
         
@@ -26,14 +37,20 @@ $data = $query->fetch_array();
                 $nama = $data2['nama'];
                 $avatar = $data2['avatar'];
 
+                if ($avatar == null) {
+                    $gambar = '<div style="background-color:#737375;border-radius: 100%;width: 65px;height:65px"><span class="text-center" style="color:#fff;font-size:14px;line-height:65px;padding-left:4px">no image</span></div>';
+                } else {
+                    $gambar = '<img src="'.str_replace("ajax/room/","",url("img/avatar/")).$avatar.'" style="width:65px"/>';
+                }
+
                 if ($jmlquery2>0) {
                     echo'
                     <div class="col-sm-3" style="padding:20px">
                         <div class="card-player">
                             <div class="delete-player">
-                            <i class="fa fa-close" style="color:red;cursor:pointer"></i>
+                            <i id="kick_player" data-id="'.$id.'" data-name="'.$nama.'" href="javascript:void(0)" class="fa fa-close" style="color:red;cursor:pointer"></i>
                             </div>
-                            <div><img src="'.str_replace("ajax/room/","",url("img/avatar/")).$avatar.'" style="width:65px"/></div>
+                            <div>'.$gambar.'</div>
                             
                             <div class="name-player">
                                 <h3>'.$nama.'</h3>
@@ -53,14 +70,20 @@ $data = $query->fetch_array();
                 $nama = $data2['nama'];
                 $avatar = $data2['avatar'];
 
+                if ($avatar == null) {
+                    $gambar = '<div style="background-color:#737375;border-radius: 100%;width: 65px;height:65px"><span class="text-center" style="color:#fff;font-size:14px;line-height:65px;padding-left:4px">no image</span></div>';
+                } else {
+                    $gambar = '<img src="'.str_replace("ajax/room/","",url("img/avatar/")).$avatar.'" style="width:65px"/>';
+                }
+
                 if ($jmlquery2>0) {
                     echo'
                     <div class="col-sm-3" style="padding:20px">
                         <div class="card-player">
                             <div class="delete-player">
-                            <i class="fa fa-close" style="color:red;cursor:pointer"></i>
+                            <i id="kick_player" data-id="'.$id.'" data-name="'.$nama.'" href="javascript:void(0)"  class="fa fa-close" style="color:red;cursor:pointer"></i>
                             </div>
-                            <div><img src="'.str_replace("ajax/room/","",url("img/avatar/")).$avatar.'" style="width:65px"/></div>
+                            <div>'.$gambar.'</div>
                             
                             <div class="name-player">
                                 <h3>'.$nama.'</h3>
@@ -73,7 +96,8 @@ $data = $query->fetch_array();
         }
     }
     
-// }
+
+
 // echo'
 // <div class="col-sm-3" style="padding:20px">
 //     <div class="card-player">
