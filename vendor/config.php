@@ -9,6 +9,8 @@ $database = "quispintar";
 $mysqli = new mysqli($servername, $username, $password, $database);
 
 
+require __DIR__ . '/autoload.php';
+
 //Menentukan timezone //
 date_default_timezone_set('Asia/Jakarta'); 
 

@@ -30,10 +30,10 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="intro-text-box text-box text-white">
-                    <form class="join-form">
-                        <input type="tel" placeholder="Enter 6 digit room code">
-                        <button class="site-btn">Join <img src="img/icons/double-arrow.png" alt="#" /></button>
-                    </form>
+                    <div class="join-form">
+                        <input  id="code" type="tel" name="code" placeholder="Enter 6 digit room code">
+                        <button onclick="join_room()" class="site-btn">Join <img src="img/icons/double-arrow.png" alt="#" /></button>
+                    </div>
                 </div>
             </div>
             <?php

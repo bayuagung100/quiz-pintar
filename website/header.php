@@ -30,6 +30,16 @@
     <script src="<?php echo url("js/jquery-3.2.1.min.js");?>"></script>
     <script src="<?php echo url("js/sweetalert2.min.js");?>"></script>
 
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+        https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-analytics.js"></script>
+
+
+    <script src="https://www.gstatic.com/firebasejs/7.14.1/firebase-database.js"></script>
+
 
     <!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>

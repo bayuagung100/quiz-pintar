@@ -47,6 +47,13 @@ function myFunction() {
         header.classList.remove("sticky");
     }
 }
+function join_room(){
+        var cdr = $('#code').val();
+        if (cdr == null) {
+            alert("harus isi");
+        }
+        window.location.href = "<?php echo url("join");?>/"+cdr;
+    }
 </script>
 
 <script>
