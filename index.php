@@ -7,7 +7,7 @@ include "vendor/func.php";
 
 $content  = (isset($_GET['content'])) ? $_GET['content'] : "home";
 $kosong   = true;
-$page     = array('home','dashboard/index','join');
+$page     = array('home','dashboard/index','join', 'play');
 foreach($page as $pg){
   if($content == $pg and $kosong){
     

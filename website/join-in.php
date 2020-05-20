@@ -49,7 +49,7 @@ if ($cek>0) {
                         </div>
                     </div>
                     <div class="col-sm-12 join-player">
-                        <button class="btn-mulai"><div class="mulai-text">Mulai</div></button>
+                        <button class="btn-mulai"><div class="mulai-text"><a href="<?php echo url("play/").$code;?>" style="color: #000">Mulai</a></div></button>
                         <div class="container">
                             <div class="online">
                                 <h4><i class="fa fa-dot-circle-o" style="color: #00C985;" ></i> Player (<span id="count_player" rc="<?php echo $code;?>"></span>)</h4>

@@ -14,6 +14,7 @@ RewriteRule ^dashboard/(.*)$ index.php?content=dashboard/index&pages=$1 [L]
 
 RewriteRule ^join$ index.php?content=join [L]
 RewriteRule ^join/(.*)$ index.php?content=join&code=$1 [L]
+RewriteRule ^play/(.*)$ index.php?content=play&code=$1 [L]
 
 
 
