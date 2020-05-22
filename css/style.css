@@ -2129,6 +2129,28 @@ img.avatar {
 	color: #000000;
 }
 
+.join-player .container .tingkat {
+	position: absolute;
+	width: 150px;
+	/* height: 36px; */
+	left: 250px;
+	top: 50px; 
+
+	background: #FFFFFF;
+	border-radius: 10px;
+}
+
+.join-player .container .tingkat h4 {
+	padding: 10px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	/* font-size: 18px;
+	line-height: 21px; */
+	text-align: center;
+	color: #000000;
+}
+
 .join-player .container .card-player {
 	padding: 0 10px 16px 16px;
 	background: #FFFFFF;
@@ -2227,6 +2249,28 @@ img.avatar {
 }
 
 .play-player .container .online h4 {
+	padding: 10px;
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	/* font-size: 18px;
+	line-height: 21px; */
+	text-align: center;
+	color: #000000;
+}
+
+.play-player .container .tingkat {
+	position: absolute;
+	width: 150px;
+	/* height: 36px; */
+	left: 250px;
+	top: 50px; 
+
+	background: #FFFFFF;
+	border-radius: 10px;
+}
+
+.play-player .container .tingkat h4 {
 	padding: 10px;
 	font-family: Roboto;
 	font-style: normal;

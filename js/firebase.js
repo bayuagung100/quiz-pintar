@@ -14,51 +14,81 @@ firebase.analytics();
 
 
 
-function InsertNotif(userId, time, name) {
-  firebase.database().ref('notif/' + userId).set({
-    time: time, 
-    name: name
-  },function(error) {
-      if (error) {
-        Swal.fire(
-          'Oops...',
-          'Terjadi kesalahan ...',
-          'error'
-        )
-      } else {
-        // Swal.fire(
-        //   'Berhasil Gabung Game',
-        //   'Silahkan tunggu sampai game dimulai ...',
-        //   'success'
-        // )
-        Swal.fire({
-          icon: "success",
-          title: 'Berhasil Gabung Game',
-          text: 'Silahkan tunggu sampai game dimulai ...',
-          // onBeforeOpen: () => {
-          //   NotifIn();
-          // },
-          onClose: () => {
-            NotifIn();
+function InsertNotif(room, id_user, time, name) {
+  // firebase.database().ref('notif/' + room).set({
+  //   id_user: id_user,
+  //   time: time, 
+  //   name: name
+  // },function(error) {
+  //     if (error) {
+  //       Swal.fire(
+  //         'Oops...',
+  //         'Terjadi kesalahan ...',
+  //         'error'
+  //       )
+  //     } else {
+  //       // Swal.fire(
+  //       //   'Berhasil Gabung Game',
+  //       //   'Silahkan tunggu sampai game dimulai ...',
+  //       //   'success'
+  //       // )
+  //       Swal.fire({
+  //         icon: "success",
+  //         title: 'Berhasil Gabung Game',
+  //         text: 'Silahkan tunggu sampai game dimulai ...',
+  //         // onBeforeOpen: () => {
+  //         //   NotifIn();
+  //         // },
+  //         onClose: () => {
+  //           NotifIn();
+  //         }
+  //       })
+        
+  //     }
+  //   }
+  // );
+
+  var ref = firebase.database().ref('notif/' + room);
+  ref.once('value').then(function(snapshot) {
+      ref.child(id_user).set({
+        id_user: id_user,
+        time: time, 
+        name: name
+      },function(error) {
+          if (error) {
+            Swal.fire(
+              'Oops...',
+              'Terjadi kesalahan ...',
+              'error'
+            )
+          } else {
+            
+            Swal.fire({
+              icon: "success",
+              title: 'Berhasil Gabung Game',
+              text: 'Silahkan tunggu sampai game dimulai ...',
+              onClose: () => {
+                NotifIn(room);
+              }
+            })
+            
           }
         })
-        
-      }
-    }
-  );
+  });
 }
 
-function DeleteNotif(userId) {
-  var ref = firebase.database().ref('notif/' + userId);
+function DeleteNotif(room, id_user) {
+  var ref = firebase.database().ref('notif/' + room + '/' + id_user);
   ref.remove();
-  NotifOut();
+  NotifOut(room);
 }
 
-function NotifIn() {
-  var ref = firebase.database().ref('notif/').orderByChild('time');
+function NotifIn(room) {
+  var ref = firebase.database().ref('notif/' + room).orderByChild('time');
   ref.on('child_added', function(snapshot) {
     console.log(snapshot);
     console.log(snapshot.val().name);
+    console.log(snapshot.val().time);
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -77,28 +107,86 @@ function NotifIn() {
   });  
 }
 
-function NotifOut() {
-  var ref = firebase.database().ref('notif/');
+function NotifOut(room) {
+  var ref = firebase.database().ref('notif/' + room);
   ref.on('child_removed', function(snapshot) {
-      
-    const Toast = Swal.mixin({
-        toast: true,
-        position: 'top-end',
-        showConfirmButton: false,
-        timer: 2000,
-        timerProgressBar: true,
-        onOpen: (toast) => {
-        toast.addEventListener('mouseenter', Swal.stopTimer)
-        toast.addEventListener('mouseleave', Swal.resumeTimer)
-        },
-    })
-    Toast.fire({
-        icon: "error",
-        title: snapshot.val().name + " telah dikeluarkan dari game.",
-    })
-
+      const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 2000,
+          timerProgressBar: true,
+          onOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+          },
+      })
+      Toast.fire({
+          icon: "error",
+          title: snapshot.val().name + " telah dikeluarkan dari game.",
+      })
     
   });  
+}
+
+function MulaiGame(room, data_player) {
+  firebase.database().ref('ingame/' + room).set(data_player);
+};
+
+function InGame(room) {
+  var ref = firebase.database().ref('ingame/' + room).orderByChild('ranked');
+  ref.on('value', function(snapshot) {
+    var room = snapshot.key;
+    console.log(snapshot.val());
+    
+    var wrapper = document.getElementById("player_played");
+    var html = '';
+    snapshot.forEach(function(childSnapshot) {
+      var childKey = childSnapshot.key;
+      var childData = childSnapshot.val();
+
+        html += '<div class="col-sm-12"> ';
+        html += '<div class="card-player-played">';
+          html += '<div class="col-rank">Rank <div class="rank">'+childData.ranked+'</div></div>'
+          html += '<div class="col-img"><img src="'+childData.avatar+'"/></div>';
+          html += '<div class="col-name">';
+            html += '<div class="name"><b>'+childData.nama+'</b></div>';
+          html += '</div>';
+          html += '<div class="col-progress">';
+            html += '<div class="container-progressed">';
+              html += '<div class="progressed">'+childData.progress+'</div>';
+            html += '</div>';
+            html += '<progress value="0" max="10"></progress>';
+          html += '</div>';
+          html += '<div class="col-point">Point <div class="point">'+childData.point+'</div></div>';
+        html += '</div>';
+        html += '</div>';
+    });
+    
+    wrapper.innerHTML = html;
+    
+  });
+}
+
+function CountInGame(room) {
+  var ref = firebase.database().ref('ingame/' + room);
+  ref.on("value", function(snapshot) {
+    var newPost = snapshot.val();
+    if (newPost == null) {
+      var countKey = 0 ;
+    } else {
+      var countKey = Object.keys(newPost).length;
+    }
+    document.getElementById('count_player_play').innerText = countKey;
+    }, function (errorObject) {
+      console.log(errorObject);
+    }
+  )
+}
+
+function EndGame(room) {
+  var ref = firebase.database().ref('ingame/' + room);
+  ref.remove();
 }
 
 // function CountNotif() {

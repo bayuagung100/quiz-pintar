@@ -44,11 +44,81 @@ $(document).ready(function () {
             });
     }, 1000);
 
+    // function mulai_game(room) {
+    //     $.ajax({
+    //         url: '../ajax/room/cek-status-join.php',
+    //         method: "post",
+    //         data: {
+    //             action: 'play',
+    //             code: room,
+    //         },
+    //         success: function (data) {
+    //             console.log(data);
+    //         }
+    //     });
+    // }
+    $("#mulai_game").on("click", function() {
+        $.ajax({
+            url: '../ajax/room/mulai-game.php',
+            method: "post",
+            data: {
+                quiz: quiz,
+                code: room,
+            },
+            success: function (response) {
+                let data_player = [];
+                let timerInterval
+                
+                response.data[0].player.forEach(e => {
+                    console.log(e.id);
+                    data_player.push(
+                        {
+                            id_player: e.id,
+                            nama: e.nama,
+                            avatar: e.avatar,
+                            ranked: e.ranked,
+                            progress: e.progress,
+                            point: e.point
+                        }
+                        
+                        );
+                });
+
+                
+                Swal.fire({
+                    title: 'Game Dimulai!',
+                    html: 'Dalam waktu <b></b> detik.',
+                    timer: 5000,
+                    timerProgressBar: true,
+                    onBeforeOpen: () => {
+                        MulaiGame(room, data_player);
+                        Swal.showLoading()
+                        timerInterval = setInterval(() => {
+                        const content = Swal.getContent()
+                        if (content) {
+                            const b = content.querySelector('b')
+                            if (b) {
+                            b.textContent = Math.ceil(swal.getTimerLeft() / 1000)
+                            }
+                        }
+                        }, 100)
+                    },
+                    onClose: () => {
+                        clearInterval(timerInterval)
+                    }
+                    }).then((result) => {
+                    if (result.dismiss === Swal.DismissReason.timer) {
+                        window.location.href = response.data[0].url;
+                    }
+                });
+            }
+        });
+    });
 
     $("#player_joined").on('click', '#kick_player', function(e){
         var id = $(this).data('id');
         var name = $(this).data('name');
-        DeleteNotif(id);
+        
         Swal.fire({
             title: 'Kick '+name+' ?',
             icon: 'warning',
@@ -71,6 +141,7 @@ $(document).ready(function () {
                     dataType: 'json'
                     })
                     .done(function(response){
+                        DeleteNotif(room, id);
                         Swal.fire({
                             icon: response.data[0].icon,
                             title: 'Kicked!',
@@ -94,7 +165,7 @@ $(document).ready(function () {
             },
             allowOutsideClick: false     
         }).then((result) => {
-            NotifOut();
+            NotifOut(room);
         }); 
         e.preventDefault();
     });

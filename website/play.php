@@ -14,7 +14,6 @@ $query = $mysqli->query("SELECT * FROM join_temp WHERE code_room='$code' ");
 $data =$query->fetch_array();
 $cek = $query->num_rows;
 if ($cek>0) {
-    
 ?>
 <div class="header-join">
     <div class="header-bar-join d-flex">
@@ -27,46 +26,59 @@ if ($cek>0) {
 <?php
     if ($sesi) {
         if ($role == "guru" && $data['id_rm']==$sesi) {
+            if ($data['status']!='play') {
+                header('location:'.url("join/").$code );
+            } else {
 ?>
-        <!-- sisi guru -->
-        <section class="play-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 play-player">
-                        <button class="btn-leaderboard"><div class="leaderboard-text"><i class='fas fa-medal'></i> Leaderboard</div></button>
-                        <div class="container">
-                            <div class="online">
-                                <h4><i class="fa fa-dot-circle-o" style="color: #00C985;" ></i> Player (<span id="count_player_play" pc="<?php echo $code;?>"></span>)</h4>
-                            </div>
-                            <div class="container-card" id="player_played" class="row" quiz="<?php echo $data['id_quiz'];?>"  room="<?php echo $code;?>">
-                                <div class="col-sm-12" >
-                                    <div class="card-player-played">
-                                        <div class="col-rank">Rank <div class="rank">1</div></div>
-                                        
-                                        <div class="col-img"><img src="http://localhost/quiz-pintar//img/quiz-pintar.png"/></div>
-                                        
-                                        <div class="col-name">
-                                            <div class="name"><b>nama player asds asdsa asdsa</b></div>
-                                        </div>
+                <!-- sisi guru -->
+                <section class="play-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 play-player">
+                                <button class="btn-leaderboard"><div class="leaderboard-text"><i class='fas fa-medal'></i> Leaderboard</div></button>
+                                <div class="container">
+                                    <div class="online">
+                                        <h4><i class="fa fa-dot-circle-o" style="color: #00C985;" ></i> Player (<span id="count_player_play"></span>)</h4>
+                                    </div>
+                                    <div class="tingkat">
+                                        <h4><?php $query_tingkat = $mysqli->query("SELECT * FROM quiz WHERE id='$data[id_quiz]' "); $data_tingkat = $query_tingkat->fetch_array(); echo $data_tingkat['tingkat'];?></h4>
+                                    </div>
+                                    <div class="container-card" id="player_played" class="row" quiz="<?php echo $data['id_quiz'];?>"  room="<?php echo $code;?>">
+                                    <script>
+                                        $(document).ready(function () {
+                                            CountInGame(<?php echo $code;?>);
+                                            InGame(<?php echo $code;?>);
+                                        });
+                                    </script>
+                                        <!-- <div class="col-sm-12" >
+                                            <div class="card-player-played">
+                                                <div class="col-rank">Rank <div class="rank">1</div></div>
+                                                
+                                                <div class="col-img"><img src="http://localhost/quiz-pintar//img/quiz-pintar.png"/></div>
+                                                
+                                                <div class="col-name">
+                                                    <div class="name"><b>nama player asds asdsa asdsa</b></div>
+                                                </div>
 
-                                        <div class="col-progress">
-                                            <div class="container-progressed">
-                                                <div class="progressed">0/10</div>
+                                                <div class="col-progress">
+                                                    <div class="container-progressed">
+                                                        <div class="progressed">0/10</div>
+                                                    </div>
+                                                    <progress value="0" max="10"></progress>
+                                                </div>
+
+                                                <div class="col-point">Point <div class="point">1</div></div>
                                             </div>
-                                            <progress value="0" max="10"></progress>
-                                        </div>
-
-                                        <div class="col-point">Point <div class="point">1</div></div>
+                                        </div> -->
                                     </div>
                                 </div>
+                                <button class="btn-endgame"><div id="end_game" class="endgame-text">End Game</div></button>
                             </div>
-                        </div>
-                        <button class="btn-endgame"><div class="endgame-text">End Game</div></button>
+                        </div> 
                     </div>
-                </div> 
-            </div>
-        </section>
+                </section>
         <?php
+            }
         } else {
             
             

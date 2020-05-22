@@ -27,103 +27,57 @@ if ($cek>0) {
 <?php
     if ($sesi) {
         if ($role == "guru" && $data['id_rm']==$sesi) {
+            if ($data['status']=='play') {
+                header('location:'.url("play/").$code );
+            } else {
 ?>
-        <!-- sisi guru -->
-        <section class="join-section">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-12 text-center text-white">
-                        <h5>Untuk memainkan game ini</h5>
-                    </div>
-                    <div class="col-sm-12 join-step text-center text-white">
-                        <p><h5>1. Gunakan perangkat apapun untuk membuka</h5></p>
-                        <div class="form-group">
-                            <input id="clipboard" class="input-step" type="text" value="<?php echo url("join/").$code;?>" readonly> 
-                            <i id="copy" data-clipboard-target="#clipboard" class="fa fa-clipboard icon"> copy</i>
-                        </div>
-                        <p>atau</p>
-                        <p><h5>2. Bagikan Room Code</h5></p>
-                        <div class="form-group">
-                            <input id="clipboard-code" class="input-step-code" type="text" value="<?php echo $code;?>" readonly>
-                            <i id="copy-code" data-clipboard-target="#clipboard-code" class="fa fa-clipboard icon"> copy</i>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 join-player">
-                        <button class="btn-mulai"><div class="mulai-text"><a href="<?php echo url("play/").$code;?>" style="color: #000">Mulai</a></div></button>
-                        <div class="container">
-                            <div class="online">
-                                <h4><i class="fa fa-dot-circle-o" style="color: #00C985;" ></i> Player (<span id="count_player" rc="<?php echo $code;?>"></span>)</h4>
+                <!-- sisi guru -->
+                <section class="join-section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 text-center text-white">
+                                <h5>Untuk memainkan game ini</h5>
                             </div>
-                            <div id="player_joined" class="row" style="padding-top:20px" quiz="<?php echo $data['id_quiz'];?>"  room="<?php echo $code;?>">
-                                
+                            <div class="col-sm-12 join-step text-center text-white">
+                                <p><h5>1. Gunakan perangkat apapun untuk membuka</h5></p>
+                                <div class="form-group">
+                                    <input id="clipboard" class="input-step" type="text" value="<?php echo url("join/").$code;?>" readonly> 
+                                    <i id="copy" data-clipboard-target="#clipboard" class="fa fa-clipboard icon"> copy</i>
+                                </div>
+                                <p>atau</p>
+                                <p><h5>2. Bagikan Room Code</h5></p>
+                                <div class="form-group">
+                                    <input id="clipboard-code" class="input-step-code" type="text" value="<?php echo $code;?>" readonly>
+                                    <i id="copy-code" data-clipboard-target="#clipboard-code" class="fa fa-clipboard icon"> copy</i>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-sm-12 join-player">
+                                <button class="btn-mulai"><div id="mulai_game" class="mulai-text" >Mulai</div></button>
+                                <div class="container">
+                                    <div class="online">
+                                        <h4><i class="fa fa-dot-circle-o" style="color: #00C985;" ></i> Player (<span id="count_player" rc="<?php echo $code;?>"></span>)</h4>
+                                    </div>
+                                    <div class="tingkat">
+                                        <h4><?php $query_tingkat = $mysqli->query("SELECT * FROM quiz WHERE id='$data[id_quiz]' "); $data_tingkat = $query_tingkat->fetch_array(); echo $data_tingkat['tingkat'];?></h4>
+                                    </div>
+                                    <div id="player_joined" class="row" style="padding-top:20px" quiz="<?php echo $data['id_quiz'];?>"  room="<?php echo $code;?>">
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
                     </div>
-                </div> 
-            </div>
-        </section>
-        <script>
-            $(document).ready(function () {
-                NotifIn();
-                // function notif(){
-                //     $.ajax({
-                //         type: 'POST',
-                //         url: '../ajax/room/notif-join.php',
-                //         data: {
-                //             code: room,
-                //             last_id: lastid
-                //         },
-                //         dataType: 'json',
-                //         success: function(response) {
-                            
-                //             if (response.data.length != 0) {
-                //                 if (lastid == null) {
-                //                     lastid = response.data[0].id_tables;
-                //                     const Toast = Swal.mixin({
-                //                         toast: true,
-                //                         position: 'top-end',
-                //                         showConfirmButton: false,
-                //                         timer: 2000,
-                //                         timerProgressBar: true,
-                //                         onOpen: (toast) => {
-                //                         toast.addEventListener('mouseenter', Swal.stopTimer)
-                //                         toast.addEventListener('mouseleave', Swal.resumeTimer)
-                //                         },
-                //                     })
-                //                     Toast.fire({
-                //                         icon: response.data[0].icon,
-                //                         title: response.data[0].title,
-                //                     })
-                //                 } else if (lastid < response.data[0].id_tables) {
-                //                     lastid = response.data[0].id_tables;
-                //                     const Toast = Swal.mixin({
-                //                         toast: true,
-                //                         position: 'top-end',
-                //                         showConfirmButton: false,
-                //                         timer: 2000,
-                //                         timerProgressBar: true,
-                //                         onOpen: (toast) => {
-                //                         toast.addEventListener('mouseenter', Swal.stopTimer)
-                //                         toast.addEventListener('mouseleave', Swal.resumeTimer)
-                //                         },
-                //                     })
-                //                     Toast.fire({
-                //                         icon: response.data[0].icon,
-                //                         title: response.data[0].title,
-                //                     })
-                //                 }
-                //             }
-                                
-                //         }
-                //     });
-                // }
-
-            });
-        </script>
+                </section>
+                <script>
+                    $(document).ready(function () {
+                        NotifIn(<?php echo $code;?>);
+                    });
+                </script>
         <?php
+            }
         } else {
             $cekarray = $data['id_player'];
-            $ex = explode(";", $cekarray);
+            $ex = array_filter(explode(";", $cekarray));
 
             $time = date('h:i:s');
             
@@ -136,23 +90,10 @@ if ($cek>0) {
                     echo "
                     <script>
                         $(document).ready(function () {
-                            InsertNotif('$sesi','$time','$nama');
-                            
+                            InsertNotif('$code','$sesi','$time','$nama');
                         });
                     </script>
                     ";
-                    // $insertnotif = $mysqli->query("INSERT INTO notif_temp (join_temp_id, user_id) VALUES ('$code', '$sesi') ");
-                    // if ($insertnotif) {
-                    //     echo "
-                    //     <script>
-                    //     Swal.fire(
-                    //         'Berhasil Gabung Game',
-                    //         'Silahkan tunggu sampai game dimulai ...',
-                    //         'success'
-                    //     )
-                    //     </script>
-                    //     ";
-                    // }
                 }
                 
                 
@@ -160,52 +101,10 @@ if ($cek>0) {
             echo "
             <script>
                 $(document).ready(function () {
-                    NotifOut();
+                    NotifOut($code);
                 });
             </script>
             ";
-
-            // if ($sesi) {
-            //     echo "
-            //     <script>
-            //         $(document).ready(function () {
-            //             NotifOut(false);
-            //         });
-            //     </script>
-            //     ";
-            // }else{
-            //     echo "
-            //     <script>
-            //         $(document).ready(function () {
-            //             NotifOut();
-            //         });
-            //     </script>
-            //     ";
-            // }
-            
-            // if(end($ex)!=$sesi){
-            //     var_dump($ex);
-            //     echo "
-            //         <script>
-            //         const Toast = Swal.mixin({
-            //             toast: true,
-            //             position: 'top-end',
-            //             showConfirmButton: false,
-            //             timer: 10000,
-            //             timerProgressBar: true,
-            //             onOpen: (toast) => {
-            //             toast.addEventListener('mouseenter', Swal.stopTimer)
-            //             toast.addEventListener('mouseleave', Swal.resumeTimer)
-            //             }
-            //         })
-            //         Toast.fire({
-            //             icon: 'success',
-            //             title: 'Signed in successfully'
-            //         })
-                    
-            //         </script>
-            //         ";
-            // }
 
             $query2 = $mysqli->query("SELECT * FROM user WHERE id='$sesi' ");
             $data2 = $query2->fetch_array();
@@ -289,92 +188,6 @@ if ($cek>0) {
                         }
                     });
                 }
-
-                function notif2(){
-                    $.ajax({
-                        type: 'POST',
-                        url: '".url('ajax/room/notif-join.php')."',
-                        data: {
-                            code: '".$code."',
-                            last_id: lastid,
-                            lastid_out: lastid_out
-                        },
-                        dataType: 'json',
-                        success: function(response) {
-                            console.log(lastid);
-                            console.log(response.data[0]);
-                            if (response.data.length != 0) {
-                                if (lastid == null) {
-                                    lastid = response.data[0].id_tables;
-                                    if(response.data[0].user_id != ".$sesi."){
-                                        const Toast = Swal.mixin({
-                                            toast: true,
-                                            position: 'top-end',
-                                            showConfirmButton: false,
-                                            timer: 2000,
-                                            timerProgressBar: true,
-                                            onOpen: (toast) => {
-                                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            
-                                            },
-                                        })
-                                        Toast.fire({
-                                            icon: response.data[0].icon,
-                                            title: response.data[0].title,
-                                            
-                                        })
-                                    }
-                                } else if (lastid < response.data[0].id_tables) {
-                                    lastid = response.data[0].id_tables;
-                                    if(response.data[0].user_id != ".$sesi."){
-                                        const Toast = Swal.mixin({
-                                            toast: true,
-                                            position: 'top-end',
-                                            showConfirmButton: false,
-                                            timer: 2000,
-                                            timerProgressBar: true,
-                                            onOpen: (toast) => {
-                                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            
-                                            },
-                                        })
-                                        Toast.fire({
-                                            icon: response.data[0].icon,
-                                            title: response.data[0].title,
-                                            
-                                        })
-                                    }
-                                }  else if (response.data[0].id_out != null) {
-                                    lastid = response.data[0].id_tables;
-                                    lastid_out = response.data[0].id_out;
-                                    if(response.data[0].user_id != ".$sesi."){
-                                        const Toast = Swal.mixin({
-                                            toast: true,
-                                            position: 'top-end',
-                                            showConfirmButton: false,
-                                            timer: 2000,
-                                            timerProgressBar: true,
-                                            onOpen: (toast) => {
-                                            toast.addEventListener('mouseenter', Swal.stopTimer)
-                                            toast.addEventListener('mouseleave', Swal.resumeTimer)
-                                            
-                                            },
-                                        })
-                                        Toast.fire({
-                                            icon: response.data[0].icon,
-                                            title: response.data[0].title,
-                                            
-                                        })
-                                    }
-                                }
-                            }
-                                
-                        }
-                    });
-                }
-                
                 
 
                 
@@ -382,45 +195,6 @@ if ($cek>0) {
             </script>
             ";
 
-                // echo"
-                // <script>
-                // $(document).ready(function () {
-                //     var notif_join = setInterval(notif, 1000);
-                //     function notif(){
-                //         $.ajax({
-                //             type: 'POST',
-                //             url: '".url('ajax/room/notif-join.php')."',
-                //             data: {
-                //                 id : ".end($ex).",
-                //                 id_quiz: ".$data['id_quiz'].",
-                //                 code: ".$code.",
-                //             },
-                //             dataType: 'json',
-                //             success: function(response) {
-                //                 console.log(response);
-                //                 clearInterval(notif_join);
-                //                 const Toast = Swal.mixin({
-                //                     toast: true,
-                //                     position: 'top-end',
-                //                     showConfirmButton: false,
-                //                     timer: 10000,
-                //                     timerProgressBar: true,
-                //                     onOpen: (toast) => {
-                //                     toast.addEventListener('mouseenter', Swal.stopTimer)
-                //                     toast.addEventListener('mouseleave', Swal.resumeTimer)
-                //                     }
-                //                 })
-                //                 Toast.fire({
-                //                     icon: 'success',
-                //                     title: 'Signed in successfully'
-                //                 })
-                //             }
-                //         });
-                //     }
-                // });
-                // </script>
-                // ";
-            
         ?>
             <!-- sisi murid -->
             <section class="join-section-murid">
