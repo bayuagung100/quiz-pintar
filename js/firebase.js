@@ -187,6 +187,8 @@ function CountInGame(room) {
 function EndGame(room) {
   var ref = firebase.database().ref('ingame/' + room);
   ref.remove();
+  var ref2 = firebase.database().ref('notif/' + room);
+  ref2.remove();
 }
 
 // function CountNotif() {
