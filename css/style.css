@@ -2217,13 +2217,6 @@ img.avatar {
 	height: 100%; */
 }
 
-.play-section-murid {
-	background: #390F3D;
-	padding: 150px 0 100px 0;
-	width: 100%;
-	height: 100%;
-}
-
 .play-player {
 	/* position: relative; */
 	/* width: 1000px; */
@@ -2432,6 +2425,332 @@ progress[value]::-webkit-progress-bar {
 .play-player .container .card-player-played .col-point .point{
 	line-height: 1px;
     text-align: center;
+}
+
+.play-section-murid {
+	background: #390F3D;
+	padding: 95px 0 100px 0;
+	width: 100%;
+	/* height: 100%; */
+}
+
+.play-section-murid .menu-bar {
+	position: relative;
+	background-color: white;
+	height: 52px;
+}
+
+.play-section-murid .menu-bar .soal{
+	position: absolute;
+	left: 50px;
+	background: #C4C4C4;
+	border-radius: 5px;
+	padding: 4px;
+	top: 12px;
+}
+
+.play-section-murid .menu-bar .soal h3{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	/* identical to box height */
+
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	color: #000000;
+}
+
+.play-section-murid .menu-bar .point{
+	position: absolute;
+	right: 50px;
+	background: #C4C4C4;
+	border-radius: 5px;
+	padding: 4px 30px 4px 20px;
+	top: 12px;
+}
+
+.play-section-murid .menu-bar .point h3{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	/* identical to box height */
+
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	color: #000000;
+}
+
+.play-section-murid .menu-bar .rank{
+	position: absolute;
+	right: 150px;
+	background: #C4C4C4;
+	border-radius: 5px;
+	padding: 4px 30px 4px 20px;
+	top: 12px;
+}
+
+.play-section-murid .menu-bar .rank h3{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 18px;
+	line-height: 21px;
+	/* identical to box height */
+
+	display: flex;
+	align-items: center;
+	text-align: center;
+
+	color: #000000;
+}
+
+.play-section-murid .menu-time {
+	position: relative;
+	background: rgba(0, 201, 133, 0.88);
+	height: 25px;
+	width: 100%;
+	background-color: #999;
+}
+
+.play-section-murid .menu-time .progress{
+	position: relative;
+	background: rgba(0, 201, 133, 0.88);
+	height: 25px;
+	width: 100%;
+}
+.play-section-murid .menu-time h3{
+	position: absolute;
+	width: 100%;
+	top: 4px;
+
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 14px;
+	line-height: 16px;
+
+	text-align: center;
+
+	color: #FFFFFF;
+}
+
+.play-section-murid .container-soal{
+	/* height: auto; */
+	background: rgba(255, 255, 255, 0.25);
+	border-radius: 10px;
+	padding: 50px;
+	margin: 50px;
+}
+
+.play-section-murid .container-soal h3{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 64px;
+	line-height: 75px;
+	/* identical to box height */
+
+	/* display: flex;
+	align-items: center; */
+	text-align: justify;
+
+	color: #FFFFFF;
+}
+
+.play-section-murid .container-jawabanA{
+	position: relative;
+	width: 250px;
+	/* height: 250px;
+	left: 55px;
+	top: 542px; */
+
+	background: #FF0000;
+	border-radius: 10px;
+	padding: 36px 10px 16px 10px;
+}
+
+.play-section-murid .container-jawabanA h4{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 42px;
+	
+
+	color: #FFFFFF;
+}
+.play-section-murid .container-jawabanA .jawabanA{
+	position: absolute;
+	width: 33px;
+	height: 33px;
+	left: 5px;
+	top: 5px;
+
+	background: #FF0000;
+	border: 2px solid #FFFFFF;
+	border-radius: 10px;
+}
+
+.play-section-murid .container-jawabanA .jawabanA h3{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	/* line-height: 16px;
+	display: flex;
+	align-items: center; */
+	text-align: center;
+
+	color: #FFFFFF;
+}
+
+.play-section-murid .container-jawabanB{
+	position: relative;
+	width: 250px;
+	/* height: 250px;
+	left: 55px;
+	top: 542px; */
+
+	background: #FFE600;
+	border-radius: 10px;
+	padding: 36px 10px 16px 10px;
+}
+
+.play-section-murid .container-jawabanB h4{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 42px;
+	
+
+	color: #000;
+}
+.play-section-murid .container-jawabanB .jawabanB{
+	position: absolute;
+	width: 33px;
+	height: 33px;
+	left: 5px;
+	top: 5px;
+
+	background: #FFE600;
+	border: 2px solid #000;
+	border-radius: 10px;
+}
+
+.play-section-murid .container-jawabanB .jawabanB h3{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	/* line-height: 16px;
+	display: flex;
+	align-items: center; */
+	text-align: center;
+
+	color: #000;
+}
+
+.play-section-murid .container-jawabanC{
+	position: relative;
+	width: 250px;
+	/* height: 250px;
+	left: 55px;
+	top: 542px; */
+
+	background: rgba(0, 201, 133, 0.88);
+	border-radius: 10px;
+	padding: 36px 10px 16px 10px;
+}
+
+.play-section-murid .container-jawabanC h4{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 42px;
+	
+
+	color: #FFFFFF;
+}
+.play-section-murid .container-jawabanC .jawabanC{
+	position: absolute;
+	width: 33px;
+	height: 33px;
+	left: 5px;
+	top: 5px;
+
+	background: rgba(0, 201, 133, 0.88);
+	border: 2px solid #FFFFFF;
+	border-radius: 10px;
+}
+
+.play-section-murid .container-jawabanC .jawabanC h3{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	/* line-height: 16px;
+	display: flex;
+	align-items: center; */
+	text-align: center;
+
+	color: #FFFFFF;
+}
+
+.play-section-murid .container-jawabanD{
+	position: relative;
+	width: 250px;
+	/* height: 250px;
+	left: 55px;
+	top: 542px; */
+
+	background: #0075FF;
+	border-radius: 10px;
+	padding: 36px 10px 16px 10px;
+}
+
+.play-section-murid .container-jawabanD h4{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 22px;
+	line-height: 42px;
+	
+
+	color: #FFFFFF;
+}
+.play-section-murid .container-jawabanD .jawabanD{
+	position: absolute;
+	width: 33px;
+	height: 33px;
+	left: 5px;
+	top: 5px;
+
+	background: #0075FF;
+	border: 2px solid #FFFFFF;
+	border-radius: 10px;
+}
+
+.play-section-murid .container-jawabanD .jawabanD h3{
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 24px;
+	/* line-height: 16px;
+	display: flex;
+	align-items: center; */
+	text-align: center;
+
+	color: #FFFFFF;
 }
 
 @media screen and (max-width: 769px) {

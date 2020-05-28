@@ -35,7 +35,7 @@ if ($cek>0) {
                     <div class="container">
                         <div class="row">
                             <div class="col-sm-12 play-player">
-                                <button class="btn-leaderboard"><div class="leaderboard-text"><i class='fas fa-medal'></i> Leaderboard</div></button>
+                                <button class="btn-leaderboard"><div class="leaderboard-text"><img src="<?php echo url("img/icons/medal.png");?>" style="max-width:42px"> Leaderboard</div></button>
                                 <div class="container">
                                     <div class="online">
                                         <h4><i class="fa fa-dot-circle-o" style="color: #00C985;" ></i> Player (<span id="count_player_play"></span>)</h4>
@@ -85,26 +85,89 @@ if ($cek>0) {
         ?>
             <!-- sisi murid -->
             <section class="play-section-murid">
+                <div class="menu-bar">
+                    <div class="soal"><h3>Soal: 1/10</h3></div>
+                    <div class="rank"><h3><img src="<?php echo url("img/icons/medal.png");?>" style="max-width:24px;margin-right:5px">0</h3></div>
+                    <div class="point"><h3><i class='fas fa-coins' style='font-size:24px;margin-right:10px;color:yellow'></i>0</h3></div>
+                </div>
+                <div class="menu-time">
+                    <div id="timeLeft" class="progress"></div>
+                    <h3><span>Sisa waktu: </span><span id="time">06:00</span></h3>
+                </div>
+                <div class="container-soal">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <h3>Pertanyaan 1</h3>
+                        </div>
+                    </div> 
+                </div>
                 <div class="container">
                     <div class="row">
-                        <div class="col-sm-12 text-center text-white">
-                            <div><?php echo $gambar;?></div>
-                            <h5>Menunggu game dimulai</h5>
-                            <div class="spinner">
-                                <div class="bounce1"></div>
-                                <div class="bounce2"></div>
-                                <div class="bounce3"></div>
+                        <div class="col-sm-3">
+                            <div class="container-jawabanA">
+                                <div class="jawabanA"><h3>A</h3></div>
+                                <h4>Pertanyaan 1</h4>
                             </div>
-                            
-                                <div class="card-waiting">
-                                    <div class="name-player">
-                                        <h3><?php echo $nama;?></h3>
-                                    </div>
-                                </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="container-jawabanB">
+                                <div class="jawabanB"><h3>B</h3></div>
+                                <h4>Pertanyaan 1</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="container-jawabanC">
+                                <div class="jawabanC"><h3>C</h3></div>
+                                <h4>Pertanyaan 1</h4>
+                            </div>
+                        </div>
+                        <div class="col-sm-3">
+                            <div class="container-jawabanD">
+                                <div class="jawabanD"><h3>D</h3></div>
+                                <h4>Pertanyaan 1</h4>
+                            </div>
                         </div>
                     </div> 
                 </div>
             </section>
+            <script>
+                $(document).ready(function () {
+                    var time = $('#time').text();
+                    var pisah = time.split(':');
+                    var min = pisah[0];
+                    var sec = pisah[1];
+                    var detik = min*60;
+                    var j = 100/detik;
+                    var elem = document.getElementById("timeLeft");
+                    var width = 100;
+                    var id = setInterval(frame, 1000);
+                    function frame() {
+                        if (width <= 0) {
+                            clearInterval(id);
+                            alert("next");
+                        } else {
+                            width=width-j;
+                            elem.style.width = width + "%";
+                        }
+                    }
+
+                    //countdown id time
+                    var interval = setInterval(function() {
+                        var timer = time.split(':');
+                        //by parsing integer, I avoid all extra string processing
+                        var minutes = parseInt(timer[0], 10);
+                        var seconds = parseInt(timer[1], 10);
+                        --seconds;
+                        minutes = (seconds < 0) ? --minutes : minutes;
+                        if (minutes < 0) clearInterval(interval);
+                        seconds = (seconds < 0) ? 59 : seconds;
+                        seconds = (seconds < 10) ? '0' + seconds : seconds;
+                        //minutes = (minutes < 10) ?  minutes : minutes;
+                        $('#time').html(minutes + ':' + seconds);
+                        time = minutes + ':' + seconds;
+                    }, 1000);
+                });
+            </script>
 <?php
         }
     } else {

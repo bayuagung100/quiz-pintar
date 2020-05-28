@@ -84,7 +84,7 @@ if ($cek>0) {
             if (!in_array($sesi, $ex)) {
                 $cekarray = [$data['id_player'],$sesi];
                 $imp = implode(";", $cekarray);
-                var_dump($cekarray);
+                // var_dump($cekarray);
                 $update = $mysqli->query("UPDATE join_temp SET id_player='$imp' WHERE code_room='$code' ");
                 if ($update) {
                     echo "
