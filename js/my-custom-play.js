@@ -99,8 +99,8 @@ $(document).ready(function () {
             //             Swal.fire('Oops...', 'Something went wrong!', 'error');
             //         });
             //     });
-            },
-            allowOutsideClick: false     
+            // },
+            // allowOutsideClick: false     
           }).then((result) => {
             if (result.value) {
                 $('#kumpulan_soal1').hide();
