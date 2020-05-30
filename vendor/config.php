@@ -51,9 +51,9 @@ function path(){
     }
 }
 
-function title()
+function title($jdl="")
 {   
-    $title = " - Quiz Pintar";
+    $title = $jdl." - Quiz Pintar";
 
     return $title;
 }

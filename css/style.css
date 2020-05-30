@@ -1937,9 +1937,35 @@ img.avatar {
 	cursor: pointer;
 }
 
+[type=radio]+div.container-jawabanA {
+	cursor: pointer;
+}
+[type=radio]+div.container-jawabanB {
+	cursor: pointer;
+}
+[type=radio]+div.container-jawabanC {
+	cursor: pointer;
+}
+[type=radio]+div.container-jawabanD {
+	cursor: pointer;
+}
+
 /* CHECKED STYLES */
 [type=radio]:checked+img {
-	outline: 2px solid #f00;
+	outline: 4px solid #fff;
+}
+
+[type=radio]:checked+div.container-jawabanA {
+	outline: 4px solid #fff;
+}
+[type=radio]:checked+div.container-jawabanB {
+	outline: 4px solid #fff;
+}
+[type=radio]:checked+div.container-jawabanC {
+	outline: 4px solid #fff;
+}
+[type=radio]:checked+div.container-jawabanD {
+	outline: 4px solid #fff;
 }
 
 /* The Modal (background) */
@@ -2550,11 +2576,11 @@ progress[value]::-webkit-progress-bar {
 	margin: 50px;
 }
 
-.play-section-murid .container-soal h3{
+.play-section-murid .container-soal h3, .play-section-murid .container-soal h3 p{
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 64px;
+	font-size: 22px;
 	line-height: 75px;
 	/* identical to box height */
 
@@ -2581,7 +2607,7 @@ progress[value]::-webkit-progress-bar {
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 22px;
+	font-size: 20px;
 	line-height: 42px;
 	
 
@@ -2628,7 +2654,7 @@ progress[value]::-webkit-progress-bar {
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 22px;
+	font-size: 20px;
 	line-height: 42px;
 	
 
@@ -2675,7 +2701,7 @@ progress[value]::-webkit-progress-bar {
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 22px;
+	font-size: 20px;
 	line-height: 42px;
 	
 
@@ -2722,7 +2748,7 @@ progress[value]::-webkit-progress-bar {
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: bold;
-	font-size: 22px;
+	font-size: 20px;
 	line-height: 42px;
 	
 
@@ -2751,6 +2777,52 @@ progress[value]::-webkit-progress-bar {
 	text-align: center;
 
 	color: #FFFFFF;
+}
+
+.play-section-murid .btn-soal-next{
+	position: absolute;
+	cursor: pointer;
+	width: 150px;
+    left: 45%;
+    background: #FFFFFF;
+    box-shadow: 5px 4px 5px #E231C5;
+	border-radius: 10px;
+	margin-top: 30px;
+}
+
+.play-section-murid .btn-soal-next .btn-soal-next-text {
+	font-family: Roboto;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 36px;
+	/* line-height: 42px; */
+	/* display: flex; */
+	align-items: center;
+	text-align: center;
+
+	color: #000000;
+}
+
+
+#kumpulan_soal2,
+#kumpulan_soal3,
+#kumpulan_soal4,
+#kumpulan_soal5,
+#kumpulan_soal6,
+#kumpulan_soal7,
+#kumpulan_soal8,
+#kumpulan_soal9,
+#kumpulan_soal10,
+#nextSoal3,
+#nextSoal4,
+#nextSoal5,
+#nextSoal6,
+#nextSoal7,
+#nextSoal8,
+#nextSoal9,
+#nextSoal10,
+#simpan-jawaban {
+    display: none;
 }
 
 @media screen and (max-width: 769px) {

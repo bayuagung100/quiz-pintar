@@ -33,9 +33,9 @@ $data = $query->fetch_array();
                 $jmlquery2 = $query2->num_rows;
                 $data2 = $query2->fetch_array();
 
-                $id = $data2['id'];
-                $nama = $data2['nama'];
-                $avatar = $data2['avatar'];
+                $id = isset($data2['id']) ? $data2['id'] : null;
+                $nama = isset($data2['nama'])  ? $data2['nama'] : null;
+                $avatar = isset($data2['avatar'])  ? $data2['avatar'] : null;
 
                 if ($avatar == null) {
                     $gambar = '<div style="background-color:#737375;border-radius: 100%;width: 65px;height:65px"><span class="text-center" style="color:#fff;font-size:14px;line-height:65px;padding-left:4px">no image</span></div>';

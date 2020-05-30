@@ -84,54 +84,115 @@ if ($cek>0) {
             
         ?>
             <!-- sisi murid -->
-            <section class="play-section-murid">
+            <section class="play-section-murid" >
                 <div class="menu-bar">
                     <div class="soal"><h3>Soal: 1/10</h3></div>
-                    <div class="rank"><h3><img src="<?php echo url("img/icons/medal.png");?>" style="max-width:24px;margin-right:5px">0</h3></div>
-                    <div class="point"><h3><i class='fas fa-coins' style='font-size:24px;margin-right:10px;color:yellow'></i>0</h3></div>
+                    <div class="rank"><h3><img src="<?php echo url("img/icons/medal.png");?>" style="max-width:24px;margin-right:5px"><span id="InGameMuridRank">0</span></h3></div>
+                    <div class="point"><h3><i class='fas fa-coins' style='font-size:24px;margin-right:10px;color:yellow'></i><span id="InGameMuridPoint">0</span></h3></div>
                 </div>
                 <div class="menu-time">
                     <div id="timeLeft" class="progress"></div>
-                    <h3><span>Sisa waktu: </span><span id="time">06:00</span></h3>
+                    <h3><span>Sisa waktu: </span><span id="time">60:00</span></h3>
                 </div>
-                <div class="container-soal">
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <h3>Pertanyaan 1</h3>
-                        </div>
-                    </div> 
-                </div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <div class="container-jawabanA">
-                                <div class="jawabanA"><h3>A</h3></div>
-                                <h4>Pertanyaan 1</h4>
+
+                <form id="isi_soal" method="post" action="" sesi="<?php echo $sesi;?>" id_quiz="<?php echo $data['id_quiz'];?>" >
+                <?php
+                    $queryquiz = $mysqli->query("SELECT * FROM quiz WHERE id='$data[id_quiz]' ");
+                    $dataquiz = $queryquiz->fetch_array();
+
+                    $soal = $dataquiz['soal'];
+                    $gambar_soal = $dataquiz['gambar_soal'];
+                    $jawaban_soal = $dataquiz['jawaban_soal'];
+                    $jawaban_a_soal = $dataquiz['jawaban_a_soal'];
+                    $jawaban_b_soal = $dataquiz['jawaban_b_soal'];
+                    $jawaban_c_soal = $dataquiz['jawaban_c_soal'];
+                    $jawaban_d_soal = $dataquiz['jawaban_d_soal'];
+
+                    $ex_soal = explode(';', $soal);
+                    $ex_jawaban_soal = explode(';', $jawaban_soal);
+                    $ex_jawaban_a_soal = explode(';', $jawaban_a_soal);
+                    $ex_jawaban_b_soal = explode(';', $jawaban_b_soal);
+                    $ex_jawaban_c_soal = explode(';', $jawaban_c_soal);
+                    $ex_jawaban_d_soal = explode(';', $jawaban_d_soal);
+                    $count_soal = count($ex_soal);
+                    for ($i=1; $i <= $count_soal; $i++) { 
+                        $s = $i-1;
+                    echo'
+                        <div id="kumpulan_soal'.$i.'">
+                            <div class="container-soal">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <h3>'.$ex_soal["$s"].'</h3>
+                                    </div>
+                                </div> 
+                            </div>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <label>
+                                            <input type="radio" name="jawabanSoal'.$i.'" value="A" required>
+                                            <div class="container-jawabanA">
+                                                <div class="jawabanA"><h3>A</h3></div>
+                                                <h4>'.$ex_jawaban_a_soal["$s"].'</h4>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>
+                                            <input type="radio" name="jawabanSoal'.$i.'" value="B" required>
+                                            <div class="container-jawabanB">
+                                                <div class="jawabanB"><h3>B</h3></div>
+                                                <h4>'.$ex_jawaban_b_soal["$s"].'</h4>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>
+                                            <input type="radio" name="jawabanSoal'.$i.'" value="C" required>
+                                            <div class="container-jawabanC">
+                                                <div class="jawabanC"><h3>C</h3></div>
+                                                <h4>'.$ex_jawaban_c_soal["$s"].'</h4>
+                                            </div>
+                                        </label>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label>
+                                            <input type="radio" name="jawabanSoal'.$i.'" value="D" required>
+                                            <div class="container-jawabanD">
+                                                <div class="jawabanD"><h3>D</h3></div>
+                                                <h4>'.$ex_jawaban_d_soal["$s"].'</h4>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div> 
                             </div>
                         </div>
-                        <div class="col-sm-3">
-                            <div class="container-jawabanB">
-                                <div class="jawabanB"><h3>B</h3></div>
-                                <h4>Pertanyaan 1</h4>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="container-jawabanC">
-                                <div class="jawabanC"><h3>C</h3></div>
-                                <h4>Pertanyaan 1</h4>
-                            </div>
-                        </div>
-                        <div class="col-sm-3">
-                            <div class="container-jawabanD">
-                                <div class="jawabanD"><h3>D</h3></div>
-                                <h4>Pertanyaan 1</h4>
-                            </div>
-                        </div>
-                    </div> 
-                </div>
+                    ';
+
+                        if ($i == 1) {
+                            echo '
+                            <button type="button" id="nextSoal2" class="btn-soal-next"><div class="btn-soal-next-text">Next</div></button>
+                            ';
+                        } elseif ($i == 10) {
+                            echo '
+                            <button type="submit" id="simpan-jawaban" class="btn-soal-next" name="simpan-jawaban"><div class="btn-soal-next-text">Simpan</div></button>
+                            ';
+                        } else {
+                            $next = $i + 1;
+                            echo '
+                            <button type="button" id="nextSoal'.$next.'" class="btn-soal-next"><div class="btn-soal-next-text">Next</div></button>
+                            ';
+                        }
+
+                    }
+                ?>
+                
+                </form>
             </section>
             <script>
                 $(document).ready(function () {
+                    InGameMurid(<?php echo $code;?>, <?php echo $sesi;?>);
+
                     var time = $('#time').text();
                     var pisah = time.split(':');
                     var min = pisah[0];
@@ -145,6 +206,7 @@ if ($cek>0) {
                         if (width <= 0) {
                             clearInterval(id);
                             alert("next");
+                            InGameMuridUpdate(<?php echo $code;?>, <?php echo $sesi;?>, '1/10');
                         } else {
                             width=width-j;
                             elem.style.width = width + "%";

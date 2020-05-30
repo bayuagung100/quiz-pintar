@@ -168,6 +168,40 @@ function InGame(room) {
   });
 }
 
+function InGameMurid(room, id_user) {
+  var InGameMuridRank = document.getElementById('InGameMuridRank');
+  var InGameMuridPoint = document.getElementById('InGameMuridPoint');
+  var ref = firebase.database().ref('ingame/' + room);
+  ref.on('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childKey = childSnapshot.key;
+      var childData = childSnapshot.val();
+      if (childData.id_player == id_user) {
+        InGameMuridRank.innerText = childData.ranked;
+        InGameMuridPoint.innerText = childData.point;
+      }
+      
+    })
+  })
+}
+
+function InGameMuridUpdate(room, id_user, progress) {
+  var ref = firebase.database().ref('ingame/' + room);
+  ref.once('value', function(snapshot) {
+    snapshot.forEach(function(childSnapshot) {
+      var childKey = childSnapshot.key;
+      var childData = childSnapshot.val();
+      if (childData.id_player == id_user) {
+        ref.child(childKey).update(
+          {
+            'progress': progress
+          }
+        )
+      }
+    })
+  })
+}
+
 function CountInGame(room) {
   var ref = firebase.database().ref('ingame/' + room);
   ref.on("value", function(snapshot) {

@@ -2,7 +2,20 @@
 <html lang="ID">
 
 <head>
-    <title><?php echo title();?></title>
+    <?php
+        $path = path();
+        if ($path != false) {
+            $query = $mysqli->query("SELECT * FROM join_temp WHERE code_room='$path' ");
+            $data = $query->fetch_array();
+            $id_quiz = $data['id_quiz'];
+            $query2 = $mysqli->query("SELECT * FROM quiz WHERE id='$id_quiz' ");
+            $data2 = $query2->fetch_array();
+            echo' <title>'.title($data2['judul']).'</title>';
+        } else {
+            echo' <title>'.title().'</title>';
+        }
+        
+    ?>
     <meta charset="UTF-8">
     <meta name="description" content="EndGam Gaming Magazine Template">
     <meta name="keywords" content="endGam,gGaming, magazine, html">

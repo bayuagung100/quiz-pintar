@@ -1,4 +1,9 @@
 <?php
+function test(){
+    echo"
+        test
+    ";
+}
 function buka_form($link, $id, $aksi, $form_id){
     echo'
     <form id="'.$form_id.'"  method="post" action="'.$link.'&show=action" class="form-horizontal" enctype="multipart/form-data">
