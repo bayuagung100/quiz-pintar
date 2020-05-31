@@ -42,7 +42,6 @@ $(document).ready(function () {
 $(document).ready(function () {
     var sesi = $('#isi_soal').attr('sesi');
     var id_quiz = $('#isi_soal').attr('id_quiz');
-    console.log(id_quiz);
     var jawabanSoal1 = document.forms["isi_soal"]["jawabanSoal1"];
     var jawabanSoal2 = document.forms["isi_soal"]["jawabanSoal2"];
     var jawabanSoal3 = document.forms["isi_soal"]["jawabanSoal3"];
@@ -76,12 +75,13 @@ $(document).ready(function () {
             // preConfirm: function() {
             //     return new Promise(function(resolve) {
             //         $.ajax({
-            //         url: '../ajax/room/cek-status-join.php',
+            //         url: '../ajax/room/cek-jawaban.php',
             //         type: 'POST',
             //         data: {
             //             id_user: sesi,
             //             id_quiz: id_quiz,
-            //             jawabanSoal1: jawabanSoal1
+            //             jawabanSoal1: jawabanSoal1.value
+            //             sisaPoint: parseInt(point/ttl_soal)
             //         },
             //         dataType: 'json'
             //         })
@@ -103,6 +103,8 @@ $(document).ready(function () {
             // allowOutsideClick: false     
           }).then((result) => {
             if (result.value) {
+                console.log("sisa point (bulat) onclick: "+parseInt(point/ttl_soal));
+                console.log(jawabanSoal1);
                 $('#kumpulan_soal1').hide();
                 $('#nextSoal2').hide();
         

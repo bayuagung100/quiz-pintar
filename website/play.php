@@ -199,8 +199,11 @@ if ($cek>0) {
                     var sec = pisah[1];
                     var detik = min*60;
                     var j = 100/detik;
+                    var k = 250/detik;
                     var elem = document.getElementById("timeLeft");
-                    var width = 100;
+                     width = 100;
+                     point = 2500;
+                     ttl_soal = 10;
                     var id = setInterval(frame, 1000);
                     function frame() {
                         if (width <= 0) {
@@ -209,6 +212,10 @@ if ($cek>0) {
                             InGameMuridUpdate(<?php echo $code;?>, <?php echo $sesi;?>, '1/10');
                         } else {
                             width=width-j;
+                            point=point-k;
+                            // console.log("sisa waktu: "+width);
+                            // console.log("sisa point (bulat): "+parseInt(point));
+                            // console.log("sisa point: "+point);
                             elem.style.width = width + "%";
                         }
                     }
