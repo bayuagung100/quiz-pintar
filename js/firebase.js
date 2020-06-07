@@ -144,6 +144,8 @@ function InGame(room) {
     snapshot.forEach(function(childSnapshot) {
       var childKey = childSnapshot.key;
       var childData = childSnapshot.val();
+      var pisah = childData.progress.split('/');
+      var val = pisah[0];
 
         html += '<div class="col-sm-12"> ';
         html += '<div class="card-player-played">';
@@ -156,7 +158,7 @@ function InGame(room) {
             html += '<div class="container-progressed">';
               html += '<div class="progressed">'+childData.progress+'</div>';
             html += '</div>';
-            html += '<progress value="0" max="10"></progress>';
+            html += '<progress value="'+val+'" max="10"></progress>';
           html += '</div>';
           html += '<div class="col-point">Point <div class="point">'+childData.point+'</div></div>';
         html += '</div>';
@@ -185,7 +187,7 @@ function InGameMurid(room, id_user) {
   })
 }
 
-function InGameMuridUpdate(room, id_user, progress) {
+function InGameMuridUpdate(room, id_user, point, progress, ranked) {
   var ref = firebase.database().ref('ingame/' + room);
   ref.once('value', function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
@@ -194,12 +196,67 @@ function InGameMuridUpdate(room, id_user, progress) {
       if (childData.id_player == id_user) {
         ref.child(childKey).update(
           {
-            'progress': progress
+            'point': point,
+            'progress': progress,
+            'ranked': ranked
           }
         )
       }
     })
   })
+}
+
+function ShowLeaderboard(room) {
+  var ref = firebase.database().ref('ingame/' + room).orderByChild('ranked');
+  ref.on('value', function(snapshot) {
+    var room = snapshot.key;
+    console.log(snapshot.val());
+    
+    var wrapper = document.getElementById("show_lederboard");
+    var html = '';
+    snapshot.forEach(function(childSnapshot) {
+      var childKey = childSnapshot.key;
+      var childData = childSnapshot.val();
+      var pisah = childData.progress.split('/');
+      var val = pisah[0];
+
+        html += '<div class="col-sm-12"> ';
+        html += '<div class="card-player-played">';
+          html += '<div class="col-rank">Rank <div class="rank">'+childData.ranked+'</div></div>'
+          html += '<div class="col-img"><img src="'+childData.avatar+'"/></div>';
+          html += '<div class="col-name">';
+            html += '<div class="name"><b>'+childData.nama+'</b></div>';
+          html += '</div>';
+          html += '<div class="col-progress">';
+            html += '<div class="container-progressed">';
+              html += '<div class="progressed">'+childData.progress+'</div>';
+            html += '</div>';
+            html += '<progress value="'+val+'" max="10"></progress>';
+          html += '</div>';
+          html += '<div class="col-point">Point <div class="point">'+childData.point+'</div></div>';
+        html += '</div>';
+        html += '</div>';
+    });
+    
+    wrapper.innerHTML = html;
+    
+  });
+}
+
+function ShowLeaderboardCount(room) {
+  var ref = firebase.database().ref('ingame/' + room);
+  ref.on("value", function(snapshot) {
+    var newPost = snapshot.val();
+    if (newPost == null) {
+      var countKey = 0 ;
+    } else {
+      var countKey = Object.keys(newPost).length;
+    }
+    document.getElementById('show_lederboard_count').innerText = countKey;
+    }, function (errorObject) {
+      console.log(errorObject);
+    }
+  )
 }
 
 function CountInGame(room) {
