@@ -12,6 +12,7 @@ if ($update) {
 
     $response = array();
     $response["data"] = array();
+    $response["player"] = array();
     $res['url']  = str_replace("ajax/room/","",url("play/").$_POST['code']);
     $res['room']  = $_POST['code'];
     $res['id_quiz']  = $_POST['quiz'];
@@ -38,7 +39,8 @@ if ($update) {
             $rank++;
         }
 
-    $res['player']  = array();
+    
+    
 
         $imp_idp = implode(',',$ex);
         
@@ -57,17 +59,27 @@ if ($update) {
 
             $query_leaderboard = $mysqli->query ("SELECT * FROM leaderboard_temp WHERE id_player IN ($data2[id]) ");
             while ($data3 = $query_leaderboard->fetch_array()) {
-                $resp['ranked'] = $data3['ranked'];
-                $resp['progress'] = $data3['progress'];
-                $resp['point'] = $data3['point'];
+                // $resp['ranked'] = $data3['ranked'];
+                // $resp['progress'] = $data3['progress'];
+                // $resp['point'] = $data3['point'];
                 
-                array_push($res["player"], $resp);
+                $res2[$data2['id']]  = array(
+                    'id_player' => $data2['id'],
+                    'nama' => $data2['nama'],
+                    'avatar' => $gambar,
+                    'ranked'=> $data3['ranked'],
+                    'progress' => $data3['progress'],
+                    'point' => $data3['point']
+                );
+                
+                // array_push($res2[], $resp);
             }
         }
         
         
 
     array_push($response["data"], $res);
+    array_push($response["player"], $res2);
 
     echo json_encode($response);
 }

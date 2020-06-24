@@ -86,9 +86,9 @@ function DeleteNotif(room, id_user) {
 function NotifIn(room) {
   var ref = firebase.database().ref('notif/' + room).orderByChild('time');
   ref.on('child_added', function(snapshot) {
-    console.log(snapshot);
-    console.log(snapshot.val().name);
-    console.log(snapshot.val().time);
+    // console.log(snapshot);
+    // console.log(snapshot.val().name);
+    // console.log(snapshot.val().time);
     const Toast = Swal.mixin({
         toast: true,
         position: 'top-end',
@@ -130,6 +130,11 @@ function NotifOut(room) {
 }
 
 function MulaiGame(room, data_player) {
+  // data_player.forEach(e => {
+    // console.log(data_player);
+    // firebase.database().ref('ingame/' + room).child(e.id_player).set(data_player);
+  // })
+  
   firebase.database().ref('ingame/' + room).set(data_player);
 };
 
@@ -137,7 +142,7 @@ function InGame(room) {
   var ref = firebase.database().ref('ingame/' + room).orderByChild('ranked');
   ref.on('value', function(snapshot) {
     var room = snapshot.key;
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
     
     var wrapper = document.getElementById("player_played");
     var html = '';
@@ -171,25 +176,35 @@ function InGame(room) {
 }
 
 function InGameMurid(room, id_user) {
+  
   var InGameMuridRank = document.getElementById('InGameMuridRank');
   var InGameMuridPoint = document.getElementById('InGameMuridPoint');
-  var ref = firebase.database().ref('ingame/' + room);
+  
+  var ref = firebase.database().ref('ingame/' + room + '/' + id_user);
+  
   ref.on('value', function(snapshot) {
-    snapshot.forEach(function(childSnapshot) {
-      var childKey = childSnapshot.key;
-      var childData = childSnapshot.val();
-      if (childData.id_player == id_user) {
-        InGameMuridRank.innerText = childData.ranked;
-        InGameMuridPoint.innerText = childData.point;
-      }
+    var dataKey = snapshot.key;
+    var Data = snapshot.val();
+    // snapshot.forEach(function(childSnapshot) {
       
-    })
+      // var childKey = childSnapshot.key;
+      // var childData = childSnapshot.val();
+      // console.log(Data);
+      // if (childData.id_player == id_user) {
+        
+        InGameMuridRank.innerText = Data.ranked;
+        InGameMuridPoint.innerText = Data.point;
+      // }
+      
+    // })
   })
 }
 
 function InGameMuridUpdate(room, id_user, point, progress, ranked) {
   var ref = firebase.database().ref('ingame/' + room);
   ref.once('value', function(snapshot) {
+    // var dataKey = snapshot.key;
+    // var Data = snapshot.val();
     snapshot.forEach(function(childSnapshot) {
       var childKey = childSnapshot.key;
       var childData = childSnapshot.val();
@@ -210,7 +225,7 @@ function ShowLeaderboard(room) {
   var ref = firebase.database().ref('ingame/' + room).orderByChild('ranked');
   ref.on('value', function(snapshot) {
     var room = snapshot.key;
-    console.log(snapshot.val());
+    // console.log(snapshot.val());
     
     var wrapper = document.getElementById("show_lederboard");
     var html = '';

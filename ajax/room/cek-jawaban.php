@@ -12,12 +12,76 @@ $ex_jawaban = explode(";",$data_quiz['jawaban_soal']);
 $query_motivasi = $mysqli->query("SELECT * FROM motivasi ORDER BY rand() limit 1 ");
 $data_motivasi = $query_motivasi->fetch_array();
 
+function update_rank($room, $id_user, $rank){
+    // var_dump($room." ".$id_user." ".$rank);
+    // Constants
+    $FIREBASE = "https://quiz-pintar-70d15.firebaseio.com/ingame/$room/";
+    // $NODE_DELETE = ".json";
+    // $NODE_GET = ".json";
+    $NODE_PATCH = $id_user.".json";
+    // $NODE_PUT = ".json";
+
+    // Data for PUT
+    // Node replaced
+    // $data = 32;
+
+    // Data for PATCH
+    // Matching nodes updated
+    $data = array(
+        // "avatar" => "http://localhost/quiz-pintar/img/avatar/no-image2.png",
+        // "id_player" => "9",
+        // "nama" => "Balar",
+        // "point" => "496",
+        // "progress" => "2/10",
+        "ranked" => $rank
+    );
+
+
+
+    // JSON encoded
+    $json = json_encode( $data );
+
+    // Initialize cURL
+    $curl = curl_init();
+
+    // Create
+    // curl_setopt( $curl, CURLOPT_URL, $FIREBASE . $NODE_PUT );
+    // curl_setopt( $curl, CURLOPT_CUSTOMREQUEST, "PUT" );
+    // curl_setopt( $curl, CURLOPT_POSTFIELDS, 32 );
+
+    // Read
+    // curl_setopt( $curl, CURLOPT_URL, $FIREBASE . $NODE_GET );
+
+    // Update
+    curl_setopt( $curl, CURLOPT_URL, $FIREBASE . $NODE_PATCH );
+    curl_setopt( $curl, CURLOPT_CUSTOMREQUEST, "PATCH" );
+    curl_setopt( $curl, CURLOPT_POSTFIELDS, $json );
+
+    // Delete
+    // curl_setopt( $curl, CURLOPT_URL, $FIREBASE . $NODE_DELETE );
+    // curl_setopt( $curl, CURLOPT_CUSTOMREQUEST, "DELETE" );
+
+    // Get return value (string)
+    curl_setopt( $curl, CURLOPT_RETURNTRANSFER, true );
+
+    // Make request
+    // Close connection
+    $response = curl_exec( $curl );
+
+    curl_close( $curl );
+    // var_dump($response);
+    return $response;
+    
+}
+
+// update_rank($_POST['room'], 10, 2);
+
 function update_leaderboard($progress, $point){
     global $mysqli;
-    $query_semua = $mysqli->query("SELECT * FROM  leaderboard_temp ORDER BY point DESC LIMIT 1 ");
-    $data_semua = $query_semua->fetch_array();
-    $order_point = $data_semua['point'];
-    $order_ranked = $data_semua['ranked'];
+    // $query_semua = $mysqli->query("SELECT * FROM  leaderboard_temp ORDER BY point DESC LIMIT 1 ");
+    // $data_semua = $query_semua->fetch_array();
+    // $order_point = $data_semua['point'];
+    // $order_ranked = $data_semua['ranked'];
     
     $query_ambil = $mysqli->query("SELECT * FROM  leaderboard_temp WHERE id_player ='$_POST[id_user]' ");
     $data_ambil = $query_ambil->fetch_array();
@@ -26,37 +90,59 @@ function update_leaderboard($progress, $point){
     $ambil_ranked = $data_ambil['ranked'];
     $point_sekarang = $ambil_point+$point;
 
-    if ($point_sekarang > $order_point) {
-        if ($ambil_ranked == $order_ranked) {
-            $ranked_sekarang = $order_ranked;
-        } else {
-            $ranked_sekarang = 1;
-        }
-    } elseif ($point_sekarang == $order_point) {
-        if ($ambil_ranked == $order_ranked) {
-            $ranked_sekarang = $order_ranked;
-        } else {
-            $ranked_sekarang = $ambil_ranked;
-        }
+
+    // if ($point_sekarang > $order_point) {
+    //     $masuk = "masuk if 1";
+    //     // if ($ambil_ranked == $order_ranked) {
+    //     //     $ranked_sekarang = $order_ranked;
+    //     // } else {
+    //         $ranked_sekarang = 1;
+    //     // }
+    // } elseif ($point_sekarang == $order_point) {
+    //     $masuk = "masuk if 2";
+    //     // if ($ambil_ranked == $order_ranked) {
+    //     //     $ranked_sekarang = $order_ranked;
+    //     // } else {
+    //         $ranked_sekarang = $ambil_ranked;
+    //     // }
         
-    } else {
-        if ($ambil_ranked == $order_ranked) {
-            $ranked_sekarang = $order_ranked;
-        } else {
-            $ranked_sekarang = $ambil_ranked + 1;
-        }
-    }
+    // } else {
+    //     $masuk = "masuk if 3";
+    //     // if ($ambil_ranked == $order_ranked) {
+    //     //     $ranked_sekarang = $order_ranked;
+    //     // } else {
+    //         $ranked_sekarang = $ambil_ranked + 1;
+    //     // }
+    // }
 
 
     $update_point = $mysqli->query("UPDATE leaderboard_temp SET 
-        ranked = '$ranked_sekarang',
         progress = '$progress',
         point = '$point_sekarang'
-
         WHERE 
         id_player ='$_POST[id_user]'
     ");
 
+    if ($update_point) {
+        $sql = "SELECT @curRank:=@curRank + 1 'rank', p.id_player, p.ranked, p.progress, p.point FROM leaderboard_temp p, (SELECT @curRank:=0) r ORDER BY p.point DESC";
+        // $sql .= "SELECT id_player, ranked, progress, point, (@curRank:=@curRank + 1) AS rank FROM leaderboard_temp ORDER BY point DESC";
+        $query_newrank = $mysqli->query("$sql");
+        // $data_query_newrank = $query_newrank->fetch_array();
+        // var_dump($data_query_newrank);
+        while($data_query_newrank = $query_newrank->fetch_array()){
+            $newRank = $data_query_newrank['rank'];
+            $new_id_player = $data_query_newrank['id_player'];
+
+            $update_rank = $mysqli->query("UPDATE leaderboard_temp SET 
+                ranked = '$newRank'
+                WHERE 
+                id_player ='$new_id_player'
+            ");
+
+            update_rank($_POST['room'], $new_id_player, $newRank);
+
+        }
+    }
     if ($update_point) {
         $query_ambil2 = $mysqli->query("SELECT * FROM  leaderboard_temp WHERE id_player ='$_POST[id_user]' ");
         $data_ambil2 = $query_ambil2->fetch_array();
@@ -72,8 +158,11 @@ function update_leaderboard($progress, $point){
     array_push($arr, $res);
     return $arr;
 
+
+
    
 }
+
 
 
 $response = array();
@@ -185,6 +274,7 @@ if (isset($_POST['jawabanSoal1'])) {
 
 
 echo json_encode($response);
+
 
 
 ?>

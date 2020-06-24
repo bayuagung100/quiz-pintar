@@ -98,6 +98,13 @@ if ($cek>0) {
 
                     <form id="isi_soal" method="post" action="" sesi="<?php echo $sesi;?>" id_quiz="<?php echo $data['id_quiz'];?>"  code="<?php echo $code;?>">
                     <?php
+                        $cek_state = $mysqli->query("SELECT * FROM leaderboard_temp WHERE id_player='$sesi' ");
+                        $data_cek = $cek_state->fetch_array();
+                        $cek_progress = $data_cek['progress'];
+                        $ex_cek_progress = explode('/', $cek_progress);
+                        $cekState = $ex_cek_progress[0];
+                        $cekState = $cekState+1;
+
                         $queryquiz = $mysqli->query("SELECT * FROM quiz WHERE id='$data[id_quiz]' ");
                         $dataquiz = $queryquiz->fetch_array();
 
@@ -109,6 +116,7 @@ if ($cek>0) {
                         $jawaban_c_soal = $dataquiz['jawaban_c_soal'];
                         $jawaban_d_soal = $dataquiz['jawaban_d_soal'];
 
+                        $ex_gambar_soal = explode(';', $gambar_soal);
                         $ex_soal = explode(';', $soal);
                         $ex_jawaban_soal = explode(';', $jawaban_soal);
                         $ex_jawaban_a_soal = explode(';', $jawaban_a_soal);
@@ -116,14 +124,101 @@ if ($cek>0) {
                         $ex_jawaban_c_soal = explode(';', $jawaban_c_soal);
                         $ex_jawaban_d_soal = explode(';', $jawaban_d_soal);
                         $count_soal = count($ex_soal);
-                        for ($i=1; $i <= $count_soal; $i++) { 
+                        // 
+                        echo $cekState;
+                        if ($cekState == 1) {
+                            $i = $cekState;
+                            $state="";
+                        } elseif ($cekState == 2) {
+                            $i = $cekState;
+                            $state="
+                            $('#kumpulan_soal2').show();
+                            $('#nextSoal3').show();
+                            $('#texSoal').text('2/10');
+                            ";
+                        } elseif ($cekState == 3) {
+                            $i = $cekState;
+                            $state="
+                            $('#kumpulan_soal3').show();
+                            $('#nextSoal4').show();
+                            $('#texSoal').text('3/10');
+                            ";
+                        } elseif ($cekState == 4) {
+                            $i = $cekState;
+                            $state="
+                            $('#kumpulan_soal4').show();
+                            $('#nextSoal5').show();
+                            $('#texSoal').text('4/10');
+                            ";
+                        } elseif ($cekState == 5) {
+                            $i = $cekState;
+                            $state="
+                            $('#kumpulan_soal5').show();
+                            $('#nextSoal6').show();
+                            $('#texSoal').text('5/10');
+                            ";
+                        } elseif ($cekState == 6) {
+                            $i = $cekState;
+                            $state="
+                            $('#kumpulan_soal6').show();
+                            $('#nextSoal7').show();
+                            $('#texSoal').text('6/10');
+                            ";
+                        } elseif ($cekState == 7) {
+                            $i = $cekState;
+                            $state="
+                            $('#kumpulan_soal7').show();
+                            $('#nextSoal8').show();
+                            $('#texSoal').text('7/10');
+                            ";
+                        } elseif ($cekState == 8) {
+                            $i = $cekState;
+                            $state="
+                            $('#kumpulan_soal8').show();
+                            $('#nextSoal9').show();
+                            $('#texSoal').text('8/10');
+                            ";
+                        } elseif ($cekState == 9) {
+                            $i = $cekState;
+                            $state="
+                            $('#kumpulan_soal9').show();
+                            $('#nextSoal10').show();
+                            $('#texSoal').text('9/10');
+                            ";
+                        } elseif ($cekState == 10) {
+                            $i = $cekState;
+                            $state="
+                            $('#kumpulan_soal10').show();
+                            $('#simpan-jawaban').show();
+                            $('#texSoal').text('10/10');
+                            ";
+                        }
+                        for ($i; $i <= $count_soal; $i++) { 
+                            
                             $s = $i-1;
+                            echo"
+                            <script>
+                            $(document).ready(function () {
+                                $state
+                            })
+                            </script>
+                            ";
+                            
                         echo'
                             <div id="kumpulan_soal'.$i.'">
                                 <div class="container-soal">
                                     <div class="row">
                                         <div class="col-sm-12">
-                                            <h3>'.$ex_soal["$s"].'</h3>
+                                        ';
+                                        if ($ex_gambar_soal[$s]!=null) {
+                                            echo '
+                                            <div class="text-center">
+                                                <img src="'.url("images").'/'.$ex_gambar_soal[$s].'" style="width: 100%;max-width: 600px;height: auto;">
+                                            </div>
+                                            ';
+                                        }
+                                        echo '
+                                            <h3>'.$ex_soal[$s].'</h3>
                                         </div>
                                     </div> 
                                 </div>

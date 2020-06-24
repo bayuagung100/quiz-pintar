@@ -81,6 +81,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal1: jawabanSoal1.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -88,7 +89,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -98,7 +99,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,
@@ -166,6 +167,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal2: jawabanSoal2.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -173,7 +175,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -183,7 +185,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,
@@ -251,6 +253,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal3: jawabanSoal3.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -258,7 +261,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -268,7 +271,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,
@@ -336,6 +339,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal4: jawabanSoal4.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -343,7 +347,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -353,7 +357,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,
@@ -421,6 +425,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal5: jawabanSoal5.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -428,7 +433,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -438,7 +443,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,
@@ -506,6 +511,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal6: jawabanSoal6.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -513,7 +519,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -523,7 +529,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,
@@ -591,6 +597,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal7: jawabanSoal7.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -598,7 +605,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -608,7 +615,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,
@@ -676,6 +683,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal8: jawabanSoal8.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -683,7 +691,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -693,7 +701,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,
@@ -761,6 +769,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal9: jawabanSoal9.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -768,7 +777,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -778,7 +787,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,
@@ -847,6 +856,7 @@ $(document).ready(function () {
                     data: {
                         id_user: sesi,
                         id_quiz: id_quiz,
+                        room: code,
                         jawabanSoal10: jawabanSoal10.value,
                         sisaPoint: parseInt(point/ttl_soal)
                     },
@@ -854,7 +864,7 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         if (response.data[0].jawaban == "benar") {
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Benar!',
                                 text: response.data[0].motivasi,
@@ -864,7 +874,7 @@ $(document).ready(function () {
                                 imageAlt: 'Ads',
                               })
                         } else if(response.data[0].jawaban == "salah"){
-                            console.log(response.data[0]);
+                            // console.log(response.data[0]);
                             Swal.fire({
                                 title: 'Salah!',
                                 text: response.data[0].motivasi,

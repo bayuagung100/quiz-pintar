@@ -70,24 +70,26 @@ $(document).ready(function () {
                     code: room,
                 },
                 success: function (response) {
-                    let data_player = [];
-                    let timerInterval
+                    // let data_player = [];
                     
-                    response.data[0].player.forEach(e => {
-                        console.log(e.id);
-                        data_player.push(
-                            {
-                                id_player: e.id,
-                                nama: e.nama,
-                                avatar: e.avatar,
-                                ranked: e.ranked,
-                                progress: e.progress,
-                                point: e.point
-                            }
+                    // let timerInterval
+                    
+                    // response.player[0].forEach(e => {
+                    //     data_player.push(
+                    //         {
+                    //             id_player: e.id,
+                    //             nama: e.nama,
+                    //             avatar: e.avatar,
+                    //             ranked: e.ranked,
+                    //             progress: e.progress,
+                    //             point: e.point
+                    //         }
                             
-                            );
-                    });
+                    //         );
+                    // });
+                    // console.log(response.player[0]);
 
+                    // MulaiGame(room, response.player[0]);
                     
                     Swal.fire({
                         title: 'Game Dimulai!',
@@ -95,7 +97,7 @@ $(document).ready(function () {
                         timer: 5000,
                         timerProgressBar: true,
                         onBeforeOpen: () => {
-                            MulaiGame(room, data_player);
+                            MulaiGame(room, response.player[0]);
                             Swal.showLoading()
                             timerInterval = setInterval(() => {
                             const content = Swal.getContent()
