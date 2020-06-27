@@ -334,3 +334,159 @@
   }
   
   .pagination a:hover:not(.active) {background-color: #ddd;}
+
+  .bg{
+    background: rgb(79, 89, 98);
+    border-radius: 10px;
+  }
+  .btn-leaderboard {
+        /* position: absolute; */
+        /* cursor: pointer; */
+        /* width: 420px; */
+        margin-top: 10px;
+        background: #FFFFFF;
+        box-shadow: 5px 4px 5px #E231C5;
+        border-radius: 50px;
+    }
+
+    .btn-leaderboard .leaderboard-text {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 36px;
+        /* line-height: 42px; */
+        /* display: flex; */
+        align-items: center;
+        text-align: center;
+
+        color: #000000;
+    }
+    .online {
+        width: 200px;
+        margin-top: 20px;
+        background: #FFFFFF;
+        border-radius: 10px;
+    }
+    .online h4 {
+        padding: 10px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        /* font-size: 18px;
+        line-height: 21px; */
+        text-align: center;
+        color: #000000;
+    }
+
+    .tingkat {
+        width: 150px;
+    
+        background: #FFFFFF;
+        border-radius: 10px;
+    }
+    .tingkat h4 {
+        padding: 10px;
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        /* font-size: 18px;
+        line-height: 21px; */
+        text-align: center;
+        color: #000000;
+    }
+    .container-card {
+        padding: 20px 100px;
+    }
+
+    .card-player-played {
+        background: #FFFFFF;
+        border: 5px solid rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        position: relative;
+        height: 62px;
+        margin: 10px 0 10px 0;
+    }
+    
+    .container .card-player-played .col-rank{
+        /* float: left; */
+        position: absolute;
+        left: 5%;
+        line-height: 38px;
+    }
+    .container .card-player-played .col-rank .rank{
+        line-height: 1px;
+        text-align: center;
+    }
+    
+    .container .card-player-played .col-img{
+        /* float: left; */
+        position: absolute;
+        left: 15%;
+        line-height: 52px;
+    }
+    .container .card-player-played .col-img img{
+        border-radius: 100%;
+        width:40px;
+        height: 40px;
+    }
+    
+    .container .card-player-played .col-name {
+        /* float: left; */
+        position: absolute;
+        line-height: 52px;
+        left: 25%;
+        max-width: 170px;
+        white-space: nowrap;
+        
+    }
+    
+    .container .card-player-played .col-name .name {
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 18px;
+        width: 100%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    
+    }
+    
+    
+    .container .card-player-played .col-progress {
+        float: left;
+        position: absolute;
+        left: 50%;
+        line-height: 52px;
+    }
+
+    progress[value] {
+        width: 300px;
+        
+        -webkit-appearance: none;
+    }
+    progress[value]::-webkit-progress-bar {
+        background-color: #C4C4C4;
+        height: 20px;
+    }
+      
+    .container .card-player-played .col-progress .container-progressed{
+        position: relative;
+    }
+    
+    .container .card-player-played .col-progress .container-progressed .progressed{
+        position: absolute;
+        width: 300px;
+        top: -4px;
+        text-align: center;
+    }
+    
+    .container .card-player-played .col-point{
+        /* float: left; */
+        position: absolute;
+        right: 5%;
+        line-height: 38px;
+    }
+    .container .card-player-played .col-point .point{
+        line-height: 1px;
+        text-align: center;
+    }

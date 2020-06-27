@@ -26,8 +26,10 @@ if ($cek>0) {
 <?php
     if ($sesi) {
         if ($role == "guru" && $data['id_rm']==$sesi) {
-            if ($data['status']!='play') {
+            if ($data['status']=='waiting') {
                 header('location:'.url("join/").$code );
+            } elseif ($data['status']=='end') {
+                header('location:'.url(""));
             } else {
 ?>
                 <!-- sisi guru -->
@@ -80,8 +82,10 @@ if ($cek>0) {
         <?php
             }
         } else {
-            if ($data['status']!='play') {
+            if ($data['status']=='waiting') {
                 header('location:'.url("join/").$code );
+            } elseif ($data['status']=='end') {
+                header('location:'.url(""));
             } else {
         ?>
                 <!-- sisi murid -->
@@ -93,7 +97,7 @@ if ($cek>0) {
                     </div>
                     <div class="menu-time">
                         <div id="timeLeft" class="progress"></div>
-                        <h3><span>Sisa waktu: </span><span id="time">60:00</span></h3>
+                        <h3><span>Sisa waktu: </span><span id="time">01:00</span></h3>
                     </div>
 
                     <form id="isi_soal" method="post" action="" sesi="<?php echo $sesi;?>" id_quiz="<?php echo $data['id_quiz'];?>"  code="<?php echo $code;?>">
@@ -312,53 +316,249 @@ if ($cek>0) {
                     $(document).ready(function () {
                         InGameMurid(<?php echo $code;?>, <?php echo $sesi;?>);
 
-                        var time = $('#time').text();
-                        var pisah = time.split(':');
-                        var min = pisah[0];
-                        var sec = pisah[1];
-                        var detik = min*60;
-                        var j = 100/detik;
-                        var k = 250/detik;
+                        // var interval = setInterval(function() {
+                        //     var timer = val.batas.split(':');
+                        //     //by parsing integer, I avoid all extra string processing
+                        //     var minutes = parseInt(timer[0], 10);
+                        //     var seconds = parseInt(timer[1], 10);
+                        //     --seconds;
+                            
+                        //     minutes = (seconds < 0) ? --minutes : minutes;
+                        //     // if (minutes < 0) clearInterval(interval);
+                        //     seconds = (seconds < 0) ? 59 : seconds;
+                        //     seconds = (seconds < 10) ? '0' + seconds : seconds;
+                        //     //minutes = (minutes < 10) ?  minutes : minutes;
+                        //     ref.update(
+                        //         {
+                        //             batas: minutes+":"+seconds,
+                        //             // panjang: width
+                        //         }
+                        //     )
+                        //     $('#time').html(minutes + ':' + seconds);
+                        //     // time = minutes + ':' + seconds;
+                        // }, 1000);
+                        var ref = firebase.database().ref('timer/' + 386605);
+                        ref.once('value', function(snapshot) {
+                            static_val = snapshot.val(); 
+                            staic_batas = static_val.batas;
+                            
+                            
+                            
+                            
+                        })
+                         
+                         
                         var elem = document.getElementById("timeLeft");
-                        width = 100;
-                        point = 2500;
-                        ttl_soal = 10;
-                        var id = setInterval(frame, 1000);
-                        function frame() {
-                            if (width <= 0) {
-                                clearInterval(id);
-                                Swal.fire({
-                                    title: 'Waktu Sudah Habis!',
-                                });
-                                $('#section_murid').hide();
-                                $('#section_show_lederboard').show();
-                                ShowLeaderboardCount(<?php echo $code;?>);
-                                ShowLeaderboard(<?php echo $code;?>);
-                            } else {
-                                width=width-j;
-                                point=point-k;
-                                // console.log("sisa waktu: "+width);
-                                // console.log("sisa point (bulat): "+parseInt(point));
-                                // console.log("sisa point: "+point);
-                                elem.style.width = width + "%";
-                            }
-                        }
+                        
 
-                        //countdown id time
                         var interval = setInterval(function() {
-                            var timer = time.split(':');
-                            //by parsing integer, I avoid all extra string processing
-                            var minutes = parseInt(timer[0], 10);
-                            var seconds = parseInt(timer[1], 10);
-                            --seconds;
-                            minutes = (seconds < 0) ? --minutes : minutes;
-                            if (minutes < 0) clearInterval(interval);
-                            seconds = (seconds < 0) ? 59 : seconds;
-                            seconds = (seconds < 10) ? '0' + seconds : seconds;
-                            //minutes = (minutes < 10) ?  minutes : minutes;
-                            $('#time').html(minutes + ':' + seconds);
-                            time = minutes + ':' + seconds;
-                        }, 1000);
+                            ref.once('value', function(snapshot) {
+                                var key = snapshot.key;
+                                val = snapshot.val(); 
+                                batas = val.batas;
+                                panjang = val.panjang;
+                                var timer = batas.split(':');
+                                var minutes = parseInt(timer[0], 10);
+                                var seconds = parseInt(timer[1], 10);
+                                --seconds;
+                                minutes = (seconds < 0) ? --minutes : minutes;
+                                if (minutes < 0) clearInterval(interval);
+                                seconds = (seconds < 0) ? 59 : seconds;
+                                seconds = (seconds < 10) ? '0' + seconds : seconds;
+                                //minutes = (minutes < 10) ?  minutes : minutes;
+                                $('#time').html(minutes + ':' + seconds);
+                                // console.log(val);
+                                // console.log(minutes);
+                                // console.log(seconds);
+                                // console.log(val);
+                                // console.log(" waktu: "+batas);
+                                // console.log(" width: "+panjang);
+                                pisah = staic_batas.split(':');
+                                min = pisah[0];
+                                sec = pisah[1];
+                                detik = min*60;
+                                j = 100/detik;
+                                k = 250/detik;
+                                width = panjang;
+                                point = 2500;
+                                ttl_soal = 10;
+                                // var id = setInterval(frame, 1000);
+                                // function frame() {
+                                    if (width <= 0) {
+                                        clearInterval(id);
+                                        Swal.fire({
+                                            title: 'Waktu Sudah Habis!',
+                                        });
+                                        $('#section_murid').hide();
+                                        $('#section_show_lederboard').show();
+                                        ShowLeaderboardCount(<?php echo $code;?>);
+                                        ShowLeaderboard(<?php echo $code;?>);
+                                    } else {
+                                        width=width-j;
+                                        point=point-k;
+                                        console.log("sisa width: "+width);
+                                        // console.log("sisa point (bulat): "+parseInt(point));
+                                        // console.log("sisa point: "+point);
+                                        elem.style.width = width + "%";
+                                    }
+                                // }
+
+                                // ref.update(
+                                //     {
+                                //         batas: minutes+":"+seconds,
+                                //         panjang: width
+                                //     }
+                                // )
+                                // ref.once('value', function(snapshot) {
+                                //     var key = snapshot.key;
+                                //     value = snapshot.val(); 
+                                //     console.log(value);
+                                //     console.log("sisa waktu: "+batas);
+                                //     console.log("sisa width: "+width);
+                                // })
+                                
+                            });
+                        },1000);
+
+                        // var time = $('#time').text(val.batas);
+                        
+                        
+                        
+                        
+                        // ttl_soal = 10;
+                        // var id = setInterval(frame, 1000);
+                        // function frame() {
+                        //     ref.once('value', function(snapshot) {
+                        //         var key = snapshot.key;
+                        //         val2 = snapshot.val(); 
+                        //         batas2 = val2.batas;
+                                
+
+                               
+                                
+                        //         ref.update(
+                        //             {
+                        //                 // batas: minutes+":"+seconds,
+                        //                 panjang: width
+                        //             }
+                        //         )
+                        //         ref.once('value', function(snapshot) {
+                        //             var key2 = snapshot.key;
+                        //             value2 = snapshot.val(); 
+                        //             console.log(value2);
+                        //         })
+                        //     });
+                        // }
+
+                        // ref.on('value', function(snapshot) {
+                        //     var key = snapshot.key;
+                        //     val = snapshot.val(); 
+                        //     console.log(val) ;
+                        // })
+                        // var elem = document.getElementById("timeLeft");
+                        // // width = asd;
+                        // point = 2500;
+                        // //countdown id time
+                        // var interval = setInterval(frame, 1000);
+
+                        // function frame() {
+                            // var timer = val.batas.split(':');
+                            
+                        //     //by parsing integer, I avoid all extra string processing
+                        //     var minutes = parseInt(timer[0], 10);
+                        //     var seconds = parseInt(timer[1], 10);
+                        //     --seconds;
+                            
+                        //     minutes = (seconds < 0) ? --minutes : minutes;
+                        //     if (minutes < 0) clearInterval(interval);
+                        //     seconds = (seconds < 0) ? 59 : seconds;
+                        //     seconds = (seconds < 10) ? '0' + seconds : seconds;
+                        //     //minutes = (minutes < 10) ?  minutes : minutes;
+                        //     $('#time').html(minutes + ':' + seconds);
+                            
+                        //     // time = minutes + ':' + seconds;
+                        //     var min = timer[0];
+                        //     var sec = timer[1];
+                        //     var detik = min*60;
+                        //     var j = 100/detik;
+                        //     var k = 250/detik;
+                        //     console.log(detik+":"+j+":"+k);
+                        //     if (width <= 0) {
+                        //         clearInterval(interval);
+                        //         Swal.fire({
+                        //             title: 'Waktu Sudah Habis!',
+                        //         });
+                        //         $('#section_murid').hide();
+                        //         $('#section_show_lederboard').show();
+                        //         ShowLeaderboardCount(<?php echo $code;?>);
+                        //         ShowLeaderboard(<?php echo $code;?>);
+                        //     } else {
+                        //         width=width-j;
+                        //         point=point-k;
+                        //         // console.log("sisa waktu: "+width);
+                        //         // console.log("sisa point (bulat): "+parseInt(point));
+                        //         // console.log("sisa point: "+point);
+                        //         elem.style.width = width + "%";
+                        //     }
+                        //     ref.update(
+                        //         {
+                        //             batas: minutes+":"+seconds,
+                        //             panjang: width
+                        //         }
+                        //     )
+                        //     console.log(val.batas);
+                        //     console.log(width);
+                        // }
+
+
+                        // var time = $('#time').text();
+                        // var pisah = time.split(':');
+                        // var min = pisah[0];
+                        // console.log(min);
+                        // var sec = pisah[1];
+                        // var detik = min*60;
+                        // var j = 100/detik;
+                        // var k = 250/detik;
+                        // var elem = document.getElementById("timeLeft");
+                        // width = 100;
+                        // point = 2500;
+                        // ttl_soal = 10;
+                        // var id = setInterval(frame, 1000);
+                        // function frame() {
+                        //     if (width <= 0) {
+                        //         clearInterval(id);
+                        //         Swal.fire({
+                        //             title: 'Waktu Sudah Habis!',
+                        //         });
+                        //         $('#section_murid').hide();
+                        //         $('#section_show_lederboard').show();
+                        //         ShowLeaderboardCount(<?php echo $code;?>);
+                        //         ShowLeaderboard(<?php echo $code;?>);
+                        //     } else {
+                        //         width=width-j;
+                        //         point=point-k;
+                        //         console.log("sisa waktu: "+width);
+                        //         // console.log("sisa point (bulat): "+parseInt(point));
+                        //         // console.log("sisa point: "+point);
+                        //         elem.style.width = width + "%";
+                        //     }
+                        // }
+                        // var interval = setInterval(function() {
+                        //     var timer = time.split(':');
+                        //     //by parsing integer, I avoid all extra string processing
+                        //     var minutes = parseInt(timer[0], 10);
+                        //     var seconds = parseInt(timer[1], 10);
+                        //     --seconds;
+                            
+                        //     minutes = (seconds < 0) ? --minutes : minutes;
+                        //     if (minutes < 0) clearInterval(interval);
+                        //     seconds = (seconds < 0) ? 59 : seconds;
+                        //     seconds = (seconds < 10) ? '0' + seconds : seconds;
+                        //     //minutes = (minutes < 10) ?  minutes : minutes;
+                        //     $('#time').html(minutes + ':' + seconds);
+                        //     time = minutes + ':' + seconds;
+                        // }, 1000);
+
                     });
                 </script>
 <?php

@@ -499,7 +499,7 @@ function isi_datatables($no, $data, $link, $id, $edit = true, $hapus = true)
 		</tr>';
 }
 
-function detail_datatables($no, $data, $link, $id, $hapus = true)
+function detail_datatables($no, $data, $link, $id)
 {
 	echo '
 				<tr>
@@ -512,12 +512,6 @@ function detail_datatables($no, $data, $link, $id, $hapus = true)
 		echo '<a href="' . $link . '&show=form&id=' . $id . '" class="btn btn-success btn-sm">
 				<i class="fas fa-eye"></i> Lihat
             </a> ';
-            
-        if ($hapus) {
-            echo '<a href="' . $link . '&show=delete&id=' . $id . '" class="btn btn-danger btn-sm">
-                    <i class="fas fa-trash"></i> Hapus
-                </a>';
-        }
 	echo '</td>
 		</tr>';
 }

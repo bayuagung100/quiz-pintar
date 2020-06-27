@@ -28,10 +28,19 @@
                     </div>
                     ';
                 } else {
+                    $query_point = $mysqli->query ("SELECT * FROM points WHERE id_player='$_SESSION[id]' ");
+                    $cek_query_point = $query_point->num_rows;
+                    $data_query_point = $query_point->fetch_array();
+                    if ($cek_query_point>0) {
+                        $point = $data_query_point['point'];
+                    } else {
+                        $point = "0";
+                    }
+                    
                     echo '
                     <div class="info">
                         <a href="'.url("dashboard/profil").'" class="d-block">'.$_SESSION['nama'].'</a>
-                        <h6 style="color:white">Point: 0</h6>
+                        <h6 style="color:white">Point: '.$point.'</h6>
                     </div>
                     ';
                 }

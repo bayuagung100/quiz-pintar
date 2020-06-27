@@ -10,13 +10,11 @@ if ($update) {
 
     $query_join_temp = $mysqli->query ("SELECT * FROM join_temp WHERE code_room='$_POST[code]' AND id_quiz='$_POST[quiz]' ");
     $data_query_join_temp = $query_join_temp->fetch_array();
+    $id = $data_query_join_temp['id'];
     $cr = $data_query_join_temp['code_room'];
     $ir = $data_query_join_temp['id_rm'];
     $iq = $data_query_join_temp['id_quiz'];
     $ip = $data_query_join_temp['id_player'];
-
-    
-
     
     $ex = array_filter(explode(";", $ip));
     $imp_ip = implode(',',$ex);
@@ -41,8 +39,6 @@ if ($update) {
     $res['ranked'] = $imp_ranked;
     $res['progress'] = $imp_progress;
     $res['point'] = $imp_point;
-    
-
 
     $insert_aktivitas = $mysqli->query("INSERT INTO aktivitas 
     (
@@ -65,21 +61,16 @@ if ($update) {
         '$imp_point'
     )
     ");
-
-    
-
     $response["points"] = array();
     
     $ex_imp_ip = explode(',',$imp_ip);
     $ex_imp_point = explode(',',$imp_point);
 
-   
     foreach ($ex_imp_ip as $key => $value) {
         $cek_points = $mysqli->query ("SELECT * FROM points WHERE id_player='$value' ");
         if ($cek_points->num_rows>0) {
             $data_cek_points = $cek_points->fetch_array();
             $dataPoint = $ex_imp_point[$key]+$data_cek_points['point'];
-            
         } else {
             $dataPoint = $ex_imp_point[$key];
             $insert_points = $mysqli->query("INSERT INTO points 
@@ -100,6 +91,10 @@ if ($update) {
         array_push($response["points"], $res2);
         
     }
+
+    $query_delete_leaderboard_temp = $mysqli->query("DELETE FROM leaderboard_temp WHERE id_player IN ($imp_ip) ");
+    $query_delete_join_temp = $mysqli->query("DELETE FROM join_temp WHERE code_room='$_POST[code]' AND id_quiz='$_POST[quiz]'");
+
 
     array_push($response["data"], $res);
     
