@@ -136,6 +136,11 @@ function MulaiGame(room, data_player) {
   // })
   
   firebase.database().ref('ingame/' + room).set(data_player);
+
+  firebase.database().ref('timer/' + room).set({
+    batas:"60:00",
+    panjang:100
+  });
 };
 
 function InGame(room) {
@@ -151,7 +156,6 @@ function InGame(room) {
       var childData = childSnapshot.val();
       var pisah = childData.progress.split('/');
       var val = pisah[0];
-
         html += '<div class="col-sm-12"> ';
         html += '<div class="card-player-played">';
           html += '<div class="col-rank">Rank <div class="rank">'+childData.ranked+'</div></div>'
@@ -173,6 +177,128 @@ function InGame(room) {
     wrapper.innerHTML = html;
     
   });
+}
+
+function TimerGame(params) {
+  var path = window.location.href;
+  var ex = path.split('play/');
+  var url = ex[0];
+  var cd = ex[1];
+  console.log(url+":"+cd);
+  var ref = firebase.database().ref('timer/' + cd);
+  var elem = document.getElementById("timeLeft");
+  var interval = setInterval(function() {
+      $.ajax({
+          type: "POST",
+          url: url+"ajax/room/cek-status-play.php",
+          data: {
+              code_room : cd,
+          },
+          dataType: 'json',
+          success: function(response) {
+              if (response.data[0].status=='end'){
+                  clearInterval(interval)
+                  let timerInterval
+                  Swal.fire({
+                      title: 'Game Berakhir!',
+                      html: 'Dalam waktu <b></b> detik.',
+                      timer: 5000,
+                      timerProgressBar: true,
+                      onBeforeOpen: () => {
+                          Swal.showLoading()
+                          timerInterval = setInterval(() => {
+                          const content = Swal.getContent()
+                          if (content) {
+                              const b = content.querySelector('b')
+                              if (b) {
+                              b.textContent = Math.ceil(swal.getTimerLeft() / 1000)
+                              }
+                          }
+                          }, 100)
+                      },
+                      onClose: () => {
+                          clearInterval(timerInterval)
+                      }
+                      }).then((result) => {
+                      if (result.dismiss === Swal.DismissReason.timer) {
+                          window.location.href = response.data[0].url;
+                      }
+                  });
+              } else {
+                  ref.once('value', function(snapshot) {
+                  var key = snapshot.key;
+                  val = snapshot.val(); 
+                  batas = val.batas;
+                  panjang = val.panjang;
+                  var timer = batas.split(':');
+                  var minutes = parseInt(timer[0], 10);
+                  var seconds = parseInt(timer[1], 10);
+                  --seconds;
+                  minutes = (seconds < 0) ? --minutes : minutes;
+                  if (minutes < 0) clearInterval(interval);
+                  seconds = (seconds < 0) ? 59 : seconds;
+                  seconds = (seconds < 10) ? '0' + seconds : seconds;
+                  //minutes = (minutes < 10) ?  minutes : minutes;
+                  $('#time').html(minutes + ':' + seconds);
+                  // console.log(val);
+                  // console.log(minutes);
+                  // console.log(seconds);
+                  // console.log(val);
+                  // console.log(" waktu: "+batas);
+                  // console.log(" width: "+panjang);
+              
+                  pisah = batas.split(':');
+                  min = pisah[0];
+                  min = (min == 0) ? 01 : min;
+                  sec = pisah[1];
+                  detik = min*60;
+                  j = 100/detik;
+                  k = 250/detik;
+                  width = panjang;
+                  point = 2500;
+                  ttl_soal = 10;
+                  // var id = setInterval(frame, 1000);
+                  // function frame() {
+                      if (width <= 0) {
+                          clearInterval(interval);
+                          Swal.fire({
+                              title: 'Waktu Sudah Habis!',
+                          });
+                          $('#section_murid').hide();
+                          $('#section_show_lederboard').show();
+                          ShowLeaderboardCount(cd);
+                          ShowLeaderboard(cd);
+                      } else {
+                          width=width-j;
+                          point=point-k;
+                          console.log("sisa min: "+min);
+                          console.log("sisa width: "+width);
+                          // console.log("sisa point (bulat): "+parseInt(point));
+                          // console.log("sisa point: "+point);
+                          elem.style.width = width + "%";
+                      }
+                  // }
+
+                  ref.update(
+                      {
+                          batas: minutes+":"+seconds,
+                          panjang: width
+                      }
+                  )
+                  // ref.once('value', function(snapshot) {
+                  //     var key = snapshot.key;
+                  //     value = snapshot.val(); 
+                  //     console.log(value);
+                  //     console.log("sisa waktu: "+batas);
+                  //     console.log("sisa width: "+width);
+                  // })
+                  
+              });
+              }
+          }
+      });
+    
+  },1000);
 }
 
 function InGameMurid(room, id_user) {
@@ -295,6 +421,8 @@ function EndGame(room) {
   ref.remove();
   var ref2 = firebase.database().ref('notif/' + room);
   ref2.remove();
+  var ref3 = firebase.database().ref('timer/' + room);
+  ref3.remove();
 }
 
 // function CountNotif() {

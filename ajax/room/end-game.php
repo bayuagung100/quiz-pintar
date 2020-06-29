@@ -6,7 +6,7 @@ $update = $mysqli->query("UPDATE join_temp SET status='end' WHERE code_room='$_P
 if ($update) {
     $response = array();
     $response["data"] = array();
-    $res['url']  = str_replace("ajax/room/","",url(""));
+    $res['url']  = str_replace("ajax/room/","",url("dashboard/aktivitas"));
 
     $query_join_temp = $mysqli->query ("SELECT * FROM join_temp WHERE code_room='$_POST[code]' AND id_quiz='$_POST[quiz]' ");
     $data_query_join_temp = $query_join_temp->fetch_array();
@@ -26,7 +26,7 @@ if ($update) {
 
     $query_player = $mysqli->query ("SELECT * FROM user WHERE id IN ($imp_ip) ");
     while ($data_query_player = $query_player->fetch_array()) {
-        $query_leaderboard = $mysqli->query ("SELECT * FROM leaderboard_temp WHERE id_player IN ($data_query_player[id]) ");
+        $query_leaderboard = $mysqli->query ("SELECT * FROM leaderboard_temp WHERE id_join='$id' AND id_player IN ($data_query_player[id]) ");
         while ($data_query_leaderboard = $query_leaderboard->fetch_array()) {
             $ranked[] = $data_query_leaderboard['ranked'];
             $progress[] = $data_query_leaderboard['progress'];
@@ -71,6 +71,9 @@ if ($update) {
         if ($cek_points->num_rows>0) {
             $data_cek_points = $cek_points->fetch_array();
             $dataPoint = $ex_imp_point[$key]+$data_cek_points['point'];
+            $update_points = $mysqli->query("UPDATE points SET 
+            point='$dataPoint'
+            WHERE id_player='$value' ");
         } else {
             $dataPoint = $ex_imp_point[$key];
             $insert_points = $mysqli->query("INSERT INTO points 
@@ -92,7 +95,7 @@ if ($update) {
         
     }
 
-    $query_delete_leaderboard_temp = $mysqli->query("DELETE FROM leaderboard_temp WHERE id_player IN ($imp_ip) ");
+    $query_delete_leaderboard_temp = $mysqli->query("DELETE FROM leaderboard_temp WHERE id_join='$id' AND  id_player IN ($imp_ip) ");
     $query_delete_join_temp = $mysqli->query("DELETE FROM join_temp WHERE code_room='$_POST[code]' AND id_quiz='$_POST[quiz]'");
 
 

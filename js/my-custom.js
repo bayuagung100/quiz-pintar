@@ -59,8 +59,11 @@ $(document).ready(function () {
     // }
     $("#mulai_game").on("click", function() {
         var cek = document.getElementById('count_player').textContent;
+        console.log(cek);
         if (cek == 0) {
             Swal.fire('Oops...', 'Tidak ada player di dalam room!', 'error');
+        } else if(cek == 1){
+            Swal.fire('Oops...', 'Minimal 2 player di dalam room!', 'error');
         } else {
             $.ajax({
                 url: '../ajax/room/mulai-game.php',
