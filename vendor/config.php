@@ -1,9 +1,15 @@
 <?php
 //localpc
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $database = "quispintar";
+
+//server
 $servername = "localhost";
-$username = "root";
-$password = "";
-$database = "quispintar";
+$username = "u328098603_quizpintar";
+$password = "bayuagung123";
+$database = "u328098603_quizpintar";
  
 // Create connection
 $mysqli = new mysqli($servername, $username, $password, $database);
