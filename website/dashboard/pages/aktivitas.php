@@ -21,19 +21,21 @@ switch($show){
                 buka_datatables(array("Nama Quiz", "Total Pemain"));
                     $no = 1;
                     if ($_SESSION['role'] == 'guru') {
-                        $query = $mysqli->query("SELECT * FROM aktivitas WHERE id_rm = '$_SESSION[id]' ORDER BY id DESC");
+                        $query = $mysqli->query("SELECT DISTINCT code_room,id_rm, id_quiz FROM aktivitas WHERE id_rm='$_SESSION[id]'");
                     } else {
-                        $query = $mysqli->query("SELECT * FROM aktivitas WHERE id_player LIKE '%$_SESSION[id]%' ORDER BY id DESC");
+                        $query = $mysqli->query("SELECT * FROM aktivitas WHERE id_player='$_SESSION[id]'");
                     }
                     
                     while($data = $query->fetch_array()){
                         $id_quiz = $data['id_quiz'];
-                        $id_player = $data['id_player'];
-                        $total_player = count(explode(',', $id_player));
+                        $code_room = $data['code_room'];
+                        $total_player = $mysqli->query("SELECT COUNT(code_room) AS total FROM aktivitas WHERE code_room='$code_room'");
+                        $data_total_player = $total_player->fetch_array();
+                        $total = $data_total_player['total'];
                         $query_quiz = $mysqli->query("SELECT * FROM quiz WHERE id = '$id_quiz' ");
                         $data_query_quiz = $query_quiz->fetch_array();
                         $judul = $data_query_quiz['judul'];
-                        detail_datatables($no, array($judul,$total_player), $link, $data['id']);
+                        detail_datatables($no, array($judul,$total), $link, $code_room);
                         $no++;
                     }
                     
@@ -49,18 +51,12 @@ switch($show){
     case "form":
         global $mysqli;
         if(isset($_GET['id'])){
-            $query 	= $mysqli->query ( "SELECT * FROM aktivitas WHERE id='$_GET[id]'");
+            $query 	= $mysqli->query ( "SELECT * FROM aktivitas WHERE code_room='$_GET[id]' ORDER BY ranked ");
             $data= $query->fetch_array();
-            $aksi 	= "Lihat";
-            $id_player = $data['id_player'];
-            $ranked = $data['ranked'];
-            $progress = $data['progress'];
-            $point = $data['point'];
-            $total_player = count(explode(',', $id_player));
-            $ex_id_player = explode(',', $id_player);
-            $ex_ranked = explode(',', $ranked);
-            $ex_progress = explode(',', $progress);
-            $ex_point = explode(',', $point);
+            $total_player = $mysqli->query("SELECT COUNT(code_room) AS total FROM aktivitas WHERE code_room='$_GET[id]' ");
+            $data_total_player = $total_player->fetch_array();
+            $total = $data_total_player['total'];
+            // var_dump($data);
         }
         ?>
         <div class="container">
@@ -69,7 +65,7 @@ switch($show){
                     <div class="text-center btn-leaderboard "><div class="leaderboard-text"><img src="<?php echo url("img/icons/medal.png");?>" style="max-width:42px"> Leaderboard</div></div>
                     <div class="container">
                         <div class="online">
-                            <h4><i class="fa fa-dot-circle-o" style="color: #00C985;" ></i> Player (<span><?php echo $total_player;?></span>)</h4>
+                            <h4><i class="fa fa-dot-circle-o" style="color: #00C985;" ></i> Player (<span><?php echo $total;?></span>)</h4>
                         </div>
                         <div class="tingkat">
                             <h4><?php $query_tingkat = $mysqli->query("SELECT * FROM quiz WHERE id='$data[id_quiz]' "); $data_tingkat = $query_tingkat->fetch_array(); echo $data_tingkat['tingkat'];?></h4>
@@ -77,10 +73,16 @@ switch($show){
 
                         <div class="container-card" id="show_lederboard" class="row">
                             <div class="col-sm-12"> 
-                                <?php 
-                                    foreach ($ex_id_player as $key => $value) {
-                                        $ex_value = explode('/', $ex_progress[$key]);
-                                        $query_player = $mysqli->query ("SELECT * FROM user WHERE id='$value' ");
+                                    <?php
+                                    $query2 	= $mysqli->query ( "SELECT * FROM aktivitas WHERE code_room='$_GET[id]' ORDER BY ranked ");
+                                    while($data2 = $query2->fetch_array()){
+                                        $id_player = $data2['id_player'];
+                                        $ranked = $data2['ranked'];
+                                        $progress = $data2['progress'];
+                                        $ex_progress = explode('/', $progress);
+                                        $point = $data2['point'];
+
+                                        $query_player = $mysqli->query ("SELECT * FROM user WHERE id='$id_player' ");
                                         $data_query_player = $query_player->fetch_array();
                                         $nama = $data_query_player['nama'];
                                         $avatar = $data_query_player['avatar'];
@@ -89,22 +91,24 @@ switch($show){
                                         } else {
                                             $gambar = url("img/avatar/").$avatar;
                                         }
-                                ?>
+                                    ?>
                                     <div class="card-player-played">
-                                        <div class="col-rank">Rank <div class="rank"><?php echo $ex_ranked[$key];?></div></div>
+                                        <div class="col-rank">Rank <div class="rank"><?php echo $ranked;?></div></div>
                                         <div class="col-img"><img src="<?php echo $gambar;?>"/></div>
                                         <div class="col-name">
                                             <div class="name"><b><?php echo $nama;?></b></div>
                                         </div>
                                         <div class="col-progress">
                                             <div class="container-progressed">
-                                            <div class="progressed"><?php echo $ex_progress[$key];?></div>
+                                            <div class="progressed"><?php echo $progress;?></div>
                                             </div>
-                                            <progress value="<?php echo $ex_value[0];?>" max="10"></progress>
+                                            <progress value="<?php echo $ex_progress[0];?>" max="10"></progress>
                                         </div>
-                                        <div class="col-point">Point <div class="point"><?php echo $ex_point[$key];?></div></div>
+                                        <div class="col-point">Point <div class="point"><?php echo $point;?></div></div>
                                     </div>
-                                <?php } ?>
+                                    <?php 
+                                    } 
+                                    ?>
                             </div>
                             <button class="text-center btn btn-block btn-warning btn-lg" onclick="history.back()">Kembali</button>
                         </div>

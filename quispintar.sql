@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 01 Jul 2020 pada 04.50
+-- Waktu pembuatan: 01 Jul 2020 pada 18.30
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.6
 
@@ -32,10 +32,10 @@ CREATE TABLE `aktivitas` (
   `code_room` varchar(6) NOT NULL,
   `id_rm` int(11) NOT NULL,
   `id_quiz` int(11) NOT NULL,
-  `id_player` text NOT NULL,
-  `ranked` text NOT NULL,
-  `progress` text NOT NULL,
-  `point` text NOT NULL
+  `id_player` int(11) NOT NULL,
+  `ranked` int(11) NOT NULL,
+  `progress` varchar(50) NOT NULL,
+  `point` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -65,7 +65,7 @@ CREATE TABLE `leaderboard_temp` (
   `id_player` int(11) NOT NULL,
   `ranked` int(11) NOT NULL,
   `progress` varchar(50) NOT NULL,
-  `point` varchar(50) NOT NULL
+  `point` int(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -109,7 +109,7 @@ INSERT INTO `motivasi` (`id`, `text`) VALUES
 CREATE TABLE `points` (
   `id` int(11) NOT NULL,
   `id_player` int(11) NOT NULL,
-  `point` varchar(100) NOT NULL
+  `point` int(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -277,19 +277,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `aktivitas`
 --
 ALTER TABLE `aktivitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT untuk tabel `join_temp`
 --
 ALTER TABLE `join_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT untuk tabel `leaderboard_temp`
 --
 ALTER TABLE `leaderboard_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=260;
 
 --
 -- AUTO_INCREMENT untuk tabel `motivasi`
@@ -301,7 +301,7 @@ ALTER TABLE `motivasi`
 -- AUTO_INCREMENT untuk tabel `points`
 --
 ALTER TABLE `points`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT untuk tabel `quiz`
@@ -325,7 +325,7 @@ ALTER TABLE `setting`
 -- AUTO_INCREMENT untuk tabel `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

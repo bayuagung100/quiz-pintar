@@ -22,85 +22,85 @@ if ($update) {
     $res['code_room'] = $cr;
     $res['id_rm'] = $ir;
     $res['id_quiz'] = $iq;
-    $res['id_player'] = $imp_ip;
+    $res["player"] = array();
 
-    $query_player = $mysqli->query ("SELECT * FROM user WHERE id IN ($imp_ip) ");
-    while ($data_query_player = $query_player->fetch_array()) {
-        $query_leaderboard = $mysqli->query ("SELECT * FROM leaderboard_temp WHERE id_join='$id' AND id_player IN ($data_query_player[id]) ");
-        while ($data_query_leaderboard = $query_leaderboard->fetch_array()) {
-            $ranked[] = $data_query_leaderboard['ranked'];
-            $progress[] = $data_query_leaderboard['progress'];
-            $point[] = $data_query_leaderboard['point'];
+    foreach ($ex as $key => $value) {
+        
+        // array_push($res["player"], $res2);
+
+        $query_leaderboard = $mysqli->query ("SELECT * FROM leaderboard_temp WHERE id_player='$value' ");
+        $data_query_leaderboard = $query_leaderboard->fetch_array();
+        $id_player_lead = $data_query_leaderboard['id_player'];
+        $ranked_player_lead = $data_query_leaderboard['ranked'];
+        $progress_player_lead = $data_query_leaderboard['progress'];
+        $point_player_lead = $data_query_leaderboard['point'];
+
+        $insert_aktivitas = $mysqli->query("INSERT INTO aktivitas 
+            (
+                code_room,
+                id_rm,
+                id_quiz,
+                id_player,
+                ranked,
+                progress,
+                point
+            )
+            VALUES
+            (
+                '$cr',
+                '$ir',
+                '$iq',
+                '$value',
+                '$ranked_player_lead',
+                '$progress_player_lead',
+                '$point_player_lead'
+            )
+        ");
+
+        if ($insert_aktivitas) {
+            $cek_points = $mysqli->query ("SELECT * FROM points WHERE id_player='$value' ");
+            if ($cek_points->num_rows>0) {
+                $data_cek_points = $cek_points->fetch_array();
+                $dataPoint = $point_player_lead+$data_cek_points['point'];
+                $update_points = $mysqli->query("UPDATE points SET 
+                point='$dataPoint'
+                WHERE id_player='$value' ");
+            } else {
+                $dataPoint = $point_player_lead;
+                $insert_points = $mysqli->query("INSERT INTO points 
+                    (
+                        id_player,
+                        point
+                    )
+                    VALUES
+                    (
+                        '$value',
+                        '$dataPoint'
+                    )
+                ");
+            }
+
+            $query_delete_leaderboard_temp = $mysqli->query("DELETE FROM leaderboard_temp WHERE id_join='$id' AND  id_player='$value' ");
+            
+            $res2['id'] = $value;
+            $res2['ranked'] = $ranked_player_lead;
+            $res2['progress'] = $progress_player_lead;
+            $res2['point'] = $dataPoint;
+
+            array_push($res["player"], $res2);
         }
     }
-    $imp_ranked = implode(',',$ranked);
-    $imp_progress = implode(',',$progress);
-    $imp_point = implode(',',$point);
-    $res['ranked'] = $imp_ranked;
-    $res['progress'] = $imp_progress;
-    $res['point'] = $imp_point;
 
-    $insert_aktivitas = $mysqli->query("INSERT INTO aktivitas 
-    (
-        code_room,
-        id_rm,
-        id_quiz,
-        id_player,
-        ranked,
-        progress,
-        point
-    )
-    VALUES
-    (
-        '$cr',
-        '$ir',
-        '$iq',
-        '$imp_ip',
-        '$imp_ranked',
-        '$imp_progress',
-        '$imp_point'
-    )
-    ");
-    $response["points"] = array();
-    
-    $ex_imp_ip = explode(',',$imp_ip);
-    $ex_imp_point = explode(',',$imp_point);
-
-    foreach ($ex_imp_ip as $key => $value) {
-        $cek_points = $mysqli->query ("SELECT * FROM points WHERE id_player='$value' ");
-        if ($cek_points->num_rows>0) {
-            $data_cek_points = $cek_points->fetch_array();
-            $dataPoint = $ex_imp_point[$key]+$data_cek_points['point'];
-            $update_points = $mysqli->query("UPDATE points SET 
-            point='$dataPoint'
-            WHERE id_player='$value' ");
-        } else {
-            $dataPoint = $ex_imp_point[$key];
-            $insert_points = $mysqli->query("INSERT INTO points 
-                (
-                    id_player,
-                    point
-                )
-                VALUES
-                (
-                    '$value',
-                    '$dataPoint'
-                )
-            ");
-        }
-        
-        $res2['id_player'] = $value;
-        $res2['point'] = $dataPoint;
-        array_push($response["points"], $res2);
-        
-    }
-
-    $query_delete_leaderboard_temp = $mysqli->query("DELETE FROM leaderboard_temp WHERE id_join='$id' AND  id_player IN ($imp_ip) ");
     $query_delete_join_temp = $mysqli->query("DELETE FROM join_temp WHERE code_room='$_POST[code]' AND id_quiz='$_POST[quiz]'");
 
-
-    array_push($response["data"], $res);
+    if ($query_delete_join_temp) {
+        array_push($response["data"], $res);
     
-    echo json_encode($response);
+        echo json_encode($response);
+    }
+
+    // array_push($response["data"], $res);
+    
+    // echo json_encode($response);
 }
 ?>
