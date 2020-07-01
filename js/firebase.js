@@ -423,16 +423,30 @@ function CountInGame(room) {
 
 function EndGame(room) {
   var ref = firebase.database().ref('ingame/' + room);
-  ref.remove();
-}
-function EndGame2(room) {
+  ref.remove().then(() => {
+    console.log('remove ingame sukses '+room);
+  });
   var ref2 = firebase.database().ref('notif/' + room);
-  ref2.remove();
-}
-function EndGame3(room) {
+  ref2.remove().then(() => {
+    console.log('remove notif sukses '+room);
+  });
   var ref3 = firebase.database().ref('timer/' + room);
-  ref3.remove();
+  ref3.remove().then(() => {
+    console.log('remove timer sukses '+room);
+  });
 }
+// function EndGame2(room) {
+//   var ref2 = firebase.database().ref('notif/' + room);
+//   ref2.remove().then(() => {
+//     console.log('remove notif sukses '+room);
+//   });
+// }
+// function EndGame3(room) {
+//   var ref3 = firebase.database().ref('timer/' + room);
+//   ref3.remove().then(() => {
+//     console.log('remove timer sukses '+room);
+//   });
+// }
 
 // function CountNotif() {
 //   var ref = firebase.database().ref('notif/');

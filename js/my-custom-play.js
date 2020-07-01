@@ -24,8 +24,8 @@ $(document).ready(function () {
                     })
                     .done(function(response){
                         EndGame(room);
-                        EndGame2(room);
-                        EndGame3(room);
+                        // EndGame2(room);
+                        // EndGame3(room);
                         window.location.href = response.data[0].url;
                     })
                     .fail(function(){
