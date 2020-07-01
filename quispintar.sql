@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 24 Jun 2020 pada 21.57
+-- Waktu pembuatan: 01 Jul 2020 pada 04.50
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.4.6
 
@@ -38,13 +38,6 @@ CREATE TABLE `aktivitas` (
   `point` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `aktivitas`
---
-
-INSERT INTO `aktivitas` (`id`, `code_room`, `id_rm`, `id_quiz`, `id_player`, `ranked`, `progress`, `point`) VALUES
-(4, '200730', 1, 2, '9,10', '2,1', '10/10,6/10', '1737,2237');
-
 -- --------------------------------------------------------
 
 --
@@ -60,13 +53,6 @@ CREATE TABLE `join_temp` (
   `status` enum('waiting','play','end') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `join_temp`
---
-
-INSERT INTO `join_temp` (`id`, `code_room`, `id_rm`, `id_quiz`, `id_player`, `status`) VALUES
-(4, '200730', 1, 2, ';9;10', 'end');
-
 -- --------------------------------------------------------
 
 --
@@ -81,14 +67,6 @@ CREATE TABLE `leaderboard_temp` (
   `progress` varchar(50) NOT NULL,
   `point` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data untuk tabel `leaderboard_temp`
---
-
-INSERT INTO `leaderboard_temp` (`id`, `id_join`, `id_player`, `ranked`, `progress`, `point`) VALUES
-(214, 4, 9, 2, '10/10', '1737'),
-(215, 4, 10, 1, '6/10', '2237');
 
 -- --------------------------------------------------------
 
@@ -134,14 +112,6 @@ CREATE TABLE `points` (
   `point` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data untuk tabel `points`
---
-
-INSERT INTO `points` (`id`, `id_player`, `point`) VALUES
-(32, 9, '1737'),
-(33, 10, '2237');
-
 -- --------------------------------------------------------
 
 --
@@ -172,6 +142,30 @@ CREATE TABLE `quiz` (
 INSERT INTO `quiz` (`id`, `id_pembuat`, `judul`, `gambar`, `kategori`, `tingkat`, `deskripsi`, `soal`, `gambar_soal`, `jawaban_soal`, `jawaban_a_soal`, `jawaban_b_soal`, `jawaban_c_soal`, `jawaban_d_soal`) VALUES
 (1, 1, 'Ini Quiz Asd', 'quiz-comic-pop-art-style_175838-505.jpg', 'Bahasa Indonesia', 'Hard', '<p>ini quiz test</p>', '<p>soal 1</p>;<p>soal 2</p>;<p>soal 3</p>;<p>soal 4</p>;<p>soal 5</p>;<p>soal 6</p>;<p>soal 7</p>;<p>soal 8</p>;<p>soal 9</p>;<p>soal 10</p>', ';;;;;;;;;', 'A;B;C;D;A;B;C;D;C;B', 'a;a;a;a;a;a;a;a;a;a', 'b;b;b;b;b;b;b;b;b;b', 'c;c;c;c;c;c;c;c;c;d', 'd;d;d;d;d;d;d;d;d;c'),
 (2, 1, 'Quis Iseng', 'screenshot-from-2020-05-30-19-05-20.png', 'Keterampilan/Bahasa Asing', 'Medium', '<p style=\"box-sizing: border-box; color: #444444; font-family: AcuminPro, arial, helvetica, sans-serif; font-size: 15px; font-style: normal; font-variant-ligatures: normal; font-variant-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-align: start; text-indent: 0px; text-transform: none; white-space: normal; widows: 2; word-spacing: 0px; -webkit-text-stroke-width: 0px; background-color: #ffffff; text-decoration-style: initial; text-decoration-color: initial;\">iseng2 aja</p>', '<p>Tahukah kamu, mengapa motor berhenti di depan lampu merah?</p>;<p>Tebak binatang apa yang jago renang?</p>;<p>Ibu Anna memiliki tiga anak.</p>\r\n<p>Dua di antaranya adalah Faith dan Natasha.</p>\r\n<p>Siapa nama anak ketiganya?</p>;<p>saya mempunyai 3 apel. jika kamu mengambil 2 buah dari saya. berapa apel yang kamu punya ?</p>;<p>jika ada 12 ikan dan setengah dari mereka tenggelam, berapa banyak yang tersisa ?</p>;<p>sebuah kereta listrik bergerak ke utara dengan kecepatan 100 mph. ke arah mana asapnya berhembus ?</p>;<p>berapa banyak batu bata yang dibutuhkan untuk menyelesaikan bangunan yang terbuat dari batu bata?</p>;<p>saat mengikuti sebuah balapan, kamu menyalip orang diposisi nomor 2. ada di posisi berapakah kamu?</p>;<p>beberapa bulan memiliki 31 hari, lainnya 30 hari. berapa bulan yang memiliki 28 hari?</p>;<p>petani memiliki 12 domba, semuanya mati kecuali 8 ekor. berapa banyak yang tersisa?</p>', 'screenshot-from-2020-05-30-19-24-15.png;;;;;;;;;', 'D;B;C;B;D;D;B;B;D;C', 'karena motornya direm;ikan;faith;1 apel;0 ikan;utara;0 batu bata;posisi 1;ga ada;0 domba', 'karena takut ditangkep polisi;bebek;natashya;2 apel;4 ikan;barat;1 batu bata;posisi 2;1 bulan;7 domba', 'karena ga bawa sim;angsa;anna;3 apel;6 ikan;selatan;50 batu bata;posisi 3;11 bulan;8 domba', 'karena lampunya merah;hiu;angel;4 apel;12 ikan;tidak ada yang benar;tergantung bangunannya;posisi 4;12 bulan;15 domba');
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `redeem`
+--
+
+CREATE TABLE `redeem` (
+  `id` int(255) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `tanggal` date NOT NULL,
+  `jenis_hadiah` enum('pulsa','uang','barang') NOT NULL,
+  `status` enum('pending','success') NOT NULL,
+  `no_hp` varchar(20) DEFAULT NULL,
+  `nominal_pulsa` varchar(50) DEFAULT NULL,
+  `nama_rekening` varchar(100) DEFAULT NULL,
+  `rekening` varchar(100) DEFAULT NULL,
+  `nominal_uang` varchar(50) DEFAULT NULL,
+  `bukti_tf` text DEFAULT NULL,
+  `nama_penerima` varchar(100) DEFAULT NULL,
+  `alamat_lengkap` text DEFAULT NULL,
+  `nominal_harga` varchar(50) DEFAULT NULL,
+  `catatan` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -215,11 +209,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `nama`, `avatar`, `email`, `hp`, `alamat`, `role`, `password`) VALUES
-(1, 'Bayu Agung Gumelar', 'monster3.png', 'bayuagung100@gmail.com', '089634372389', 'Kemuning Permai blok b2 no 31', 'guru', '5f4dcc3b5aa765d61d8327deb882cf99'),
-(8, 'smile', '', 'smileyoudontcry100@gmail.com', '089634372389', 'Kemuning', 'pelajar', '5f4dcc3b5aa765d61d8327deb882cf99'),
-(9, 'Balar', NULL, 'balar@gmail.com', '08111838679', 'kemuning', 'pelajar', '5f4dcc3b5aa765d61d8327deb882cf99'),
-(10, 'Test', NULL, 'test@gmail.com', '123456789', 'citra', 'pelajar', '5f4dcc3b5aa765d61d8327deb882cf99'),
-(11, 'Samuel DIdik Gunawan', NULL, 'sampoerna.sd@gmail.com', '089519282254', 'Perum Sudirman Indah', 'pelajar', 'c19748eff57304b251848aeb558d1c75');
+(1, 'Bayu Agung Gumelar', 'monster3.png', 'bayuagung100@gmail.com', '089634372389', 'Kemuning Permai blok b2 no 31', 'guru', '5f4dcc3b5aa765d61d8327deb882cf99');
 
 --
 -- Indexes for dumped tables
@@ -262,6 +252,12 @@ ALTER TABLE `quiz`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indeks untuk tabel `redeem`
+--
+ALTER TABLE `redeem`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indeks untuk tabel `setting`
 --
 ALTER TABLE `setting`
@@ -281,19 +277,19 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT untuk tabel `aktivitas`
 --
 ALTER TABLE `aktivitas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `join_temp`
 --
 ALTER TABLE `join_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT untuk tabel `leaderboard_temp`
 --
 ALTER TABLE `leaderboard_temp`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=216;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 
 --
 -- AUTO_INCREMENT untuk tabel `motivasi`
@@ -312,6 +308,12 @@ ALTER TABLE `points`
 --
 ALTER TABLE `quiz`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT untuk tabel `redeem`
+--
+ALTER TABLE `redeem`
+  MODIFY `id` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `setting`
