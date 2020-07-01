@@ -155,7 +155,7 @@ $(document).ready(function () {
                         })
                         .done(function(response){
                             MulaiGame(room, response.player[0]);
-                            MulaiGame2(room);
+                            // MulaiGame2(room);
                             window.location.href = response.data[0].url;
                         })
                         .fail(function(){

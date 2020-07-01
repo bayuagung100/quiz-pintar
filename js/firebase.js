@@ -130,14 +130,23 @@ function NotifOut(room) {
 }
 
 function MulaiGame(room, data_player) {
-  firebase.database().ref('ingame/' + room).set(data_player);
-};
-function MulaiGame2(room) {
-  firebase.database().ref('timer/' + room).set({
-    batas:"60:00",
-    panjang:100
-  });
-};
+  // firebase.database().ref('ingame/' + room).set(data_player);
+  var ref = firebase.database().ref('ingame/' + room);
+  var ref2 = firebase.database().ref('timer/' + room);
+      ref.set(data_player).then(() => {
+        console.log('Set ingame sukses '+room);
+      })
+
+      ref2.set(data_player).then(() => {
+        console.log('Set timer sukses '+room);
+      })
+}
+// function MulaiGame2(room) {
+//   firebase.database().ref('timer/' + room).set({
+//     batas:"60:00",
+//     panjang:100
+//   });
+// };
 
 function InGame(room) {
   var ref = firebase.database().ref('ingame/' + room).orderByChild('ranked');
