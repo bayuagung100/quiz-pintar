@@ -154,7 +154,7 @@ function MulaiGame(room, data_player, url) {
 // };
 
 function InGame(room) {
-  var ref = firebase.database().ref('ingame/' + room).orderByChild('ranked');
+  var ref = firebase.database().ref('ingame/' + room).orderByChild('point');
   ref.on('value', function(snapshot) {
     var room = snapshot.key;
     console.log(snapshot.val());
