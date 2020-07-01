@@ -130,13 +130,9 @@ function NotifOut(room) {
 }
 
 function MulaiGame(room, data_player) {
-  // data_player.forEach(e => {
-    // console.log(data_player);
-    // firebase.database().ref('ingame/' + room).child(e.id_player).set(data_player);
-  // })
-  
   firebase.database().ref('ingame/' + room).set(data_player);
-
+};
+function MulaiGame2(room) {
   firebase.database().ref('timer/' + room).set({
     batas:"60:00",
     panjang:100
@@ -419,8 +415,12 @@ function CountInGame(room) {
 function EndGame(room) {
   var ref = firebase.database().ref('ingame/' + room);
   ref.remove();
+}
+function EndGame2(room) {
   var ref2 = firebase.database().ref('notif/' + room);
   ref2.remove();
+}
+function EndGame3(room) {
   var ref3 = firebase.database().ref('timer/' + room);
   ref3.remove();
 }

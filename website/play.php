@@ -129,7 +129,7 @@ if ($cek>0) {
                         $ex_jawaban_d_soal = explode(';', $jawaban_d_soal);
                         $count_soal = count($ex_soal);
                         // 
-                        echo $cekState;
+                        // echo $cekState;
                         if ($cekState == 1) {
                             $i = $cekState;
                             $state="";
@@ -195,6 +195,18 @@ if ($cek>0) {
                             $('#kumpulan_soal10').show();
                             $('#simpan-jawaban').show();
                             $('#texSoal').text('10/10');
+                            ";
+                        } elseif ($cekState == 11) {
+                            $i = $cekState;
+                            echo"
+                            <script>
+                            $(document).ready(function () {
+                                $('#section_murid').hide();
+                                $('#section_show_lederboard').show();
+                                ShowLeaderboardCount(".$code.");
+                                ShowLeaderboard(".$code.");
+                            })
+                            </script>
                             ";
                         }
                         for ($i; $i <= $count_soal; $i++) { 

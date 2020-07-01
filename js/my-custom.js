@@ -57,7 +57,76 @@ $(document).ready(function () {
     //         }
     //     });
     // }
-    $("#mulai_game").on("click", function() {
+    // $("#mulai_game").on("click", function() {
+    //     var cek = document.getElementById('count_player').textContent;
+    //     console.log(cek);
+    //     if (cek == 0) {
+    //         Swal.fire('Oops...', 'Tidak ada player di dalam room!', 'error');
+    //     } else if(cek == 1){
+    //         Swal.fire('Oops...', 'Minimal 2 player di dalam room!', 'error');
+    //     } else {
+    //         $.ajax({
+    //             url: '../ajax/room/mulai-game.php',
+    //             method: "post",
+    //             data: {
+    //                 quiz: quiz,
+    //                 code: room,
+    //             },
+    //             success: function (response) {
+    //                 // let data_player = [];
+                    
+    //                 // let timerInterval
+                    
+    //                 // response.player[0].forEach(e => {
+    //                 //     data_player.push(
+    //                 //         {
+    //                 //             id_player: e.id,
+    //                 //             nama: e.nama,
+    //                 //             avatar: e.avatar,
+    //                 //             ranked: e.ranked,
+    //                 //             progress: e.progress,
+    //                 //             point: e.point
+    //                 //         }
+                            
+    //                 //         );
+    //                 // });
+    //                 // console.log(response.player[0]);
+
+    //                 // MulaiGame(room, response.player[0]);
+                    
+    //                 Swal.fire({
+    //                     title: 'Game Dimulai!',
+    //                     html: 'Dalam waktu <b></b> detik.',
+    //                     timer: 5000,
+    //                     timerProgressBar: true,
+    //                     onBeforeOpen: () => {
+    //                         MulaiGame(room, response.player[0]);
+    //                         Swal.showLoading()
+    //                         timerInterval = setInterval(() => {
+    //                         const content = Swal.getContent()
+    //                         if (content) {
+    //                             const b = content.querySelector('b')
+    //                             if (b) {
+    //                             b.textContent = Math.ceil(swal.getTimerLeft() / 1000)
+    //                             }
+    //                         }
+    //                         }, 100)
+    //                     },
+    //                     onClose: () => {
+    //                         clearInterval(timerInterval)
+    //                     }
+    //                     }).then((result) => {
+    //                     if (result.dismiss === Swal.DismissReason.timer) {
+    //                         window.location.href = response.data[0].url;
+    //                     }
+    //                 });
+    //             }
+    //         });
+    //     }
+    // });
+
+    $("#mulai_game").on("click", function(e) {
+        e.preventDefault();
         var cek = document.getElementById('count_player').textContent;
         console.log(cek);
         if (cek == 0) {
@@ -65,63 +134,39 @@ $(document).ready(function () {
         } else if(cek == 1){
             Swal.fire('Oops...', 'Minimal 2 player di dalam room!', 'error');
         } else {
-            $.ajax({
-                url: '../ajax/room/mulai-game.php',
-                method: "post",
-                data: {
-                    quiz: quiz,
-                    code: room,
-                },
-                success: function (response) {
-                    // let data_player = [];
-                    
-                    // let timerInterval
-                    
-                    // response.player[0].forEach(e => {
-                    //     data_player.push(
-                    //         {
-                    //             id_player: e.id,
-                    //             nama: e.nama,
-                    //             avatar: e.avatar,
-                    //             ranked: e.ranked,
-                    //             progress: e.progress,
-                    //             point: e.point
-                    //         }
-                            
-                    //         );
-                    // });
-                    // console.log(response.player[0]);
-
-                    // MulaiGame(room, response.player[0]);
-                    
-                    Swal.fire({
-                        title: 'Game Dimulai!',
-                        html: 'Dalam waktu <b></b> detik.',
-                        timer: 5000,
-                        timerProgressBar: true,
-                        onBeforeOpen: () => {
-                            MulaiGame(room, response.player[0]);
-                            Swal.showLoading()
-                            timerInterval = setInterval(() => {
-                            const content = Swal.getContent()
-                            if (content) {
-                                const b = content.querySelector('b')
-                                if (b) {
-                                b.textContent = Math.ceil(swal.getTimerLeft() / 1000)
-                                }
-                            }
-                            }, 100)
+            Swal.fire({
+                title: 'Mulai Game ?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes!',
+                showLoaderOnConfirm: true,
+                preConfirm: function() {
+                    return new Promise(function(resolve) {
+                        $.ajax({
+                        url: '../ajax/room/mulai-game.php',
+                        type: 'POST',
+                        data: {
+                            quiz: quiz,
+                            code: room,
                         },
-                        onClose: () => {
-                            clearInterval(timerInterval)
-                        }
-                        }).then((result) => {
-                        if (result.dismiss === Swal.DismissReason.timer) {
+                        dataType: 'json'
+                        })
+                        .done(function(response){
+                            MulaiGame(room, response.player[0]);
+                            MulaiGame2(room);
                             window.location.href = response.data[0].url;
-                        }
+                        })
+                        .fail(function(){
+                            Swal.fire('Oops...', 'Something went wrong!', 'error');
+                        });
                     });
-                }
-            });
+                },
+                allowOutsideClick: false     
+            }).then((result) => {
+                
+            }); 
         }
     });
 
