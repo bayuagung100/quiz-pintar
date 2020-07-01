@@ -52,7 +52,7 @@
     <!-- jQuery -->
     <script src="<?php echo url("website/dashboard/");?>plugins/jquery/jquery.min.js"></script>
     <style>
-    ul li .active {
+    ul li .activeSide {
         position: absolute;
         left: 5px;
         width: 5px;

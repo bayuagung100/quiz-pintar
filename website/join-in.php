@@ -235,7 +235,18 @@ if ($cek>0) {
         </script>";
     }
 } else {
-    echo "tidak ada room";
+    echo "
+    <script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Tidak ada room!',
+        onAfterClose: () => {
+            window.location.href = '".url('')."';
+        }
+      })
+    
+    </script>";
 }
 include "footer-join.php"; 
 

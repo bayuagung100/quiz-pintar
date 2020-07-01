@@ -14,13 +14,13 @@
             </div>
             <?php } else { ?>
             <div class="user-panel">
-                <a href="dashboard">Dashboard</a>
+                <a href="dashboard/aktivitas">Dashboard</a>
             </div>
             <?php } ?>
-            <ul class="main-menu primary-menu">
+            <!-- <ul class="main-menu primary-menu">
                 <li><a href="<?php echo url(""); ?>"><i class="fa fa-home"></i> Home</a></li>
-                <li><a href="<?php echo url("aktivitas"); ?>"><i class="fa fa-history"></i> Aktivitas</a></li>
-            </ul>
+                <li><a href="<?php echo url("dashboard/aktivitas"); ?>"><i class="fa fa-history"></i> Aktivitas</a></li>
+            </ul> -->
         </nav>
 
     </div>
@@ -199,7 +199,23 @@
 
                     </div>
                     <h4><?php echo $_SESSION['nama']; ?></h4>
-                    <a href="" style="color: #b01ba5">Edit profil</a> | <a href="" style="color: #b01ba5">Lihat
+                    <?php
+                        if ($_SESSION['role']=="pelajar") {
+                            $query_point = $mysqli->query ("SELECT * FROM points WHERE id_player='$_SESSION[id]' ");
+                            $cek_query_point = $query_point->num_rows;
+                            $data_query_point = $query_point->fetch_array();
+                            if ($cek_query_point>0) {
+                                $point = $data_query_point['point'];
+                            } else {
+                                $point = "0";
+                            }
+                            
+                            echo '
+                                <h5>Point: '.$point.'</h5>
+                            ';
+                        }
+                    ?>
+                    <a href="<?php echo url("dashboard/profil");?>" style="color: #b01ba5">Edit profil</a> | <a href="<?php echo url("dashboard/aktivitas");?>" style="color: #b01ba5">Lihat
                         aktifitas</a>
                     <br>
                     <a href="<?php echo url("logout");?>" style="color: #b01ba5"><i class="fa fa-sign-out"></i>
@@ -214,7 +230,7 @@
     </div>
 </section>
 
-<section class="newsletter-section">
+<!-- <section class="newsletter-section">
     <div class="container">
         <h2>Cari game quiz yang kamu inginkan!</h2>
         <form class="newsletter-form">
@@ -307,5 +323,5 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
 <?php include "footer.php"; ?>

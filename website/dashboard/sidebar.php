@@ -1,5 +1,5 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4" style="top:15px">
-    <a href="<?php echo url("dashboard");?>" class="brand-link">
+    <a href="<?php echo url("dashboard/aktivitas");?>" class="brand-link">
         <img src="<?php echo url("img/quiz-pintar.png");?>" alt="Logo Quiz Pintar" style="max-height: 50px;opacity: .8">
         <!-- <span class="brand-text font-weight-light">Adminisitrator</span> -->
     </a>
@@ -50,12 +50,12 @@
         </div>
         <nav class="mt-2" style="border-bottom: 1px solid #4f5962;">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-                <li class="nav-item">
+                <!-- <li class="nav-item">
                     <a href="<?php echo url("dashboard");?>" class="nav-link">
                         <?php
                             if (path()==false or path()=="buat-quiz") {
                                 echo'
-                                <span class="active"></span>
+                                <span class="activeSide"></span>
                                 ';
                             }
                         ?>
@@ -64,7 +64,7 @@
                             Temukan Quiz
                         </p>
                     </a>
-                </li>
+                </li> -->
                 <?php
                 if ($_SESSION['role']=="guru") {
                     echo '
@@ -72,7 +72,7 @@
                         <a href="'.url("dashboard/quizku").'" class="nav-link">';
                         if (path()=="quizku") {
                             echo'
-                            <span class="active"></span>
+                            <span class="activeSide"></span>
                             ';
                         }
                     echo '
@@ -91,7 +91,7 @@
                         <?php
                         if (path()=="aktivitas") {
                             echo'
-                            <span class="active"></span>
+                            <span class="activeSide"></span>
                             ';
                         }
                     ?>
@@ -101,16 +101,51 @@
                         </p>
                     </a>
                 </li>
-            </ul>
-        </nav>
-        <nav class="mt-2" style="border-bottom: 1px solid #4f5962;">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <?php
+                if ($_SESSION['role']=="pelajar") {
+                    echo '
+                    <li class="nav-item">
+                        <a href="'.url("dashboard/redeem").'" class="nav-link">';
+                        if (path()=="redeem") {
+                            echo'
+                            <span class="activeSide"></span>
+                            ';
+                        }
+                    echo '
+                            <i class="nav-icon fas fa-coins"></i>
+                            <p>
+                            Redeem
+                            </p>
+                        </a>
+                    </li>
+                    ';
+                }
+                ?>
                 <li class="nav-item">
                     <a href="<?php echo url("dashboard/profil");?>" class="nav-link">
                         <?php
                         if (path()=="profil") {
                             echo'
-                            <span class="active"></span>
+                            <span class="activeSide"></span>
+                            ';
+                        }
+                    ?>
+                        <i class="nav-icon fas fa-user"></i>
+                        <p>
+                        profil
+                        </p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <nav class="mt-2" style="border-bottom: 1px solid #4f5962;">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <!-- <li class="nav-item">
+                    <a href="<?php echo url("dashboard/profil");?>" class="nav-link">
+                        <?php
+                        if (path()=="profil") {
+                            echo'
+                            <span class="activeSid"></span>
                             ';
                         }
                     ?>
@@ -119,7 +154,7 @@
                             Profil
                         </p>
                     </a>
-                </li>
+                </li> -->
 
                 <li class="nav-item">
                     <a href="<?php echo url("logout");?>" class="nav-link">

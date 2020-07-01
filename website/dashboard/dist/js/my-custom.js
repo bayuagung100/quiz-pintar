@@ -1374,3 +1374,143 @@ $("#quizku").ready(function() {
     
 });
 
+
+$(document).ready(function () {
+    var point = document.forms["redeem_form"]["point"];
+    var redeem_hadiah = document.forms["redeem_form"]["redeem_hadiah"];
+    var phone = document.forms["redeem_form"]["phone"];
+    var isi_pulsa = document.forms["redeem_form"]["isi_pulsa"];
+    var ex_isi_pulsa = isi_pulsa.value.split("-");
+    var note = document.forms["redeem_form"]["note"];
+    var no_hp = $("#no_hp");
+    var pulsa = $("#pulsa");
+    var nominalUang = $("#nominalUang");
+    var namaRekening = $("#namaRekening");
+    var Rekening = $("#Rekening");
+    var nominalHarga = $("#nominalHarga");
+    var namaPenerima = $("#namaPenerima");
+    var Alamat = $("#Alamat");
+    $('form#redeem_form input[name=redeem_hadiah]').click(function () {
+        var val = redeem_hadiah.value;
+        if (val == "pulsa") {
+            no_hp.show();
+            $("form#redeem_form input[name=phone]").attr("required", "true");
+            pulsa.show();
+            $("form#redeem_form select[name=isi_pulsa]").attr("required", "true");
+
+            nominalUang.hide();
+            $("form#redeem_form select[name=nominal_uang]").removeAttr('required');
+            namaRekening.hide();
+            $("form#redeem_form input[name=nama_rekening]").removeAttr('required');
+            Rekening.hide();
+            $("form#redeem_form input[name=rekening]").removeAttr('required');
+
+            nominalHarga.hide();
+            $("form#redeem_form select[name=nominal_harga]").removeAttr('required');
+            namaPenerima.hide();
+            $("form#redeem_form input[name=nama_penerima]").removeAttr('required');
+            Alamat.hide();
+            $("form#redeem_form textarea[name=alamat_lengkap]").removeAttr('required');
+        } else if(val == "uang"){
+            no_hp.hide();
+            $("form#redeem_form input[name=phone]").removeAttr('required');
+            pulsa.hide();
+            $("form#redeem_form select[name=isi_pulsa]").removeAttr('required');
+
+            nominalUang.show();
+            $("form#redeem_form select[name=nominal_uang]").attr("required", "true");
+            namaRekening.show();
+            $("form#redeem_form input[name=nama_rekening]").attr("required", "true");
+            Rekening.show();
+            $("form#redeem_form input[name=rekening]").attr("required", "true");
+
+            nominalHarga.hide();
+            $("form#redeem_form select[name=nominal_harga]").removeAttr('required');
+            namaPenerima.hide();
+            $("form#redeem_form input[name=nama_penerima]").removeAttr('required');
+            Alamat.hide();
+            $("form#redeem_form textarea[name=alamat_lengkap]").removeAttr('required');
+        } else if(val == "barang"){
+            no_hp.hide();
+            $("form#redeem_form input[name=phone]").removeAttr('required');
+            pulsa.hide();
+            $("form#redeem_form select[name=isi_pulsa]").removeAttr('required');
+
+            nominalUang.hide();
+            $("form#redeem_form select[name=nominal_uang]").removeAttr('required');
+            namaRekening.hide();
+            $("form#redeem_form input[name=nama_rekening]").removeAttr('required');
+            Rekening.hide();
+            $("form#redeem_form input[name=rekening]").removeAttr('required');
+
+            nominalHarga.show();
+            $("form#redeem_form select[name=nominal_harga]").attr("required", "true");
+            namaPenerima.show();
+            $("form#redeem_form input[name=nama_penerima]").attr("required", "true");
+            Alamat.show();
+            $("form#redeem_form textarea[name=alamat_lengkap]").attr("required", "true");
+        }
+    })
+
+    $("select#isi_pulsa").change(function(){
+        var selectedPulsa = $(this).children("option:selected").val();
+        var ex_selectedPulsa = selectedPulsa.split("-");
+        if (parseInt(point.value) < ex_selectedPulsa[1]) {
+            $('#submit_redeem').attr("disabled", "true");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Point kamu tidak cukup!',
+            });
+        } else {
+            $('#submit_redeem').removeAttr('disabled');
+        }
+    });
+
+    $("select#nominal_uang").change(function(){
+        var selectedUang = $(this).children("option:selected").val();
+        var ex_selectedUang = selectedUang.split("-");
+        if (parseInt(point.value) < ex_selectedUang[1]) {
+            $('#submit_redeem').attr("disabled", "true");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Point kamu tidak cukup!',
+            });
+        } else {
+            $('#submit_redeem').removeAttr('disabled');
+        }
+    });
+
+    $("select#nominal_harga").change(function(){
+        var selectedHarga = $(this).children("option:selected").val();
+        var ex_selectedHarga = selectedHarga.split("-");
+        if (parseInt(point.value) < ex_selectedHarga[1]) {
+            $('#submit_redeem').attr("disabled", "true");
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Point kamu tidak cukup!',
+            });
+        } else {
+            $('#submit_redeem').removeAttr('disabled');
+        }
+    });
+    // $('form#redeem_form').submit(function(e){
+    //     e.preventDefault();
+    //     // var ex_isi_pulsa = isi_pulsa.value.split("-");
+    //     var data = $(this).serialize();
+    //     // if (point.value < ex_isi_pulsa[1]) {
+    //     //     console.log("point tidak cukup");
+    //     //     Swal.fire({
+    //     //         icon: 'error',
+    //     //         title: 'Oops...',
+    //     //         text: 'Point kamu tidak cukup!',
+    //     //     });
+    //     // }
+    //     console.log(data);
+    // })
+    
+    
+});
+

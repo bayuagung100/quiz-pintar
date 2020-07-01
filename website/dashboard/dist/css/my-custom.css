@@ -27,6 +27,15 @@
     margin-right: 26px;
 }
 
+.redeem h2 {
+    font-size: 48px;
+    color: #0c062e;
+    font-weight: 700;
+    font-style: italic;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
 .site-btn {
 
     display: inline-block;
@@ -277,7 +286,19 @@
     position: relative;
     display: block;
 }
-
+.redeem-container{
+    position: relative;
+    display: block;
+}
+.redeem-container input[type=radio] {
+    position: absolute;
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+.redeem-container input[type=radio]:checked+div.position-relative {
+	outline: 4px solid rgb(255, 0, 0);
+}
 .jawaban-container input[type=text].jawaban-radio-input {
     display: inline-block;
     width: 95%;

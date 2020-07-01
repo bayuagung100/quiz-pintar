@@ -1952,7 +1952,7 @@ img.avatar {
 
 /* CHECKED STYLES */
 [type=radio]:checked+img {
-	outline: 4px solid #fff;
+	outline: 4px solid rgb(255, 0, 0);
 }
 
 [type=radio]:checked+div.container-jawabanA {

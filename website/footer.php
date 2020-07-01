@@ -1,25 +1,25 @@
 <footer class="footer-section">
     <div class="container">
         <div class="footer-left-pic">
-            <img src="<?php echo url("");?>/img/footer-left.png" alt="" style="max-height: 350px;">
+            <img src="<?php echo url("");?>/img/footer-left.png" alt="" style="max-height: 200px;">
         </div>
         <div class="footer-right-pic">
-            <img src="<?php echo url("");?>/img/footer-right.png" alt="" style="max-height: 350px;">
+            <img src="<?php echo url("");?>/img/footer-right-new.png" alt="" style="max-height: 200px;">
         </div>
         <a href="#" class="footer-logo">
             <img src="<?php echo url("");?>/img/quiz-pintar.png" alt="">
         </a>
-        <ul class="main-menu footer-menu">
+        <!-- <ul class="main-menu footer-menu">
             <li><a href="<?php echo url("");?>"><i class="fa fa-home"></i> Home</a></li>
-            <li><a href="<?php echo url("aktivitas");?>"><i class="fa fa-history"></i> Aktivitas</a></li>
-        </ul>
-        <div class="footer-social d-flex justify-content-center">
+            <li><a href="<?php echo url("dashboard/aktivitas");?>"><i class="fa fa-history"></i> Aktivitas</a></li>
+        </ul> -->
+        <!-- <div class="footer-social d-flex justify-content-center">
             <a href="#"><i class="fa fa-pinterest"></i></a>
             <a href="#"><i class="fa fa-facebook"></i></a>
             <a href="#"><i class="fa fa-twitter"></i></a>
             <a href="#"><i class="fa fa-dribbble"></i></a>
             <a href="#"><i class="fa fa-behance"></i></a>
-        </div>
+        </div> -->
         <div class="copyright"><a href="">Quiz Pintar</a> <?php echo date("Y"); ?> @ All rights reserved</div>
     </div>
 </footer>
