@@ -21,9 +21,9 @@ switch($show){
                 buka_datatables(array("Nama Quiz", "Total Pemain"));
                     $no = 1;
                     if ($_SESSION['role'] == 'guru') {
-                        $query = $mysqli->query("SELECT DISTINCT code_room,id_rm, id_quiz FROM aktivitas WHERE id_rm='$_SESSION[id]'");
+                        $query = $mysqli->query("SELECT DISTINCT code_room,id_rm, id_quiz FROM aktivitas WHERE id_rm='$_SESSION[id]' ORDER BY id DESC ");
                     } else {
-                        $query = $mysqli->query("SELECT * FROM aktivitas WHERE id_player='$_SESSION[id]'");
+                        $query = $mysqli->query("SELECT * FROM aktivitas WHERE id_player='$_SESSION[id]' ORDER BY id DESC ");
                     }
                     
                     while($data = $query->fetch_array()){
