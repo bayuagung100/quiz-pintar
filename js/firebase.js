@@ -428,17 +428,21 @@ function CountInGame(room) {
 
 function EndGame(room) {
   var ref = firebase.database().ref('ingame/' + room);
+  var ref2 = firebase.database().ref('notif/' + room);
+  var ref3 = firebase.database().ref('timer/' + room);
   ref.remove().then(() => {
     console.log('remove ingame sukses '+room);
+    ref2.remove().then(() => {
+      console.log('remove notif sukses '+room);
+      ref3.remove().then(() => {
+        console.log('remove timer sukses '+room);
+      });
+    });
   });
-  var ref2 = firebase.database().ref('notif/' + room);
-  ref2.remove().then(() => {
-    console.log('remove notif sukses '+room);
-  });
-  var ref3 = firebase.database().ref('timer/' + room);
-  ref3.remove().then(() => {
-    console.log('remove timer sukses '+room);
-  });
+  
+ 
+ 
+  
 }
 // function EndGame2(room) {
 //   var ref2 = firebase.database().ref('notif/' + room);
