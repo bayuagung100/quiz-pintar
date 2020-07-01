@@ -164,6 +164,7 @@ function InGame(room) {
     snapshot.forEach(function(childSnapshot) {
       var childKey = childSnapshot.key;
       var childData = childSnapshot.val();
+      console.log(childData);
       var pisah = childData.progress.split('/');
       var val = pisah[0];
         html += '<div class="col-sm-12"> ';
