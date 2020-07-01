@@ -154,9 +154,9 @@ $(document).ready(function () {
                         dataType: 'json'
                         })
                         .done(function(response){
-                            MulaiGame(room, response.player[0]);
+                            MulaiGame(room, response.player[0], response.data[0].url);
                             // MulaiGame2(room);
-                            window.location.href = response.data[0].url;
+                            // window.location.href = response.data[0].url;
                         })
                         .fail(function(){
                             Swal.fire('Oops...', 'Something went wrong!', 'error');

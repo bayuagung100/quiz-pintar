@@ -129,20 +129,22 @@ function NotifOut(room) {
   });  
 }
 
-function MulaiGame(room, data_player) {
+function MulaiGame(room, data_player, url) {
   // firebase.database().ref('ingame/' + room).set(data_player);
   var ref = firebase.database().ref('ingame/' + room);
   var ref2 = firebase.database().ref('timer/' + room);
       ref.set(data_player).then(() => {
         console.log('Set ingame sukses '+room);
+        ref2.set({
+          batas:"60:00",
+          panjang:100
+        }).then(() => {
+          console.log('Set timer sukses '+room);
+          window.location.href = url;
+        })
       })
 
-      ref2.set({
-        batas:"60:00",
-        panjang:100
-      }).then(() => {
-        console.log('Set timer sukses '+room);
-      })
+      
 }
 // function MulaiGame2(room) {
 //   firebase.database().ref('timer/' + room).set({
