@@ -6,10 +6,16 @@
 // $database = "quispintar";
 
 //server
+// $servername = "localhost";
+// $username = "u328098603_quizpintar";
+// $password = "bayuagung123";
+// $database = "u328098603_quizpintar";
+
+//rumahweb
 $servername = "localhost";
-$username = "u328098603_quizpintar";
+$username = "quif4942_bayu";
 $password = "bayuagung123";
-$database = "u328098603_quizpintar";
+$database = "quif4942_quiz-pintar";
  
 // Create connection
 $mysqli = new mysqli($servername, $username, $password, $database);
