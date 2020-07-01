@@ -425,7 +425,7 @@ function CountInGame(room) {
   )
 }
 
-function EndGame(room) {
+function EndGame(room, url) {
   var ref = firebase.database().ref('ingame/' + room);
   var ref2 = firebase.database().ref('notif/' + room);
   var ref3 = firebase.database().ref('timer/' + room);
@@ -435,6 +435,7 @@ function EndGame(room) {
       console.log('remove notif sukses '+room);
       ref3.remove().then(() => {
         console.log('remove timer sukses '+room);
+        window.location.href = url;
       });
     });
   });

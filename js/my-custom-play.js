@@ -23,10 +23,10 @@ $(document).ready(function () {
                     dataType: 'json'
                     })
                     .done(function(response){
-                        EndGame(room);
+                        EndGame(room, response.data[0].url);
                         // EndGame2(room);
                         // EndGame3(room);
-                        window.location.href = response.data[0].url;
+                        // window.location.href = response.data[0].url;
                     })
                     .fail(function(){
                         Swal.fire('Oops...', 'Something went wrong!', 'error');
