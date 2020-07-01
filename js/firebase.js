@@ -162,7 +162,7 @@ function InGame(room) {
     var html = '';
     snapshot.forEach(function(childSnapshot) {
       var childKey = childSnapshot.key;
-      var childData = childSnapshot.val();\
+      var childData = childSnapshot.val();
       var pisah = childData.progress.split('/');
       var val = pisah[0];
         html += '<div class="col-sm-12"> ';
