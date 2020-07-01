@@ -154,19 +154,15 @@ function MulaiGame(room, data_player, url) {
 // };
 
 function InGame(room) {
-  var ref = firebase.database().ref('ingame/' + room).orderByChild('point');
+  var ref = firebase.database().ref('ingame/' + room).orderByChild('ranked');
   ref.on('value', function(snapshot) {
     var room = snapshot.key;
-    console.log(snapshot.val());
-    console.log(room);
     
     var wrapper = document.getElementById("player_played");
     var html = '';
     snapshot.forEach(function(childSnapshot) {
       var childKey = childSnapshot.key;
-      var childData = childSnapshot.val();
-      console.log(childKey);
-      console.log(childData);
+      var childData = childSnapshot.val();\
       var pisah = childData.progress.split('/');
       var val = pisah[0];
         html += '<div class="col-sm-12"> ';
