@@ -137,7 +137,10 @@ function MulaiGame(room, data_player) {
         console.log('Set ingame sukses '+room);
       })
 
-      ref2.set(data_player).then(() => {
+      ref2.set({
+        batas:"60:00",
+        panjang:100
+      }).then(() => {
         console.log('Set timer sukses '+room);
       })
 }
