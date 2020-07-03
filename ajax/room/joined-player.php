@@ -45,7 +45,7 @@ $data = $query->fetch_array();
 
                 if ($jmlquery2>0) {
                     echo'
-                    <div class="col-sm-3" style="padding:20px">
+                    <div class="col-sm-6 col-lg-3" style="padding:20px">
                         <div class="card-player">
                             <div class="delete-player">
                             <i id="kick_player" data-id="'.$id.'" data-name="'.$nama.'" href="javascript:void(0)" class="fa fa-close" style="color:red;cursor:pointer"></i>
@@ -78,7 +78,7 @@ $data = $query->fetch_array();
 
                 if ($jmlquery2>0) {
                     echo'
-                    <div class="col-sm-3" style="padding:20px">
+                    <div class="col-sm-6 col-lg-3" style="padding:20px">
                         <div class="card-player">
                             <div class="delete-player">
                             <i id="kick_player" data-id="'.$id.'" data-name="'.$nama.'" href="javascript:void(0)"  class="fa fa-close" style="color:red;cursor:pointer"></i>

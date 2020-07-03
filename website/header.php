@@ -23,7 +23,7 @@
     <meta charset="UTF-8">
     <meta name="description" content="EndGam Gaming Magazine Template">
     <meta name="keywords" content="endGam,gGaming, magazine, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="initial-scale=1.0, width=device-width">
     <!-- Favicon -->
     <link href="img/icon.ico" rel="shortcut icon" />
 

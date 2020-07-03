@@ -2014,7 +2014,7 @@ img.avatar {
 }
 
 .header-join {
-	max-width: 1496px;
+	/* max-width: 1496px; */
 	margin: 0 auto;
 	position: fixed;
 	width: 100%;
@@ -2847,7 +2847,7 @@ progress[value]::-webkit-progress-bar {
 	.join-player .btn-mulai {
 		position: absolute;
 		cursor: pointer;
-		width: 200px;
+		/* width: 200px; */
 		/* width: 35%; */
 		height: 70.24px;
 		left: 22%;
@@ -2877,14 +2877,222 @@ progress[value]::-webkit-progress-bar {
 		position: absolute;
 		width: 300px;
 		padding: 10px;
-		left: 32px;
+		left: 210px;
 		/* padding: 0 10px 16px 16px; */
 		background: #FFFFFF;
 		border: 5px solid rgba(0, 0, 0, 0.25);
 		border-radius: 10px;
 	}
+
+	.play-player .btn-leaderboard {
+		position: absolute;
+		/* cursor: pointer; */
+		width: 420px;
+		/* width: 35%; */
+		height: 70.24px;
+		left: 21%;
+		/* left: 400px; */
+		top: -35px;
+		/* top: 610px; */
+	
+		background: #FFFFFF;
+		box-shadow: 5px 4px 5px #E231C5;
+		border-radius: 50px;
+	}
+
+	.play-player .btn-endgame {
+		position: absolute;
+		cursor: pointer;
+		width: 420px;
+		/* width: 35%; */
+		height: 70.24px;
+		left: 21%;
+		/* left: 400px; */
+		bottom: -35px;
+		/* top: 610px; */
+	
+		background: #FFFFFF;
+		box-shadow: 5px 4px 5px #E231C5;
+		border-radius: 50px;
+	}
+
+	.play-player .container-card {
+		padding: 0;
+	}
+
+	.play-player .container .card-player-played .col-rank{
+		/* float: left; */
+		position: absolute;
+		left: 2%;
+		line-height: 38px;
+	}
+
+	.play-player .container .card-player-played .col-img {
+		/* float: left; */
+		position: absolute;
+		left: 10%;
+		line-height: 52px;
+	}
+
+	.play-player .container .card-player-played .col-name {
+		/* float: left; */
+		position: absolute;
+		line-height: 52px;
+		left: 19%;
+		max-width: 120px;
+		white-space: nowrap;
+	}
+
+	.play-player .container .card-player-played .col-progress {
+		float: left;
+		position: absolute;
+		left: 40%;
+		line-height: 52px;
+	}
+
+	.play-player .container .card-player-played .col-point {
+		float: left;
+		position: absolute;
+		right: 2%;
+		line-height: 38px;
+	}
+
+	.play-section-murid .btn-soal-next {
+		position: absolute;
+		cursor: pointer;
+		width: 150px;
+		left: 40%;
+		background: #FFFFFF;
+		box-shadow: 5px 4px 5px #E231C5;
+		border-radius: 10px;
+		margin-top: 30px;
+	}
 }
 
+@media screen and (max-width: 479px) {
+	.join-player .btn-mulai {
+		position: absolute;
+		cursor: pointer;
+		width: 260px;
+		/* width: 35%; */
+		height: 70.24px;
+		left: 22%;
+		/* left: 400px; */
+		top: -35px;
+		/* top: 610px; */
+	
+		background: #FFFFFF;
+		box-shadow: 5px 4px 5px #E231C5;
+		border-radius: 50px;
+	}
+
+	.card-waiting{
+		position: absolute;
+		width: 300px;
+		padding: 10px;
+		left: 90px;
+		/* padding: 0 10px 16px 16px; */
+		background: #FFFFFF;
+		border: 5px solid rgba(0, 0, 0, 0.25);
+		border-radius: 10px;
+	}
+
+	.play-player .btn-leaderboard {
+		position: absolute;
+		/* cursor: pointer; */
+		width: 420px;
+		/* width: 35%; */
+		height: 70.24px;
+		left: 6%;
+		/* left: 400px; */
+		top: -35px;
+		/* top: 610px; */
+	
+		background: #FFFFFF;
+		box-shadow: 5px 4px 5px #E231C5;
+		border-radius: 50px;
+	}
+
+	.play-player .btn-endgame {
+		position: absolute;
+		cursor: pointer;
+		width: 420px;
+		/* width: 35%; */
+		height: 70.24px;
+		left: 6%;
+		/* left: 400px; */
+		bottom: -35px;
+		/* top: 610px; */
+	
+		background: #FFFFFF;
+		box-shadow: 5px 4px 5px #E231C5;
+		border-radius: 50px;
+	}
+
+	.play-player .container-card {
+		padding: 0;
+	}
+
+	.play-player .container .card-player-played .col-rank{
+		/* float: left; */
+		position: absolute;
+		left: 1%;
+		line-height: 38px;
+	}
+
+	.play-player .container .card-player-played .col-img {
+		/* float: left; */
+		position: absolute;
+		left: 12%;
+		line-height: 52px;
+	}
+
+	.play-player .container .card-player-played .col-name {
+		/* float: left; */
+		position: absolute;
+		line-height: 52px;
+		left: 24%;
+		max-width: 70px;
+		white-space: nowrap;
+	}
+
+	progress[value] {
+		width: 150px;
+		
+		-webkit-appearance: none;
+	}
+
+	.play-player .container .card-player-played .col-progress {
+		float: left;
+		position: absolute;
+		left: 45%;
+		line-height: 52px;
+	}
+
+	.play-player .container .card-player-played .col-progress .container-progressed .progressed {
+		position: absolute;
+		width: 150px;
+		text-align: center;
+	}
+
+	.play-player .container .card-player-played .col-point {
+		float: left;
+		position: absolute;
+		right: 2%;
+		line-height: 38px;
+	}
+
+	.play-section-murid .btn-soal-next {
+		position: absolute;
+		cursor: pointer;
+		width: 150px;
+		left: 34%;
+		background: #FFFFFF;
+		box-shadow: 5px 4px 5px #E231C5;
+		border-radius: 10px;
+		margin-top: 30px;
+	}
+}
 
 .spinner {
 	margin: 10px 0 10px 0;

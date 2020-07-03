@@ -239,8 +239,8 @@ if ($cek>0) {
                                     </div> 
                                 </div>
                                 <div class="container">
-                                    <div class="row">
-                                        <div class="col-sm-3">
+                                    <div class="row text-center">
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
                                             <label>
                                                 <input type="radio" name="jawabanSoal'.$i.'" value="A" required>
                                                 <div class="container-jawabanA">
@@ -249,7 +249,7 @@ if ($cek>0) {
                                                 </div>
                                             </label>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
                                             <label>
                                                 <input type="radio" name="jawabanSoal'.$i.'" value="B" required>
                                                 <div class="container-jawabanB">
@@ -258,7 +258,7 @@ if ($cek>0) {
                                                 </div>
                                             </label>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
                                             <label>
                                                 <input type="radio" name="jawabanSoal'.$i.'" value="C" required>
                                                 <div class="container-jawabanC">
@@ -267,7 +267,7 @@ if ($cek>0) {
                                                 </div>
                                             </label>
                                         </div>
-                                        <div class="col-sm-3">
+                                        <div class="col-sm-12 col-md-6 col-lg-3">
                                             <label>
                                                 <input type="radio" name="jawabanSoal'.$i.'" value="D" required>
                                                 <div class="container-jawabanD">
