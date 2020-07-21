@@ -14,7 +14,13 @@
             </div>
             <?php } else { ?>
             <div class="user-panel">
-                <a href="dashboard/aktivitas">Dashboard</a>
+                <?php
+                if ($_SESSION['role'] == "guru") {
+                    echo  '<a href="dashboard/quizku">Dashboard</a>';
+                } else {
+                    echo  '<a href="dashboard/aktivitas">Dashboard</a>';
+                }
+                ?>
             </div>
             <?php } ?>
             <!-- <ul class="main-menu primary-menu">

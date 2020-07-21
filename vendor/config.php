@@ -54,8 +54,17 @@ function path(){
     
     $url = $_SERVER['REQUEST_URI'];
     $exp = explode("/", $url);
-    if (isset($exp[3])) {
-        $path = $exp[3];
+    //localhost
+    // if (isset($exp[3])) {
+    //     $path = $exp[3];
+    //     return $path;
+    // } else {
+    //     $path = false;
+    //     return $path;
+    // }
+    //server
+    if (isset($exp[2])) {
+        $path = $exp[2];
         return $path;
     } else {
         $path = false;

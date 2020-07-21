@@ -92,6 +92,8 @@ switch($show){
                         $list[] = array('val'=>'Teknologi Informasi dan Komunikasi', 'cap'=>' Teknologi Informasi dan Komunikasi');
                         $list[] = array('val'=>'Keterampilan/Bahasa Asing', 'cap'=>' Keterampilan/Bahasa Asing');
                         $list[] = array('val'=>'Muatan Lokal', 'cap'=>' Muatan Lokal');
+                        $list[] = array('val'=>'Test IQ', 'cap'=>' Test IQ');
+                        $list[] = array('val'=>'Lainnya', 'cap'=>' Lainnya');
                         buat_select("3. Berikan kategori untuk quiz ini", "kategori", $list, $data['kategori'], "required");
                         $list2 = array();
                         $list2[] = array('val'=>'', 'cap'=>'Pilih Tingkat Kesulitan');

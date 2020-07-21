@@ -47,6 +47,8 @@
                             </option>
                             <option value="Keterampilan/Bahasa Asing">Keterampilan/Bahasa Asing</option>
                             <option value="Muatan Lokal">Muatan Lokal</option>
+                            <option value="Test IQ">Test IQ</option>
+                            <option value="Lainnya">Lainnya</option>
                         </select>
                     </div>
                     <div class="form-group">
