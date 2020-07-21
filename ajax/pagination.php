@@ -178,7 +178,7 @@ if (isset($_POST['halaman'])=="quizku") {
         $output .= '
         <div class="text-center">
             <h3>Buat Quiz Anda Sendiri</h3>
-            <a href="'.str_replace("ajax/","",url("dashboard/buat-quiz")).'" class="buat-quiz-btn"><i
+            <a href="'.str_replace("ajax/","",url("dashboard/quizku&show=form")).'" class="buat-quiz-btn"><i
                     class="fas fa-plus-circle"></i> Buat</a>
             <br>
             <br>
